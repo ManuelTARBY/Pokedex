@@ -9,12 +9,25 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/terrygyselings/Documents/Pokedex/src/Controller/PokedexController.php</code></li>
-        <li>Your template at <code>/Users/terrygyselings/Documents/Pokedex/templates/pokedex/index.html.twig</code></li>
-    </ul>
+    <table>
+        <tr>
+            <th>Numéro</th>
+            <th>Nom</th>
+            <th>Type</th>
+        </tr>
+    {% for ligne in results %}
+        {% set lestypes = ligne.logos %}
+        {% set leslogos = lestypes | split(',') %}
+        <tr>
+            <th>{{ ligne.pokedex_id }}</th>
+            <th>{{ ligne.name_fr }}</th>
+            <th>
+            {% for logo in leslogos %}
+                <img src="{{ logo }}">
+            {% endfor %}
+            </th>  
+        </tr>
+    {% endfor %}
+    </table>
 </div>
 {% endblock %}
