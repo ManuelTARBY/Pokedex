@@ -9,12 +9,21 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
+    <h1>{{pokemon.name_fr}}</h1>
+    <img src="{{pokemon.sprite_regular}}">
     <ul>
-        <li>Your controller at <code>/Users/terrygyselings/Documents/Pokedex/src/Controller/PokemonController.php</code></li>
-        <li>Your template at <code>/Users/terrygyselings/Documents/Pokedex/templates/pokemon/index.html.twig</code></li>
+        <li>Nom anglais : {{pokemon.name_en}}</li>
+        <li>Nom japonais : {{pokemon.name_jp}}</li>
+        <li>Categorie : {{pokemon.category}}</li>
+        <li>Génération : {{pokemon.gene}}</li>
+        <li>HP : {{pokemon.hp}}</li>
+        <li>Attaque : {{pokemon.atk}}</li>
+        <li>Défense : {{pokemon.def}}</li>
+        <li>Spé atk : {{pokemon.spe_atk}}</li>
+        <li>Spé def : {{pokemon.spe_def}}</li>
+        <li>Vitesse : {{pokemon.vit}}</li>
+        <li>Taille : {{pokemon.height}}</li>
+        <li>Poids : {{pokemon.weight}}</li>
     </ul>
 </div>
 {% endblock %}

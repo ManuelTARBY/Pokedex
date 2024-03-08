@@ -16,12 +16,11 @@
             <th>Type</th>
         </tr>
     {% for ligne in results %}
-        {% set lestypes = ligne.logos %}
-        {% set leslogos = lestypes | split(',') %}
         <tr>
             <th>{{ ligne.pokedex_id }}</th>
-            <th>{{ ligne.name_fr }}</th>
+            <th><a href="/pokemon/{{ ligne.pokedex_id }}">{{ ligne.name_fr }}</a></th>
             <th>
+            {% set leslogos = ligne.logos | split(',') %}
             {% for logo in leslogos %}
                 <img src="{{ logo }}">
             {% endfor %}
