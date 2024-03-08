@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PokemonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -58,6 +60,26 @@ class Pokemon
 
     #[ORM\Column(length: 10)]
     private ?string $weight = null;
+
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'evolution')]
+    private Collection $evolution;
+
+    #[ORM\ManyToMany(targetEntity: Type::class, mappedBy: 'pokemon_has_type')]
+    private Collection $pokemon_has_type;
+
+    #[ORM\ManyToOne(inversedBy: 'pokemon_has_generation')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Generation $generation = null;
+
+    #[ORM\ManyToMany(targetEntity: Ability::class, mappedBy: 'pokemon_has_ability')]
+    private Collection $pokemon_has_ability;
+
+    public function __construct()
+    {
+        $this->evolution = new ArrayCollection();
+        $this->pokemon_has_type = new ArrayCollection();
+        $this->pokemon_has_ability = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -240,6 +262,96 @@ class Pokemon
     public function setWeight(string $weight): static
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getEvolution(): Collection
+    {
+        return $this->evolution;
+    }
+
+    public function addEvolution(self $evolution): static
+    {
+        if (!$this->evolution->contains($evolution)) {
+            $this->evolution->add($evolution);
+        }
+
+        return $this;
+    }
+
+    public function removeEvolution(self $evolution): static
+    {
+        $this->evolution->removeElement($evolution);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Type>
+     */
+    public function getPokemonHasType(): Collection
+    {
+        return $this->pokemon_has_type;
+    }
+
+    public function addPokemonHasType(Type $pokemonHasType): static
+    {
+        if (!$this->pokemon_has_type->contains($pokemonHasType)) {
+            $this->pokemon_has_type->add($pokemonHasType);
+            $pokemonHasType->addPokemonHasType($this);
+        }
+
+        return $this;
+    }
+
+    public function removePokemonHasType(Type $pokemonHasType): static
+    {
+        if ($this->pokemon_has_type->removeElement($pokemonHasType)) {
+            $pokemonHasType->removePokemonHasType($this);
+        }
+
+        return $this;
+    }
+
+    public function getGeneration(): ?Generation
+    {
+        return $this->generation;
+    }
+
+    public function setGeneration(?Generation $generation): static
+    {
+        $this->generation = $generation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ability>
+     */
+    public function getPokemonHasAbility(): Collection
+    {
+        return $this->pokemon_has_ability;
+    }
+
+    public function addPokemonHasAbility(Ability $pokemonHasAbility): static
+    {
+        if (!$this->pokemon_has_ability->contains($pokemonHasAbility)) {
+            $this->pokemon_has_ability->add($pokemonHasAbility);
+            $pokemonHasAbility->addPokemonHasAbility($this);
+        }
+
+        return $this;
+    }
+
+    public function removePokemonHasAbility(Ability $pokemonHasAbility): static
+    {
+        if ($this->pokemon_has_ability->removeElement($pokemonHasAbility)) {
+            $pokemonHasAbility->removePokemonHasAbility($this);
+        }
 
         return $this;
     }
