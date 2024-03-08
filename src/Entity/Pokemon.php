@@ -55,7 +55,7 @@ class Pokemon
     #[ORM\Column]
     private ?int $vit = null;
 
-    #[ORM\Column]
+    #[ORM\Column(lenght: 10)]
     private ?string $height = null;
 
     #[ORM\Column(length: 10)]
