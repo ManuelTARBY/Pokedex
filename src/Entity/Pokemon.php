@@ -77,12 +77,16 @@ class Pokemon
     #[ORM\OneToMany(targetEntity: Caught::class, mappedBy: 'pokemon', orphanRemoval: true)]
     private Collection $caught;
 
+    #[ORM\ManyToMany(targetEntity: Team::class, mappedBy: 'pokemon_as_team')]
+    private Collection $team;
+
     public function __construct()
     {
         $this->evolution = new ArrayCollection();
         $this->pokemon_has_type = new ArrayCollection();
         $this->pokemon_has_ability = new ArrayCollection();
         $this->caught = new ArrayCollection();
+        $this->team = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -385,6 +389,33 @@ class Pokemon
             if ($caught->getPokemon() === $this) {
                 $caught->setPokemon(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Team>
+     */
+    public function getTeam(): Collection
+    {
+        return $this->team;
+    }
+
+    public function addTeam(Team $team): static
+    {
+        if (!$this->team->contains($team)) {
+            $this->team->add($team);
+            $team->addPokemonAsTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): static
+    {
+        if ($this->team->removeElement($team)) {
+            $team->removePokemonAsTeam($this);
         }
 
         return $this;

@@ -39,9 +39,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Caught::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $caught;
 
+    #[ORM\OneToMany(targetEntity: Team::class, mappedBy: 'user')]
+    private Collection $team;
+
     public function __construct()
     {
         $this->caught = new ArrayCollection();
+        $this->team = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,6 +159,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($caught->getUser() === $this) {
                 $caught->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Team>
+     */
+    public function getTeam(): Collection
+    {
+        return $this->team;
+    }
+
+    public function addTeam(Team $team): static
+    {
+        if (!$this->team->contains($team)) {
+            $this->team->add($team);
+            $team->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): static
+    {
+        if ($this->team->removeElement($team)) {
+            // set the owning side to null (unless already changed)
+            if ($team->getUser() === $this) {
+                $team->setUser(null);
             }
         }
 
