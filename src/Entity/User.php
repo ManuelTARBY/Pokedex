@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -33,6 +35,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 45)]
     private ?string $pseudo = null;
+
+    #[ORM\OneToMany(targetEntity: Caught::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $caught;
+
+    public function __construct()
+    {
+        $this->caught = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -117,6 +127,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Caught>
+     */
+    public function getCaught(): Collection
+    {
+        return $this->caught;
+    }
+
+    public function addCaught(Caught $caught): static
+    {
+        if (!$this->caught->contains($caught)) {
+            $this->caught->add($caught);
+            $caught->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCaught(Caught $caught): static
+    {
+        if ($this->caught->removeElement($caught)) {
+            // set the owning side to null (unless already changed)
+            if ($caught->getUser() === $this) {
+                $caught->setUser(null);
+            }
+        }
 
         return $this;
     }
