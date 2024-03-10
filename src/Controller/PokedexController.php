@@ -9,10 +9,18 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class PokedexController extends AbstractController
 {
+    
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager){
+        $this->entityManager = $entityManager;
+    }
+    
     #[Route('/pokedex', name: 'app_pokedex')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(): Response
     {
-        $connection = $entityManager->getConnection();
+
+        $connection = $this->entityManager->getConnection();
 
         $sql = '
             SELECT pokemon.pokedex_id, pokemon.name_fr, GROUP_CONCAT(type.logo) AS logos
@@ -23,10 +31,10 @@ class PokedexController extends AbstractController
         ';
 
         $statement = $connection->executeQuery($sql);
-        $results = $statement->fetchAllAssociative();
+        $pokemons = $statement->fetchAllAssociative();
 
         return $this->render('pokedex/index.html.twig', [
-            'results' => $results,
+            'pokemons' => $pokemons,
         ]);
     }
 }
