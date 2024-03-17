@@ -1,7 +1,8 @@
 function getPokedexByType(pokemons, poketypes, types) {
-    // Réinitialise la position de la combo Génération
+    // Réinitialise la position de la combo Génération et vide le champ de recherche par nom
     var selectElement = document.getElementById("select-generation");
     selectElement.selectedIndex = 0;
+    document.getElementById("search-by-name").value = "";
     // Récupère la valeur sélectionnée dans le sélecteur du type
     var select = document.getElementById("select-type");
     var value = select.value;
@@ -30,7 +31,7 @@ function getPokedexByType(pokemons, poketypes, types) {
         <tr class="first-lign-pokedex">
         <th>Numéro</th>
         <th>Nom</th>
-        <th>Type</th>
+        <th>Types</th>
         </tr>
         `;
         for (let k = 0 ; k < pokemons.length ; k++) {
@@ -58,9 +59,10 @@ function getPokedexByType(pokemons, poketypes, types) {
 }
 
 function getPokedexByGeneration(pokemons, generations) {
-    // Réinitialise la position de la combo Type
+    // Réinitialise la position de la combo Type et vide le champ de recherche par nom
     var selectElement = document.getElementById("select-type");
     selectElement.selectedIndex = 0;
+    document.getElementById("search-by-name").value = "";
     // Récupère la valeur sélectionnée dans la combo Génération
     var select = document.getElementById("select-generation");
     var value = select.value;
@@ -79,7 +81,7 @@ function getPokedexByGeneration(pokemons, generations) {
         <tr class="first-lign-pokedex">
         <th>Numéro</th>
         <th>Nom</th>
-        <th>Type</th>
+        <th>Types</th>
         </tr>
         `;
         for (let j = 0 ; j < pokemons.length ; j++) {
@@ -122,7 +124,7 @@ function getPokedexByName(pokemons) {
                     <tr class="first-lign-pokedex">
                     <th>Numéro</th>
                     <th>Nom</th>
-                    <th>Type</th>
+                    <th>Types</th>
                     </tr>
                     `;
         for (let j = 0; j < pokemons.length; j++) {

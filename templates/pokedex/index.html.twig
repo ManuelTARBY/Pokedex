@@ -13,7 +13,6 @@
         <h1 id="h1-pokedex">Pokedex</h1>
     </div>
     <div class="search-by-name">
-        {#<input type="text" name="searchname" id="search-by-name" placeholder="Recherche par nom" data-parametre-twig='{{ pokemons|json_encode|raw }}'>#}
         <input type="text" name="searchname" id="search-by-name" placeholder="Recherche par nom" oninput="getPokedexByName({{ pokemons|json_encode }})">
     </div>
     <div class="div-select">
@@ -35,7 +34,7 @@
             <tr class="first-lign-pokedex">
                 <th>Numéro</th>
                 <th>Nom</th>
-                <th>Type</th>
+                <th>Types</th>
             </tr>
             {% for ligne in pokemons %}
             <tr class="lign-pokedex" id="datas-pokemon">
