@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PokedexController!{% endblock %}
+{% block title %}Pokedex{% endblock %}
 
 {% block body %}
 <style>
@@ -8,25 +8,49 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <table>
-        <tr>
-            <th>Numéro</th>
-            <th>Nom</th>
-            <th>Type</th>
-        </tr>
-    {% for ligne in results %}
-        <tr>
-            <th>{{ ligne.pokedex_id }}</th>
-            <th><a href="/pokemon/{{ ligne.pokedex_id }}">{{ ligne.name_fr }}</a></th>
-            <th>
-            {% set leslogos = ligne.logos | split(',') %}
-            {% for logo in leslogos %}
-                <img src="{{ logo }}">
+<div class="main-container">
+    <div class="titre-page">
+        <h1 id="h1-pokedex">Pokedex</h1>
+    </div>
+    <div class="search-by-name">
+        {#<input type="text" name="searchname" id="search-by-name" placeholder="Recherche par nom" data-parametre-twig='{{ pokemons|json_encode|raw }}'>#}
+        <input type="text" name="searchname" id="search-by-name" placeholder="Recherche par nom" oninput="getPokedexByName({{ pokemons|json_encode }})">
+    </div>
+    <div class="div-select">
+        <select name="sel-type" id="select-type" onchange="getPokedexByType({{ pokemons|json_encode }}, {{ poketypes|json_encode }}, {{ types|json_encode }})">
+                <option value="null">Recherche par Type</option>
+            {% for type in types %}
+                <option value="{{type.name}}">{{type.name}}</option>
             {% endfor %}
-            </th>  
-        </tr>
-    {% endfor %}
-    </table>
+        </select>
+        <select name="sel-generation" id="select-generation" onchange='getPokedexByGeneration({{ pokemons|json_encode }}, {{ generations|json_encode }})'>
+                <option value="null">Recherche par Génération</option>
+            {% for generation in generations %}
+                <option value="{{generation.number}}">{{generation.number}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="div-table-pokedex" id="tab-poke">
+        <table class="table-pokedex">
+            <tr class="first-lign-pokedex">
+                <th>Numéro</th>
+                <th>Nom</th>
+                <th>Type</th>
+            </tr>
+            {% for ligne in pokemons %}
+            <tr class="lign-pokedex" id="datas-pokemon">
+                <th>{{ ligne.pokedex_id }}</th>
+                <th><a href="/pokemon/{{ ligne.pokedex_id }}">{{ ligne.name_fr }}</a></th>
+                <th class="th-logo">
+                {% set leslogos = ligne.logos | split(',') %}
+                {% for logo in leslogos %}
+                    <img class="img-type" src="{{ logo }}">
+                {% endfor %}
+                </th>  
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </div>
+<script src="{{ asset('js/script.js') }}"></script>
 {% endblock %}

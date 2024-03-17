@@ -1,3 +1,101 @@
 body {
     background-color: white;
+    display: flex;
+    justify-content: center;
 }
+
+#h1-pokedex {
+    font-size: 26px;;
+}
+
+.main-container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(80, 80, 80);
+    border-radius: 15px;
+    width: 90%
+}
+
+.titre-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2em;
+    margin-top: 5px;
+    color: white;
+}
+
+.search-by-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 12px;
+}
+
+#search-by-name {
+    background-color: rgb(61, 61, 61);
+    color: white;
+    border: solid 1.5px black;
+    border-radius: 10px;
+    padding-left: 1em;
+    padding-right: 1em;
+    height: 2em;
+    text-align: center;
+    width: 58%;
+    font-size: 12px;
+}
+
+::placeholder {
+    color: white;
+}
+
+.div-select {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 5% 10px 5%;
+}
+
+select {
+    height: 1.3em;
+    color: white;
+    background-color: rgb(61, 61, 61);
+    border: solid 1.5px black;
+    border-radius: 10px;
+    width: 40%;
+    padding-left: 1em;
+    height: 2.5em;
+    font-size: 12px;
+    text-align: center;
+}
+
+.table-pokedex {
+    width: 95%;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+th {
+    height: 2.3em;
+}
+
+.first-lign-pokedex {
+    background-color: rgb(204, 204, 204);
+}
+
+.lign-pokedex {
+    background-color: rgb(230, 230, 230);
+}
+
+.img-type {
+    margin: 4px;
+    height: 1.6em;
+}
+
+.div-table-pokedex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

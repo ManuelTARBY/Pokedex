@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PokemonController!{% endblock %}
+{% block title %}Fiche Pokédex - {{ pokemon.name_fr }}{% endblock %}
 
 {% block body %}
 <style>
@@ -9,21 +9,63 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>{{pokemon.name_fr}}</h1>
-    <img src="{{pokemon.sprite_regular}}">
-    <ul>
-        <li>Nom anglais : {{pokemon.name_en}}</li>
-        <li>Nom japonais : {{pokemon.name_jp}}</li>
-        <li>Categorie : {{pokemon.category}}</li>
-        <li>Génération : {{pokemon.gene}}</li>
-        <li>HP : {{pokemon.hp}}</li>
-        <li>Attaque : {{pokemon.atk}}</li>
-        <li>Défense : {{pokemon.def}}</li>
-        <li>Spé atk : {{pokemon.spe_atk}}</li>
-        <li>Spé def : {{pokemon.spe_def}}</li>
-        <li>Vitesse : {{pokemon.vit}}</li>
-        <li>Taille : {{pokemon.height}}</li>
-        <li>Poids : {{pokemon.weight}}</li>
-    </ul>
+    <div style="display: flex; justify-content: center; align-items: center; background-color: rgb(80, 80, 80); border-radius: 15px;">
+    <table style="width: 100%; color: white;">
+        <th style="width: 40%;"><img style="width: 100%; height: auto;" src="{{ pokemon.sprite_regular }}"><th>
+        <th style="text-align: left; width: 60%">
+            Fiche Pokédex de {{ pokemon.name_fr }}<br>
+            <div style="background-color : green; height: 0.1em;"></div>
+            <div style="color: rgb(220, 220, 220);">{{pokemon.name_en}} #{{ pokemon.pokedex_id }} - {{pokemon.name_jp}}<br></div>
+            {% for type in types %}
+                <img style="width: 10%;" src="{{type.logo}}">
+            {% endfor %}
+        </th>
+    </table>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; background-color: rgb(80, 80, 80); border-radius: 15px; margin-top: 1.5em; 
+    padding-top: 1.2em; padding-bottom: 1.2em; color: rgb(220, 220, 220); font-size: 11px;">
+        <table style="width: 50%;">
+        <tr>
+            <th style="text-align: left;">CATÉGORIE</th>
+            <th>{{pokemon.category}}</th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">GÉNÉRATION</th>
+            <th>{{pokemon.gene}}</th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">PV</th>
+            <th>{{pokemon.hp}}</th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">ATTAQUE</th>
+            <th>{{pokemon.atk}}</th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">DÉFENSE</th>
+            <th>{{pokemon.def}}</th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">ATTAQUE SPÉ</th>
+            <th>{{pokemon.spe_atk}}</th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">DÉFENSE SPÉ</th>
+            <th>{{pokemon.spe_def}}</th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">VITESSE</th>
+            <th>{{pokemon.vit}}</th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">TAILLE</th>
+            <th>{{pokemon.height}}</th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">POIDS</th>
+            <th>{{pokemon.weight}}</th>
+        </tr>
+        </table>
+    </div>
 </div>
 {% endblock %}
