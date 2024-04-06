@@ -5,13 +5,32 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
 {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+    <nav>
+        <div class="nav_gauche">
+            <div>
+                <a href="/"><img id="logo" src="images/LogoPokeball.png" alt="logo"></a>
+            </div>
+            <ul>
+                <li><a href="/pokedex">pokedex</a></li>
+                <li><a href="/shinydex">shinydex</a></li>
+                <li><a href="/teams">teams</a></li>
+            </ul>
+        </div>
+        <div class="nav_droite">
+            <a class="sub" href="">inscription</a>
+            <a class="sub" href="">connexion</a>
+        </div>
+    </nav>
     <body>
+    <div class="container">
         {% block body %}{% endblock %}
+    </div>
     </body>
 </html>
