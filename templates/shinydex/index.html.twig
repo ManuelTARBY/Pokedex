@@ -8,13 +8,15 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/terrygyselings/Documents/Pokedex/src/Controller/ShinydexController.php</code></li>
-        <li>Your template at <code>/Users/terrygyselings/Documents/Pokedex/templates/shinydex/index.html.twig</code></li>
-    </ul>
+<div class="main-container">
+    <div class="titre-page">
+        <h1 id="h1-shinydex">Shinydex</h1>
+    </div>
+    <select name="sel-generation" id="select-generation" onchange='getPokedexByGeneration({{ pokemons|json_encode }}, {{ generations|json_encode }})'>
+                <option value="null">Recherche par Génération</option>
+            {% for generation in generations %}
+                <option value="{{generation.number}}">{{generation.number}}</option>
+            {% endfor %}
+    </select>
 </div>
 {% endblock %}
