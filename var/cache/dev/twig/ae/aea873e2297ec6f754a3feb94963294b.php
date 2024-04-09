@@ -89,7 +89,6 @@ class __TwigTemplate_270b7ab9eca75d62540afae510a10178 extends Template
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
 <div class=\"main-container\">
     <div class=\"titre-page\">
         <h1 id=\"h1-shinydex\">Shinydex</h1>
@@ -98,68 +97,68 @@ class __TwigTemplate_270b7ab9eca75d62540afae510a10178 extends Template
         <select name=\"sel-generation\" id=\"select-generation\">
                     <option value=\"null\">Recherche par Génération</option>
                 ";
-        // line 18
+        // line 17
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["generations"]) || array_key_exists("generations", $context) ? $context["generations"] : (function () { throw new RuntimeError('Variable "generations" does not exist.', 18, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["generations"]) || array_key_exists("generations", $context) ? $context["generations"] : (function () { throw new RuntimeError('Variable "generations" does not exist.', 17, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["generation"]) {
-            // line 19
+            // line 18
             echo "                    <option value=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["generation"], "id", [], "any", false, false, false, 19), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["generation"], "id", [], "any", false, false, false, 18), "html", null, true);
             echo "\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["generation"], "number", [], "any", false, false, false, 19), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["generation"], "number", [], "any", false, false, false, 18), "html", null, true);
             echo "</option>
                 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['generation'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 21
+        // line 20
         echo "        </select>
     </div>
     <div class=\"div-shinydex\">
         ";
-        // line 24
+        // line 23
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["pokemons"]) || array_key_exists("pokemons", $context) ? $context["pokemons"] : (function () { throw new RuntimeError('Variable "pokemons" does not exist.', 24, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["pokemons"]) || array_key_exists("pokemons", $context) ? $context["pokemons"] : (function () { throw new RuntimeError('Variable "pokemons" does not exist.', 23, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["pokemon"]) {
-            // line 25
+            // line 24
             echo "        <div class=\"pokemon\" value=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pokemon"], "generation", [], "any", false, false, false, 25), "id", [], "any", false, false, false, 25), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pokemon"], "generation", [], "any", false, false, false, 24), "id", [], "any", false, false, false, 24), "html", null, true);
             echo "\">
             <div class=\"pokemon_id\"> # ";
-            // line 26
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "PokedexId", [], "any", false, false, false, 26), "html", null, true);
+            // line 25
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "PokedexId", [], "any", false, false, false, 25), "html", null, true);
             echo " </div>
             ";
+            // line 26
+            $context["captured"] = twig_get_attribute($this->env, $this->source, ($context["capturedPokemons"] ?? null), twig_get_attribute($this->env, $this->source, $context["pokemon"], "getId", [], "method", false, false, false, 26), [], "array", true, true, false, 26);
             // line 27
-            $context["captured"] = twig_get_attribute($this->env, $this->source, ($context["capturedPokemons"] ?? null), twig_get_attribute($this->env, $this->source, $context["pokemon"], "getId", [], "method", false, false, false, 27), [], "array", true, true, false, 27);
-            // line 28
             echo "            ";
-            if ((isset($context["captured"]) || array_key_exists("captured", $context) ? $context["captured"] : (function () { throw new RuntimeError('Variable "captured" does not exist.', 28, $this->source); })())) {
-                // line 29
+            if ((isset($context["captured"]) || array_key_exists("captured", $context) ? $context["captured"] : (function () { throw new RuntimeError('Variable "captured" does not exist.', 27, $this->source); })())) {
+                // line 28
                 echo "            <img src=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "SpriteShiny", [], "any", false, false, false, 29), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "SpriteShiny", [], "any", false, false, false, 28), "html", null, true);
                 echo "\">
             ";
             } else {
-                // line 31
+                // line 30
                 echo "            <img class=\"filter\" src=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "SpriteRegular", [], "any", false, false, false, 31), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "SpriteRegular", [], "any", false, false, false, 30), "html", null, true);
                 echo "\">
             ";
             }
-            // line 33
+            // line 32
             echo "        </div>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pokemon'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 35
+        // line 34
         echo "    </div>
 </div>
 <script src=\"";
-        // line 37
+        // line 36
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/shinydex.js"), "html", null, true);
         echo "\"></script>
 ";
@@ -192,7 +191,7 @@ class __TwigTemplate_270b7ab9eca75d62540afae510a10178 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  163 => 37,  159 => 35,  152 => 33,  146 => 31,  140 => 29,  137 => 28,  135 => 27,  131 => 26,  126 => 25,  122 => 24,  117 => 21,  106 => 19,  102 => 18,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  162 => 36,  158 => 34,  151 => 32,  145 => 30,  139 => 28,  136 => 27,  134 => 26,  130 => 25,  125 => 24,  121 => 23,  116 => 20,  105 => 18,  101 => 17,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -206,7 +205,6 @@ class __TwigTemplate_270b7ab9eca75d62540afae510a10178 extends Template
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
 <div class=\"main-container\">
     <div class=\"titre-page\">
         <h1 id=\"h1-shinydex\">Shinydex</h1>

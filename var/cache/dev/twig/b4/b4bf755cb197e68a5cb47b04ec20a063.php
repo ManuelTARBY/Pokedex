@@ -93,10 +93,31 @@ class __TwigTemplate_fb5ec2aa7337e623430d23dd64f7fd3e extends Template
 <div class=\"example-wrapper\">
     <h1>Hello ";
         // line 12
-        echo twig_escape_filter($this->env, (isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new RuntimeError('Variable "controller_name" does not exist.', 12, $this->source); })()), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["teams"]) || array_key_exists("teams", $context) ? $context["teams"] : (function () { throw new RuntimeError('Variable "teams" does not exist.', 12, $this->source); })()), 0, [], "array", false, false, false, 12), "getName", [], "any", false, false, false, 12), "html", null, true);
         echo "! ✅</h1>
 
-    This friendly message is coming from:
+    <ul>
+        ";
+        // line 15
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["teams"]) || array_key_exists("teams", $context) ? $context["teams"] : (function () { throw new RuntimeError('Variable "teams" does not exist.', 15, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["team"]) {
+            // line 16
+            echo "            <li>
+                ";
+            // line 17
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source,             // line 18
+$context["team"], "getPokemonAsTeam", [], "method", false, false, false, 18), "html", null, true);
+            // line 19
+            echo "
+            </li>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['team'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 22
+        echo "    </ul>
     <ul>
         <li>Your controller at <code>/Users/terrygyselings/Documents/Pokedex/src/Controller/TeamsController.php</code></li>
         <li>Your template at <code>/Users/terrygyselings/Documents/Pokedex/templates/teams/index.html.twig</code></li>
@@ -132,7 +153,7 @@ class __TwigTemplate_fb5ec2aa7337e623430d23dd64f7fd3e extends Template
      */
     public function getDebugInfo()
     {
-        return array (  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  120 => 22,  112 => 19,  110 => 18,  109 => 17,  106 => 16,  102 => 15,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -148,9 +169,17 @@ class __TwigTemplate_fb5ec2aa7337e623430d23dd64f7fd3e extends Template
 </style>
 
 <div class=\"example-wrapper\">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Hello {{ teams[0].getName }}! ✅</h1>
 
-    This friendly message is coming from:
+    <ul>
+        {% for team in teams %}
+            <li>
+                {{
+                    team.getPokemonAsTeam()
+                }}
+            </li>
+        {% endfor %}
+    </ul>
     <ul>
         <li>Your controller at <code>/Users/terrygyselings/Documents/Pokedex/src/Controller/TeamsController.php</code></li>
         <li>Your template at <code>/Users/terrygyselings/Documents/Pokedex/templates/teams/index.html.twig</code></li>

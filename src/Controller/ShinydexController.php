@@ -12,6 +12,12 @@ use App\Entity\User;
 
 class ShinydexController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager){
+        $this->entityManager = $entityManager;
+    }
+    
     #[Route('/shinydex', name: 'app_shinydex')]
     public function index(EntityManagerInterface $entityManager): Response
     {

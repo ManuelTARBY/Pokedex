@@ -76,18 +76,40 @@ class __TwigTemplate_b2c7c42fae49c8bfa1efd510249ae2a5 extends Template
             </ul>
         </div>
         <div class=\"nav_droite\">
-            <a class=\"sub\" href=\"\">inscription</a>
-            <a class=\"sub\" href=\"\">connexion</a>
-        </div>
+        ";
+        // line 27
+        if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_USER")) {
+            // line 28
+            echo "            <a class=\"sub\" href=\"\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 28, $this->source); })()), "user", [], "any", false, false, false, 28), "pseudo", [], "any", false, false, false, 28), "html", null, true);
+            echo "</a>
+            <a class=\"sub\" href=\"/logout\">déconnexion</a>
+        ";
+        } else {
+            // line 31
+            echo "            <a class=\"sub\" href=\"";
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
+            echo "\">inscription</a>
+            <a class=\"sub\" href=\"";
+            // line 32
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
+            echo "\">connexion</a>
+        ";
+        }
+        // line 34
+        echo "        </div>
     </nav>
     <body>
     <div class=\"container\">
         ";
-        // line 33
+        // line 38
         $this->displayBlock('body', $context, $blocks);
-        // line 34
+        // line 39
         echo "    </div>
     </body>
+    <foot>
+        <div class=\"footer\"> © All right reserved to Nintendo </div>
+    </foot>
 </html>
 ";
         
@@ -181,7 +203,7 @@ class __TwigTemplate_b2c7c42fae49c8bfa1efd510249ae2a5 extends Template
 
     }
 
-    // line 33
+    // line 38
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -210,9 +232,17 @@ class __TwigTemplate_b2c7c42fae49c8bfa1efd510249ae2a5 extends Template
     /**
      * @codeCoverageIgnore
      */
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
     public function getDebugInfo()
     {
-        return array (  185 => 33,  166 => 12,  156 => 13,  154 => 12,  144 => 11,  131 => 8,  121 => 7,  102 => 5,  89 => 34,  87 => 33,  66 => 14,  64 => 11,  61 => 10,  59 => 7,  54 => 5,  48 => 1,);
+        return array (  207 => 38,  188 => 12,  178 => 13,  176 => 12,  166 => 11,  153 => 8,  143 => 7,  124 => 5,  108 => 39,  106 => 38,  100 => 34,  95 => 32,  90 => 31,  83 => 28,  81 => 27,  66 => 14,  64 => 11,  61 => 10,  59 => 7,  54 => 5,  48 => 1,);
     }
 
     public function getSourceContext()
@@ -243,8 +273,13 @@ class __TwigTemplate_b2c7c42fae49c8bfa1efd510249ae2a5 extends Template
             </ul>
         </div>
         <div class=\"nav_droite\">
-            <a class=\"sub\" href=\"\">inscription</a>
-            <a class=\"sub\" href=\"\">connexion</a>
+        {% if is_granted('ROLE_USER') %}
+            <a class=\"sub\" href=\"\">{{app.user.pseudo}}</a>
+            <a class=\"sub\" href=\"/logout\">déconnexion</a>
+        {% else %}
+            <a class=\"sub\" href=\"{{path('app_register')}}\">inscription</a>
+            <a class=\"sub\" href=\"{{path('app_login')}}\">connexion</a>
+        {% endif %}
         </div>
     </nav>
     <body>
@@ -252,6 +287,9 @@ class __TwigTemplate_b2c7c42fae49c8bfa1efd510249ae2a5 extends Template
         {% block body %}{% endblock %}
     </div>
     </body>
+    <foot>
+        <div class=\"footer\"> © All right reserved to Nintendo </div>
+    </foot>
 </html>
 ", "base.html.twig", "/Users/terrygyselings/Documents/Pokedex/templates/base.html.twig");
     }

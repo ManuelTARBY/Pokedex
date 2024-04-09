@@ -60,7 +60,9 @@ return [PHP_INT_MAX, static fn () => \Symfony\Component\VarExporter\Internal\Hyd
                 null,
             ],
             'types' => [
-                null,
+                [
+                    'https://schema.org/email',
+                ],
             ],
             'builtinTypes' => [
                 [
@@ -69,6 +71,10 @@ return [PHP_INT_MAX, static fn () => \Symfony\Component\VarExporter\Internal\Hyd
             ],
             'schema' => [
                 [
+                    'format' => 'email',
+                    'externalDocs' => [
+                        'url' => 'https://schema.org/email',
+                    ],
                     'type' => 'string',
                 ],
             ],
