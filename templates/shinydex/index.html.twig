@@ -11,13 +11,21 @@
     <div class="titre-page">
         <h1 id="h1-shinydex">Shinydex</h1>
     </div>
-    <div class="div-select-shiny">
+    <div>
+        {{totalCaught}}/{{total}}
+    </div>
+    <div class="div-select">
+        <div>    
+            <button>+</button>
+            <span>Ajouter un nouveau Shiny</span>
+        </div>
         <select name="sel-generation" id="select-generation">
-                    <option value="null">Recherche par Génération</option>
                 {% for generation in generations %}
                     <option value="{{generation.id}}">{{generation.number}}</option>
                 {% endfor %}
         </select>
+    </div>
+    <div id="totalByGen">
     </div>
     <div class="div-shinydex">
         {% for pokemon in pokemons %}
@@ -33,5 +41,31 @@
         {% endfor %}
     </div>
 </div>
-<script src="{{ asset('js/shinydex.js') }}"></script>
+<script>
+function changeGeneration () {
+    var selectedGeneration = document.getElementById('select-generation').value;
+    var pokemons = document.querySelectorAll('.pokemon');
+    var totalByGen = document.getElementById('totalByGen');
+    var total = '{{totalCaughtByGen|raw}}';
+    total = JSON.parse(total);
+
+    pokemons.forEach(function(pokemon) {
+        var generationId = pokemon.getAttribute('value');
+        if (selectedGeneration === 'null' || selectedGeneration === generationId) {
+            pokemon.style.display = 'block';
+        } else {
+            pokemon.style.display = 'none';
+        }  
+        
+    });
+    if (total[selectedGeneration] == undefined){
+        totalByGen.innerHTML = 0;
+    }else{
+        totalByGen.innerHTML = total[selectedGeneration];
+    }
+};
+
+document.addEventListener('DOMContentLoaded', changeGeneration);
+document.getElementById('select-generation').addEventListener('change', changeGeneration);
+</script>
 {% endblock %}

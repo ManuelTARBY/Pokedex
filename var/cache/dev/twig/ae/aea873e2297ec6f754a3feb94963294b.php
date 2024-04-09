@@ -93,74 +93,113 @@ class __TwigTemplate_270b7ab9eca75d62540afae510a10178 extends Template
     <div class=\"titre-page\">
         <h1 id=\"h1-shinydex\">Shinydex</h1>
     </div>
-    <div class=\"div-select-shiny\">
+    <div>
+        ";
+        // line 15
+        echo twig_escape_filter($this->env, (isset($context["totalCaught"]) || array_key_exists("totalCaught", $context) ? $context["totalCaught"] : (function () { throw new RuntimeError('Variable "totalCaught" does not exist.', 15, $this->source); })()), "html", null, true);
+        echo "/";
+        echo twig_escape_filter($this->env, (isset($context["total"]) || array_key_exists("total", $context) ? $context["total"] : (function () { throw new RuntimeError('Variable "total" does not exist.', 15, $this->source); })()), "html", null, true);
+        echo "
+    </div>
+    <div class=\"div-select\">
+        <div>    
+            <button>+</button>
+            <span>Ajouter un nouveau Shiny</span>
+        </div>
         <select name=\"sel-generation\" id=\"select-generation\">
-                    <option value=\"null\">Recherche par Génération</option>
                 ";
-        // line 17
+        // line 23
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["generations"]) || array_key_exists("generations", $context) ? $context["generations"] : (function () { throw new RuntimeError('Variable "generations" does not exist.', 17, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["generations"]) || array_key_exists("generations", $context) ? $context["generations"] : (function () { throw new RuntimeError('Variable "generations" does not exist.', 23, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["generation"]) {
-            // line 18
+            // line 24
             echo "                    <option value=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["generation"], "id", [], "any", false, false, false, 18), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["generation"], "id", [], "any", false, false, false, 24), "html", null, true);
             echo "\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["generation"], "number", [], "any", false, false, false, 18), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["generation"], "number", [], "any", false, false, false, 24), "html", null, true);
             echo "</option>
                 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['generation'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 20
+        // line 26
         echo "        </select>
+    </div>
+    <div id=\"totalByGen\">
     </div>
     <div class=\"div-shinydex\">
         ";
-        // line 23
+        // line 31
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["pokemons"]) || array_key_exists("pokemons", $context) ? $context["pokemons"] : (function () { throw new RuntimeError('Variable "pokemons" does not exist.', 23, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["pokemons"]) || array_key_exists("pokemons", $context) ? $context["pokemons"] : (function () { throw new RuntimeError('Variable "pokemons" does not exist.', 31, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["pokemon"]) {
-            // line 24
+            // line 32
             echo "        <div class=\"pokemon\" value=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pokemon"], "generation", [], "any", false, false, false, 24), "id", [], "any", false, false, false, 24), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pokemon"], "generation", [], "any", false, false, false, 32), "id", [], "any", false, false, false, 32), "html", null, true);
             echo "\">
             <div class=\"pokemon_id\"> # ";
-            // line 25
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "PokedexId", [], "any", false, false, false, 25), "html", null, true);
+            // line 33
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "PokedexId", [], "any", false, false, false, 33), "html", null, true);
             echo " </div>
             ";
-            // line 26
-            $context["captured"] = twig_get_attribute($this->env, $this->source, ($context["capturedPokemons"] ?? null), twig_get_attribute($this->env, $this->source, $context["pokemon"], "getId", [], "method", false, false, false, 26), [], "array", true, true, false, 26);
-            // line 27
+            // line 34
+            $context["captured"] = twig_get_attribute($this->env, $this->source, ($context["capturedPokemons"] ?? null), twig_get_attribute($this->env, $this->source, $context["pokemon"], "getId", [], "method", false, false, false, 34), [], "array", true, true, false, 34);
+            // line 35
             echo "            ";
-            if ((isset($context["captured"]) || array_key_exists("captured", $context) ? $context["captured"] : (function () { throw new RuntimeError('Variable "captured" does not exist.', 27, $this->source); })())) {
-                // line 28
+            if ((isset($context["captured"]) || array_key_exists("captured", $context) ? $context["captured"] : (function () { throw new RuntimeError('Variable "captured" does not exist.', 35, $this->source); })())) {
+                // line 36
                 echo "            <img src=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "SpriteShiny", [], "any", false, false, false, 28), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "SpriteShiny", [], "any", false, false, false, 36), "html", null, true);
                 echo "\">
             ";
             } else {
-                // line 30
+                // line 38
                 echo "            <img class=\"filter\" src=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "SpriteRegular", [], "any", false, false, false, 30), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pokemon"], "SpriteRegular", [], "any", false, false, false, 38), "html", null, true);
                 echo "\">
             ";
             }
-            // line 32
+            // line 40
             echo "        </div>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pokemon'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 34
+        // line 42
         echo "    </div>
 </div>
-<script src=\"";
-        // line 36
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/shinydex.js"), "html", null, true);
-        echo "\"></script>
+<script>
+function changeGeneration () {
+    var selectedGeneration = document.getElementById('select-generation').value;
+    var pokemons = document.querySelectorAll('.pokemon');
+    var totalByGen = document.getElementById('totalByGen');
+    var total = '";
+        // line 49
+        echo (isset($context["totalCaughtByGen"]) || array_key_exists("totalCaughtByGen", $context) ? $context["totalCaughtByGen"] : (function () { throw new RuntimeError('Variable "totalCaughtByGen" does not exist.', 49, $this->source); })());
+        echo "';
+    total = JSON.parse(total);
+
+    pokemons.forEach(function(pokemon) {
+        var generationId = pokemon.getAttribute('value');
+        if (selectedGeneration === 'null' || selectedGeneration === generationId) {
+            pokemon.style.display = 'block';
+        } else {
+            pokemon.style.display = 'none';
+        }  
+        
+    });
+    if (total[selectedGeneration] == undefined){
+        totalByGen.innerHTML = 0;
+    }else{
+        totalByGen.innerHTML = total[selectedGeneration];
+    }
+};
+
+document.addEventListener('DOMContentLoaded', changeGeneration);
+document.getElementById('select-generation').addEventListener('change', changeGeneration);
+</script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -191,7 +230,7 @@ class __TwigTemplate_270b7ab9eca75d62540afae510a10178 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  162 => 36,  158 => 34,  151 => 32,  145 => 30,  139 => 28,  136 => 27,  134 => 26,  130 => 25,  125 => 24,  121 => 23,  116 => 20,  105 => 18,  101 => 17,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  180 => 49,  171 => 42,  164 => 40,  158 => 38,  152 => 36,  149 => 35,  147 => 34,  143 => 33,  138 => 32,  134 => 31,  127 => 26,  116 => 24,  112 => 23,  99 => 15,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -209,13 +248,21 @@ class __TwigTemplate_270b7ab9eca75d62540afae510a10178 extends Template
     <div class=\"titre-page\">
         <h1 id=\"h1-shinydex\">Shinydex</h1>
     </div>
-    <div class=\"div-select-shiny\">
+    <div>
+        {{totalCaught}}/{{total}}
+    </div>
+    <div class=\"div-select\">
+        <div>    
+            <button>+</button>
+            <span>Ajouter un nouveau Shiny</span>
+        </div>
         <select name=\"sel-generation\" id=\"select-generation\">
-                    <option value=\"null\">Recherche par Génération</option>
                 {% for generation in generations %}
                     <option value=\"{{generation.id}}\">{{generation.number}}</option>
                 {% endfor %}
         </select>
+    </div>
+    <div id=\"totalByGen\">
     </div>
     <div class=\"div-shinydex\">
         {% for pokemon in pokemons %}
@@ -231,7 +278,33 @@ class __TwigTemplate_270b7ab9eca75d62540afae510a10178 extends Template
         {% endfor %}
     </div>
 </div>
-<script src=\"{{ asset('js/shinydex.js') }}\"></script>
+<script>
+function changeGeneration () {
+    var selectedGeneration = document.getElementById('select-generation').value;
+    var pokemons = document.querySelectorAll('.pokemon');
+    var totalByGen = document.getElementById('totalByGen');
+    var total = '{{totalCaughtByGen|raw}}';
+    total = JSON.parse(total);
+
+    pokemons.forEach(function(pokemon) {
+        var generationId = pokemon.getAttribute('value');
+        if (selectedGeneration === 'null' || selectedGeneration === generationId) {
+            pokemon.style.display = 'block';
+        } else {
+            pokemon.style.display = 'none';
+        }  
+        
+    });
+    if (total[selectedGeneration] == undefined){
+        totalByGen.innerHTML = 0;
+    }else{
+        totalByGen.innerHTML = total[selectedGeneration];
+    }
+};
+
+document.addEventListener('DOMContentLoaded', changeGeneration);
+document.getElementById('select-generation').addEventListener('change', changeGeneration);
+</script>
 {% endblock %}
 ", "shinydex/index.html.twig", "/Users/terrygyselings/Documents/Pokedex/templates/shinydex/index.html.twig");
     }
