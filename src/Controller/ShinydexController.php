@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Pokemon;
+use App\Entity\Generation;
+use App\Entity\User;
 
 class ShinydexController extends AbstractController
 {
@@ -16,31 +19,37 @@ class ShinydexController extends AbstractController
     }
 
     #[Route('/shinydex', name: 'app_shinydex')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        $connection = $this->entityManager->getConnection();
+        $pokemonManager = $this->entityManager->getRepository(Pokemon::class);
 
-        $sql = '
-            SELECT pokedex_id, sprite_shiny
-            FROM pokemon
-            ORDER BY pokedex_id
-        ';
+        $pokemons = $pokemonManager->findAll();
 
-        $statement = $connection->executeQuery($sql);
-        $resultPoke = $statement->fetchAssociative();
+        $generationManager = $this->entityManager->getRepository(Generation::class);
 
-        $sql = '
-            SELECT * 
-            FROM generation 
-            ORDER BY number
-        ';
+        $generations = $generationManager->findAll();
 
-        $statement = $connection->executeQuery($sql);
-        $generations = $statement->fetchAllAssociative();
+        $storage = [];
+        $user = $this->getUser();
+
+        $caughts = $user->getCaught();
+
+        foreach ($caughts as $caught) {
+            $pokemon = $caught->getPokemon();
+            $storage[] = $pokemon;
+        }
+
+        $capturedPokemons = [];
+        foreach ($storage as $capturedPokemon) {
+            $capturedPokemons[$capturedPokemon->getId()] = true;
+        }
+
+        dump($capturedPokemons);
 
         return $this->render('shinydex/index.html.twig', [
-            'pokemons' => $resultPoke,
+            'pokemons' => $pokemons,
             'generations' => $generations,
+            'capturedPokemons' => $capturedPokemons,
         ]);
     }
 }

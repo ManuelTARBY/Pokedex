@@ -12,11 +12,27 @@
     <div class="titre-page">
         <h1 id="h1-shinydex">Shinydex</h1>
     </div>
-    <select name="sel-generation" id="select-generation" onchange='getPokedexByGeneration({{ pokemons|json_encode }}, {{ generations|json_encode }})'>
-                <option value="null">Recherche par Génération</option>
-            {% for generation in generations %}
-                <option value="{{generation.number}}">{{generation.number}}</option>
-            {% endfor %}
-    </select>
+    <div class="div-select-shiny">
+        <select name="sel-generation" id="select-generation">
+                    <option value="null">Recherche par Génération</option>
+                {% for generation in generations %}
+                    <option value="{{generation.id}}">{{generation.number}}</option>
+                {% endfor %}
+        </select>
+    </div>
+    <div class="div-shinydex">
+        {% for pokemon in pokemons %}
+        <div class="pokemon" value="{{ pokemon.generation.id }}">
+            <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
+            {% set captured = capturedPokemons[pokemon.getId()] is defined %}
+            {% if captured %}
+            <img src="{{ pokemon.SpriteShiny }}">
+            {% else %}
+            <img class="filter" src="{{ pokemon.SpriteRegular }}">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
 </div>
+<script src="{{ asset('js/shinydex.js') }}"></script>
 {% endblock %}

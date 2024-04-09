@@ -59,6 +59,12 @@ body {
     margin: 10px 5% 10px 5%;
 }
 
+.div-select-shiny {
+    display: flex;
+    justify-content: center;
+    margin: 10px 5% 10px 5%;
+}
+
 select {
     height: 1.3em;
     color: white;
@@ -163,4 +169,37 @@ nav a:hover {
     display: flex;
     justify-content: center;
     margin-top: 90px;
+}
+
+.div-shinydex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; 
+}
+
+.pokemon {
+    width: calc(100% / 9 - 10px);
+    height: 150px;
+    color: white;
+    position: relative;
+}
+
+.pokemon img {    
+    height: 100px;
+    position: absolute;
+    top: 50%; /* Déplace l'image à 50% de la hauteur de son parent */
+    left: 50%; /* Déplace l'image à 50% de la largeur de son parent */
+    transform: translate(-50%, -50%);
+}
+
+.filter {
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+}
+
+#select-generation-shinydex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
