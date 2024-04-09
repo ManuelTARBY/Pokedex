@@ -5,4 +5,8 @@ controllers:
     type: attribute
 auth:
     path: /auth
+<<<<<<< HEAD
     methods: ['POST']
+=======
+    methods: ['POST']
+>>>>>>> master

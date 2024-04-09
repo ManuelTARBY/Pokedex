@@ -7,14 +7,31 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/terrygyselings/Documents/Pokedex/src/Controller/ShinydexController.php</code></li>
-        <li>Your template at <code>/Users/terrygyselings/Documents/Pokedex/templates/shinydex/index.html.twig</code></li>
-    </ul>
+<div class="main-container">
+    <div class="titre-page">
+        <h1 id="h1-shinydex">Shinydex</h1>
+    </div>
+    <div class="div-select-shiny">
+        <select name="sel-generation" id="select-generation">
+                    <option value="null">Recherche par Génération</option>
+                {% for generation in generations %}
+                    <option value="{{generation.id}}">{{generation.number}}</option>
+                {% endfor %}
+        </select>
+    </div>
+    <div class="div-shinydex">
+        {% for pokemon in pokemons %}
+        <div class="pokemon" value="{{ pokemon.generation.id }}">
+            <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
+            {% set captured = capturedPokemons[pokemon.getId()] is defined %}
+            {% if captured %}
+            <img src="{{ pokemon.SpriteShiny }}">
+            {% else %}
+            <img class="filter" src="{{ pokemon.SpriteRegular }}">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
 </div>
+<script src="{{ asset('js/shinydex.js') }}"></script>
 {% endblock %}
