@@ -9,6 +9,20 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+
+# Cache, session files and logs (Symfony3)
+/var/cache/*
+/var/logs/*
+/var/sessions/*
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+!var/sessions/.gitkeep
+
+# Logs (Symfony4)
+/var/log/*
+!var/log/.gitkeep
+
+
 ###> phpunit/phpunit ###
 /phpunit.xml
 .phpunit.result.cache
