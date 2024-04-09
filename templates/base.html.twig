@@ -24,8 +24,13 @@
             </ul>
         </div>
         <div class="nav_droite">
-            <a class="sub" href="">inscription</a>
-            <a class="sub" href="">connexion</a>
+        {% if is_granted('ROLE_USER') %}
+            <a class="sub" href="">{{app.user.pseudo}}</a>
+            <a class="sub" href="/logout">déconnexion</a>
+        {% else %}
+            <a class="sub" href="{{path('app_register')}}">inscription</a>
+            <a class="sub" href="{{path('app_login')}}">connexion</a>
+        {% endif %}
         </div>
     </nav>
     <body>
@@ -33,4 +38,7 @@
         {% block body %}{% endblock %}
     </div>
     </body>
+    <foot>
+        <div class="footer"> © All right reserved to Nintendo </div>
+    </foot>
 </html>

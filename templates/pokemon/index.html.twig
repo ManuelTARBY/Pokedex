@@ -15,9 +15,9 @@
         <th style="text-align: left; width: 60%">
             Fiche Pokédex de {{ pokemon.name_fr }}<br>
             <div style="background-color : green; height: 0.1em;"></div>
-            <div style="color: rgb(220, 220, 220);">{{pokemon.name_en}} #{{ pokemon.pokedex_id }} - {{ pokemon.name_jp }}<br></div>
+            <div style="color: rgb(220, 220, 220);">{{pokemon.name_en}} #{{ pokemon.pokedex_id }} - {{pokemon.name_jp}}<br></div>
             {% for type in types %}
-                <img style="width: 10%;" src="{{ type.logo }}">
+                <img style="width: 10%;" src="{{type.logo}}">
             {% endfor %}
         </th>
     </table>
@@ -27,7 +27,7 @@
         <table style="width: 50%;">
         <tr>
             <th style="text-align: left;">CATÉGORIE</th>
-            <th>{{ pokemon.category }}</th>
+            <th>{{pokemon.category}}</th>
         </tr>
         <tr>
             <th style="text-align: left;">GÉNÉRATION</th>
@@ -64,26 +64,6 @@
         <tr>
             <th style="text-align: left;">POIDS</th>
             <th>{{pokemon.weight}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">PREVOLUTIONS</th>
-            <th>
-                {% for prevol in prevolutions %}
-                    <a href="/pokemon/{{ prevol.pokedex_id }}">{{ prevol.name_fr }}</a>
-                    <br>
-                {% endfor %}
-            </th>
-            <th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">EVOLUTIONS</th>
-            <th>
-                {% for evol in evolutions %}
-                    <a href="/pokemon/{{ evol.pokedex_id }}">{{ evol.name_fr }}</a>
-                    <br>
-                {% endfor %}
-            </th>
-            <th>
         </tr>
         </table>
     </div>

@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class ShinydexController extends AbstractController
+class SubscribeController extends AbstractController
 {
-    #[Route('/shinydex', name: 'app_shinydex')]
+    #[Route('/subscribe', name: 'app_subscribe')]
     public function index(): Response
     {
-        return $this->render('shinydex/index.html.twig', [
-            'controller_name' => 'ShinydexController',
+        return $this->render('subscribe/index.html.twig', [
+            'controller_name' => 'SubscribeController',
         ]);
     }
 }

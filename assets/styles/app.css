@@ -8,7 +8,7 @@ body {
 }
 
 #h1-pokedex, #h1-shinydex {
-    font-size: 26px;;
+    font-size: 26px;
 }
 
 .main-container {
@@ -163,4 +163,76 @@ nav a:hover {
     display: flex;
     justify-content: center;
     margin-top: 90px;
+}
+
+foot {
+    overflow: hidden;
+    width: 100%;
+    bottom: 0;
+    z-index: 1990;
+    background: red;
+    display: flex;
+    text-transform: uppercase;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: bold;
+    height: 20px;
+}
+
+.footer {
+    display: flex;
+    text-align: center; 
+    justify-content: center;
+    font-size: small;
+}
+
+.inscription-container {
+    background-color: rgb(84, 84, 84);
+    margin: auto;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    padding: 1em;
+}
+
+.elt-frm-inscri {
+    margin-top : 0.5em;
+    width: 95%;
+}
+
+.lbl-form {
+    color:white;
+    padding-left: 0.5em;
+    font-size: 26px;
+}
+
+.input-form {
+    height: 2em;
+    border: solid black;
+    border-radius: 15px;
+    width: 100%;
+    background-color: rgb(61, 61, 61);
+    color: rgb(255, 255, 255);
+    font-size: 22px;
+    margin-top: 0.3em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+}
+
+.btn-create-acc {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: rgb(92, 225, 230);
+    text-align: center;
+    width: 90%;
+    border: solid grey;
+    border-radius: 15px;
+    height: 2.3em;
+    margin-top: 1.3em;
+    margin-bottom: 0.5em;
 }

@@ -9,9 +9,17 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Hello {{ teams[0].getName }}! ✅</h1>
 
-    This friendly message is coming from:
+    <ul>
+        {% for team in teams %}
+            <li>
+                {{
+                    team.getPokemonAsTeam()
+                }}
+            </li>
+        {% endfor %}
+    </ul>
     <ul>
         <li>Your controller at <code>/Users/terrygyselings/Documents/Pokedex/src/Controller/TeamsController.php</code></li>
         <li>Your template at <code>/Users/terrygyselings/Documents/Pokedex/templates/teams/index.html.twig</code></li>
