@@ -41,14 +41,20 @@
         {% endfor %}
     </div>
 </div>
-<script>
+<script defer>
 function changeGeneration () {
     var selectedGeneration = document.getElementById('select-generation').value;
     var pokemons = document.querySelectorAll('.pokemon');
     var totalByGen = document.getElementById('totalByGen');
     var total = '{{totalCaughtByGen|raw}}';
     total = JSON.parse(total);
-
+    
+    if (total[selectedGeneration] == undefined){
+        totalByGen.innerHTML = 0;
+    }else{
+        totalByGen.innerHTML = total[selectedGeneration];
+    }
+    
     pokemons.forEach(function(pokemon) {
         var generationId = pokemon.getAttribute('value');
         if (selectedGeneration === 'null' || selectedGeneration === generationId) {
@@ -58,14 +64,11 @@ function changeGeneration () {
         }  
         
     });
-    if (total[selectedGeneration] == undefined){
-        totalByGen.innerHTML = 0;
-    }else{
-        totalByGen.innerHTML = total[selectedGeneration];
-    }
 };
 
-document.addEventListener('DOMContentLoaded', changeGeneration);
+document.addEventListener('DOMContentLoaded', function() { 
+    changeGeneration();
+});
 document.getElementById('select-generation').addEventListener('change', changeGeneration);
 </script>
 {% endblock %}
