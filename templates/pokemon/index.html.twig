@@ -1,69 +1,103 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fiche Pokédex - {{ pokemon.name_fr }}{% endblock %}
+{% block title %}Fiche Pokédex - {{ pokemon.NameFr }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <div style="display: flex; justify-content: center; align-items: center; background-color: rgb(80, 80, 80); border-radius: 15px;">
-    <table style="width: 100%; color: white;">
-        <th style="width: 40%;"><img style="width: 100%; height: auto;" src="{{ pokemon.sprite_regular }}"><th>
-        <th style="text-align: left; width: 60%">
-            Fiche Pokédex de {{ pokemon.name_fr }}<br>
+<div class="fiche-pokemon">
+    <div class="container-table-en-tete-pokemon">
+    <table class="table-pokemon">
+        <th style="width: 40%;"><img style="width: 100%; height: auto;" src="{{ pokemon.SpriteRegular }}"><th>
+        <th class="pokemon-en-tete-droit">
+            Fiche Pokédex de {{ pokemon.NameFr }}<br>
             <div style="background-color : green; height: 0.1em;"></div>
-            <div style="color: rgb(220, 220, 220);">{{pokemon.name_en}} #{{ pokemon.pokedex_id }} - {{pokemon.name_jp}}<br></div>
-            {% for type in types %}
-                <img style="width: 10%;" src="{{type.logo}}">
+            <div style="color: rgb(220, 220, 220);">{{pokemon.NameEn}} #{{ pokemon.PokedexId }} - {{pokemon.NameJp}}<br></div>
+            {% for type in pokemon.PokemonHasType %}
+                <img style="width: 10%;" src="{{type.Logo}}">
             {% endfor %}
         </th>
     </table>
     </div>
-    <div style="display: flex; justify-content: center; align-items: center; background-color: rgb(80, 80, 80); border-radius: 15px; margin-top: 1.5em; 
-    padding-top: 1.2em; padding-bottom: 1.2em; color: rgb(220, 220, 220); font-size: 11px;">
+    <div class="container-table-donnees-pokemon">
         <table style="width: 50%;">
         <tr>
             <th style="text-align: left;">CATÉGORIE</th>
-            <th>{{pokemon.category}}</th>
+            <th>{{pokemon.Category}}</th>
         </tr>
         <tr>
             <th style="text-align: left;">GÉNÉRATION</th>
-            <th>{{pokemon.gene}}</th>
+            <th>{{pokemon.Generation.Number}}</th>
         </tr>
         <tr>
             <th style="text-align: left;">PV</th>
-            <th>{{pokemon.hp}}</th>
+            <th>{{pokemon.Hp}}</th>
         </tr>
         <tr>
             <th style="text-align: left;">ATTAQUE</th>
-            <th>{{pokemon.atk}}</th>
+            <th>{{pokemon.Atk}}</th>
         </tr>
         <tr>
             <th style="text-align: left;">DÉFENSE</th>
-            <th>{{pokemon.def}}</th>
+            <th>{{pokemon.Def}}</th>
         </tr>
         <tr>
             <th style="text-align: left;">ATTAQUE SPÉ</th>
-            <th>{{pokemon.spe_atk}}</th>
+            <th>{{pokemon.SpeAtk}}</th>
         </tr>
         <tr>
             <th style="text-align: left;">DÉFENSE SPÉ</th>
-            <th>{{pokemon.spe_def}}</th>
+            <th>{{pokemon.SpeDef}}</th>
         </tr>
         <tr>
             <th style="text-align: left;">VITESSE</th>
-            <th>{{pokemon.vit}}</th>
+            <th>{{pokemon.Vit}}</th>
         </tr>
         <tr>
             <th style="text-align: left;">TAILLE</th>
-            <th>{{pokemon.height}}</th>
+            <th>{{pokemon.Height}}</th>
         </tr>
         <tr>
             <th style="text-align: left;">POIDS</th>
-            <th>{{pokemon.weight}}</th>
+            <th>{{pokemon.Weight}}</th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">PREVOLUTION(S)</th>
+            <th>
+                {% for prevol in prevolutions %}
+                    <a class="lien-fiche-pokemon" href="/pokemon/{{ prevol.pokedex_id }}">{{ prevol.name_fr }}</a>
+                    <br>
+                {% endfor %}
+                {% if not prevolutions %}
+                    -
+                {% endif %}
+            </th>
+            <th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">EVOLUTION(S)</th>
+            <th>
+                {% if pokemon.Evolution.empty %}
+                    -
+                {% else %}
+                    {% for evol in pokemon.Evolution %}
+                        <a class="lien-fiche-pokemon" href="/pokemon/{{ evol.PokedexId }}">{{ evol.NameFr }}</a>
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            </th>
+            <th>
+        </tr>
+        <tr>
+            <th style="text-align: left;">TALENT(S)</th>
+            <th>
+            {% for ability in pokemon.PokemonHasAbility %}
+                {% if ability.Hidden == 0 %}
+                    <div class="ability">{{ ability.Name }}</div>
+                {% else %}
+                    <div class="ability">{{ ability.Name }} <span class="talent-cache">Talent caché</span></div>
+                {% endif %}
+            {% endfor %}
+            </th>
         </tr>
         </table>
     </div>
