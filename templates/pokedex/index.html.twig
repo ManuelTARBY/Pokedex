@@ -16,13 +16,13 @@
         <input type="text" name="searchname" id="search-by-name" placeholder="Recherche par nom" oninput="getPokedexByName({{ pokemons|json_encode }})">
     </div>
     <div class="div-select">
-        <select name="sel-type" id="select-type" onchange="getPokedexByType({{ pokemons|json_encode }}, {{ poketypes|json_encode }}, {{ types|json_encode }})">
+        <select name="sel-type" id="select-type" onchange="getPokedexByType({{ pokemons|json_encode }}, {{ poketypes|json_encode }}, {{ types|json_encode }})" class="h-8 text-white bg-neutral-800 border border-black rounded-lg w-80 pl-4 text-center text-xs">
                 <option value="null">Recherche par Type</option>
             {% for type in types %}
                 <option value="{{type.name}}">{{type.name}}</option>
             {% endfor %}
         </select>
-        <select name="sel-generation" id="select-generation" onchange='getPokedexByGeneration({{ pokemons|json_encode }}, {{ generations|json_encode }})'>
+        <select name="sel-generation" id="select-generation" onchange='getPokedexByGeneration({{ pokemons|json_encode }}, {{ generations|json_encode }})' class="h-8 text-white bg-neutral-800 border border-black rounded-lg w-80 pl-4 text-center text-xs">
                 <option value="null">Recherche par Génération</option>
             {% for generation in generations %}
                 <option value="{{generation.number}}">{{generation.number}}</option>
