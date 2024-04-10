@@ -62,7 +62,7 @@
         },
         "files": [
             "./config/packages/lexik_jwt_authentication.yaml"
-        ]
+        ],
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
