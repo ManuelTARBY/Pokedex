@@ -298,6 +298,14 @@ class Pokemon
         return $this;
     }
 
+    public function getTypeAsArray() {
+        $types = array();
+        foreach ($this->pokemon_has_type as $type) {
+            $types[] = $type->getLogo();
+        } 
+        return $types;
+    }
+
     /**
      * @return Collection<int, Type>
      */

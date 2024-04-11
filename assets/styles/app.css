@@ -269,3 +269,59 @@ foot {
     justify-content: center;
     align-items: center;
 }
+
+.ability {
+    display: block;
+}
+
+.talent-cache {
+    background-color: rgb(90, 150, 250);
+    color: white;
+    padding: 2px 3.8px 2px 3.8px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-left: 3px;
+}
+
+.container-table-donnees-pokemon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(80, 80, 80);
+    border-radius: 15px; 
+    margin-top: 1.5em;
+    padding-top: 1.2em;
+    padding-bottom: 1.2em;
+    color: rgb(220, 220, 220);
+    font-size: 11px;
+}
+
+.container-table-en-tete-pokemon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(80, 80, 80);
+    border-radius: 15px;
+}
+
+.fiche-pokemon {
+    margin: 1em auto;
+    max-width: 800px;
+    width: 95%;
+    font: 18px/1.5 sans-serif;
+}
+
+.pokemon-en-tete-droit {
+text-align: left;
+width: 60%;
+padding:0px 15px 0px 18px;
+}
+
+.lien-fiche-pokemon {
+    color:blue;
+}
+
+.table-pokemon {
+    width: 100%;
+    color: white;
+}
