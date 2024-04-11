@@ -3,15 +3,15 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Pokemon;
 
 class PokedexController extends AbstractController
 {
     
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager){
         $this->entityManager = $entityManager;
@@ -55,11 +55,14 @@ class PokedexController extends AbstractController
         $statement = $connection->executeQuery($sql);
         $generations = $statement->fetchAllAssociative();
 
+        $losPokemons = $this->entityManager->getRepository(Pokemon::class)->findAll();
+
         return $this->render('pokedex/index.html.twig', [
             'pokemons' => $pokemons,
             'types' => $types,
             'poketypes' => $poketypes,
             'generations' => $generations,
+            'losPokemons' => $losPokemons,
         ]);
     }
 }
