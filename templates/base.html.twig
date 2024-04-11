@@ -21,7 +21,7 @@
         </div>
         <div class="flex">
         {% if is_granted('ROLE_USER') %}
-            <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="">{{app.user.pseudo}}</a>
+            <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_teams_index')}}">{{app.user.pseudo}}</a>
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/logout">déconnexion</a>
         {% else %}
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_register')}}">inscription</a>

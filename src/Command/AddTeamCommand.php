@@ -31,7 +31,7 @@ class AddTeamCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
+            ->addArgument('pseudonym', InputArgument::REQUIRED, "Pseudonyme de l'utilisateur à qui ajouter une team")
             ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
@@ -39,26 +39,32 @@ class AddTeamCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $pokeManager = $this->entityManager->getRepository(Pokemon::class);
-        $teamManager = $this->entityManager->getRepository(Team::class);
         $userManager = $this->entityManager->getRepository(User::class);
-        $user = $userManager->findOneBy(['pseudo'=>'CESI']);
-        $pokedex_ids = [];
-        for ($i = 0; $i < 6; $i++){
-            $pokedex_ids[] = random_int(1,1025);
-        }
-        $team = new Team();
-        $team->setName("Team".array_sum($pokedex_ids));
-        $team->setUser($user);
-        foreach ($pokedex_ids as $pokedex_id){
-            $pokemon = $pokeManager->findOneby(['pokedex_id'=>$pokedex_id]);
-            $team->addPokemonAsTeam($pokemon);
-            $this->entityManager->persist($team);
-        }        
-        
-        $this->entityManager->flush();
-        $io = new SymfonyStyle($input, $output);
-        $io->success('Great Success');
+        $pseudo = $input->getArgument('pseudonym');
+        $user = $userManager->findOneBy(['pseudo'=>$pseudo]);
+        if ($user != null){
+            $pokedex_ids = [];
+            for ($i = 0; $i < 6; $i++){
+                $pokedex_ids[] = random_int(1,1025);
+            }
+            $team = new Team();
+            $team->setName("Team".array_sum($pokedex_ids));
+            $team->setUser($user);
+            foreach ($pokedex_ids as $pokedex_id){
+                $pokemon = $pokeManager->findOneby(['pokedex_id'=>$pokedex_id]);
+                $team->addPokemonAsTeam($pokemon);
+                $this->entityManager->persist($team);
+            }        
+            
+            $this->entityManager->flush();
+            $io = new SymfonyStyle($input, $output);
+            $io->success('Great Success');
 
-        return Command::SUCCESS;
+            return Command::SUCCESS;
+        }else{
+            $io = new SymfonyStyle($input, $output);
+            $io->caution('No user with that pseudonym');
+            return Command::FAILURE;
+        }
     }
 }

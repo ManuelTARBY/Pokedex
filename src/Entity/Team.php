@@ -68,9 +68,10 @@ class Team
 
     public function addPokemonAsTeam(Pokemon $pokemonAsTeam): static
     {
-        if (!$this->pokemon_as_team->contains($pokemonAsTeam)) {
+        // if (!$this->pokemon_as_team->contains($pokemonAsTeam)) {
+        //     $this->pokemon_as_team->add($pokemonAsTeam);
+        // }
             $this->pokemon_as_team->add($pokemonAsTeam);
-        }
 
         return $this;
     }

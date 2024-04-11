@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    <div class="div-shinydex">{{ form_widget(form.name, { 'attr': {'class': 'input-form', 'max-length': '45'}}) }}
+        <div class="pokemon">{{ form_widget(form.Pokemon_1) }}</div>
+        <div class="pokemon">{{ form_widget(form.Pokemon_2) }}</div>
+        <div class="pokemon">{{ form_widget(form.Pokemon_3) }}</div>
+        <div class="pokemon">{{ form_widget(form.Pokemon_4) }}</div>
+        <div class="pokemon">{{ form_widget(form.Pokemon_5) }}</div>
+        <div class="pokemon">{{ form_widget(form.Pokemon_6) }}</div>
+    </div>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
