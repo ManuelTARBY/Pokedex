@@ -29,3 +29,5 @@
 ###< lexik/jwt-authentication-bundle ###
 
 composer.lock
+config/jwt/private.pem
+config/jwt/public.pem

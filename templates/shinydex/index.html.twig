@@ -3,36 +3,32 @@
 {% block title %}Hello ShinydexController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 <div class="lex justify-center items-center bg-neutral-600 rounded-lg w-11/12">
     <div class="flex justify-center items-center h-8 mt-1 text-white">
         <h1 class="text-2xl">Shinydex</h1>
     </div>
     <div class="flex justify-end">
-        <div class="bg-neutral-800 text-white border border-black rounded-lg w-20 text-center mx-8">
+        <div class="bg-neutral-700 text-white border border-black rounded-lg w-20 text-center mx-8">
             {{totalCaught}}/{{total}}
         </div>
     </div>
     <div class="flex justify-between mx-8 my-5">
         <div class="flex items-center">    
-            <button type="button" class="rounded-full bg-sky-400 p-2 text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <a href="/caught/new"><button type="button" class="rounded-full bg-sky-400 p-2 text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
                 </svg>
-            </button>            
+            </button></a>   
             <span class="text-white mx-5">Ajouter un nouveau Shiny</span>
         </div>
-        <select name="sel-generation" id="select-generation" class="h-8 text-white bg-neutral-800 border border-black rounded-lg w-80 pl-4 text-center text-xs">
+        <select name="sel-generation" id="select-generation" class="h-8 text-white bg-neutral-700 border border-black rounded-lg w-80 pl-4 text-center text-xs">
                 {% for generation in generations %}
                     <option value="{{generation.id}}">{{generation.number}}</option>
                 {% endfor %}
         </select>
     </div>
     <div class="flex justify-center">
-        <div id="totalByGen" class="bg-neutral-800 text-white border border-black rounded-lg w-20 text-center mx-8"></div>
+        <div id="totalByGen" class="bg-neutral-700 text-white border border-black rounded-lg w-20 text-center mx-8"></div>
     </div>
     <div class="grid grid-cols-3 md:grid-cols-9 m-8">
         {% for pokemon in pokemons %}
