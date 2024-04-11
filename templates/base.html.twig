@@ -25,7 +25,7 @@
         </div>
         <div class="nav_droite">
         {% if is_granted('ROLE_USER') %}
-            <a class="sub" href="">{{app.user.pseudo}}</a>
+            <a class="sub" href="{{path('app_teams_index')}}">{{app.user.pseudo}}</a>
             <a class="sub" href="/logout">déconnexion</a>
         {% else %}
             <a class="sub" href="{{path('app_register')}}">inscription</a>

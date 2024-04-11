@@ -1,29 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TeamsController!{% endblock %}
+{% block title %}Team index{% endblock %}
 
 {% block body %}
-
 <div class="main-container">
     <div class="titre-page">
         <h1 id="h1-shinydex">Teams</h1>
     </div>
+    <a class="btn-create-acc" href="{{ path('app_teams_new') }}">+</a>
     {% for team in teams %}
         <div class="div-shinydex">
-        
-            <h1>{{ team.name }}</h1><br>
+            <h1>{{ team.name }} : </h1><br>
                 {% for pokemon in team.PokemonAsTeam %}
-                    <div class="pokemon" value="{{ pokemon.generation.id }}">
-                        <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
+                    <div class="pokemon">
+                        <div class="pokemon_id"> #{{ pokemon.getPokedexId }} {{ pokemon.NameFr }} </div>
                         {% set captured = capturedPokemons[pokemon.getId()] is defined %}
                         {% if captured %}
                             <img src="{{ pokemon.SpriteShiny }}">
                         {% else %}
                             <img class="filter" src="{{ pokemon.SpriteRegular }}">
-                        {% endif %}
+                        {% endif %} 
                     </div>
                 {% endfor %}
+            <form method="get" action="{{ path('app_teams_edit', {'id': team.id}) }}">
+                <button class="btn">Editer</button>
+            </form>
+            <form method="post" action="{{ path('app_teams_delete', {'id': team.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ team.id) }}">
+                <button class="btn">Supprimer</button>
+            </form>
         </div>
+    {% else %}
+        <tr>
+            <td colspan="3">Vous n'avez créé aucune équipe.. Lancez-vous !</td>
+        </tr>
     {% endfor %}
 </div>
 {% endblock %}
