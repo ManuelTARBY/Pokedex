@@ -3,22 +3,26 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<div class="tableaux-accueil">
-    <div class="bloc-accueil" id="bloc-top-shasse">
-        <div class="title-bloc-accueil">Top Shasses<br></div>
-        <canvas id="chartShasses"></canvas>
+<div class="w-10/12 mx-auto mt-24">
+    <div class="grid grid-row md:grid-cols-2">
+        <div class="bg-neutral-600 w-full md:w-1/2 h-60 border-black border-3 rounded-lg md:mx-1 mt-2 px-4 py-16" id="bloc-top-shasse">
+            <div class="color-white fontsize-30px textdecoration-underlign marginbottom-0.5em">Top Shasses<br></div>
+            <canvas id="chartShasses"></canvas>
+        </div>
+        <div class="bg-neutral-600 w-full md:w-1/2 h-60 border-black border-3 rounded-lg md:mx-1 mt-2 px-4 py-16" id="bloc-top-dresseur">
+            <div class="title-bloc-accueil">Top Dresseurs<br></div>
+            <canvas id="chartBestDresseurs"></canvas>
+        </div>
     </div>
-    <div class="bloc-accueil" id="bloc-top-dresseur">
-        <div class="title-bloc-accueil">Top Dresseurs<br></div>
-        <canvas id="chartBestDresseurs"></canvas>
-    </div>
-    <div class="bloc-accueil" id="bloc-shiny-jour">
-        <div class="title-bloc-accueil">Shiny du jour<br></div>
-        <canvas id="chartShinyDay"></canvas>
-    </div>
-    <div class="bloc-accueil" id="bloc-pokemon-team">
-        <div class="title-bloc-accueil">Top Pokemon Team<br></div>
-        <canvas id="chartPokemonTeam"></canvas>
+    <div class="grid grid-row md:grid-cols-2">
+        <div class="bg-neutral-600 w-full md:w-1/2 h-60 border-black border-3 rounded-lg md:mx-1 mt-2 px-4 py-16" id="bloc-shiny-jour">
+            <div class="title-bloc-accueil">Shiny du jour<br></div>
+            <canvas id="chartShinyDay"></canvas>
+        </div>
+        <div class="bg-neutral-600 w-full md:w-1/2 h-60 border-black border-3 rounded-lg md:mx-1 mt-2 px-4 py-16" id="bloc-pokemon-team">
+            <div class="title-bloc-accueil">Top Pokemon Team<br></div>
+            <canvas id="chartPokemonTeam"></canvas>
+        </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
