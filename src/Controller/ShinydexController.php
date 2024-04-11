@@ -21,35 +21,46 @@ class ShinydexController extends AbstractController
     #[Route('/shinydex', name: 'app_shinydex')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $pokemonManager = $this->entityManager->getRepository(Pokemon::class);
+        $pokemons = $this->entityManager->getRepository(Pokemon::class)->findAll();
 
-        $pokemons = $pokemonManager->findAll();
-
-        $generationManager = $this->entityManager->getRepository(Generation::class);
-
-        $generations = $generationManager->findAll();
+        $generations = $this->entityManager->getRepository(Generation::class)->findAll();
 
         $storage = [];
         $user = $this->getUser();
 
         $caughts = $user->getCaught();
-
+        
+        $totalCaughtByGen = [];
+        
         foreach ($caughts as $caught) {
             $pokemon = $caught->getPokemon();
             $storage[] = $pokemon;
+            if (array_key_exists($caught->getPokemon()->getGeneration()->getId(), $totalCaughtByGen)){
+                $totalCaughtByGen [$caught->getPokemon()->getGeneration()->getId()]++;
+            }else{
+                $totalCaughtByGen [$caught->getPokemon()->getGeneration()->getId()]=1;
+            }
         }
 
         $capturedPokemons = [];
+        
         foreach ($storage as $capturedPokemon) {
             $capturedPokemons[$capturedPokemon->getId()] = true;
         }
 
-        dump($capturedPokemons);
+        $totalCaught = count($caughts);
+
+        $total = count($pokemons);
+
+        dump($totalCaughtByGen);
 
         return $this->render('shinydex/index.html.twig', [
             'pokemons' => $pokemons,
             'generations' => $generations,
             'capturedPokemons' => $capturedPokemons,
+            'totalCaught' => $totalCaught,
+            'totalCaughtByGen' => json_encode($totalCaughtByGen),
+            'total' => $total,
         ]);
     }
 }

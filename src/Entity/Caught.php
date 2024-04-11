@@ -14,7 +14,7 @@ class Caught
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_capture = null;
 
     #[ORM\ManyToOne(inversedBy: 'caught')]

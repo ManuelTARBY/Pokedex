@@ -27,8 +27,8 @@ function getPokedexByType(pokemons, poketypes, types) {
         }
         // Contruit le code HTML qui sera inséré à la place de l'ancien pour reconstituer le tableau filtré 
         var contenuHTML = `
-        <table class="table-pokedex">
-        <tr class="first-lign-pokedex">
+        <table class="w-11/12 border-collapse border-separate border-spacing-2">
+        <tr class="bg-neutral-400 h-10">
         <th>Numéro</th>
         <th>Nom</th>
         <th>Types</th>
@@ -37,16 +37,16 @@ function getPokedexByType(pokemons, poketypes, types) {
         for (let k = 0 ; k < pokemons.length ; k++) {
             var pokemon = pokemons[k];
             if (listePokemon.includes(pokemon.id)) {
-                contenuHTML += `<tr class="lign-pokedex">
-                        <th>${pokemon.pokedex_id}</th>
-                        <th><a href="/pokemon/${pokemon.pokedex_id}">${pokemon.name_fr}</a></th>
-                        <th class="th-logo"> 
+                contenuHTML += `<tr class="bg-neutral-200 h-10">
+                        <td><div class="flex justify-center">${pokemon.pokedex_id}</div></td>
+                        <td><a href="/pokemon/${pokemon.pokedex_id}" class="flex justify-center hover:text-white">${pokemon.name_fr}</a></td>
+                        <td class="flex justify-center"> 
                         `;
                 var lesLogos = pokemon.logos.split(",");
                 for (let l = 0 ; l < lesLogos.length ; l++) {
-                    contenuHTML += `<img class="img-type" src="${lesLogos[l]}"> `;
+                    contenuHTML += `<div class="flex justify-center"><img class="h-8 m-2" src="${lesLogos[l]}"></div> `;
                 }
-                contenuHTML += "</th>";
+                contenuHTML += "</td>";
             }
         }
         contenuHTML += "</table>";
@@ -77,8 +77,8 @@ function getPokedexByGeneration(pokemons, generations) {
         }
         // Contruit le code HTML qui sera inséré à la place de l'ancien pour reconstituer le tableau filtré 
         var contenuHTML = `
-        <table class="table-pokedex">
-        <tr class="first-lign-pokedex">
+        <table class="w-11/12 border-collapse border-separate border-spacing-2">
+        <tr class="bg-neutral-400 h-10">
         <th>Numéro</th>
         <th>Nom</th>
         <th>Types</th>
@@ -87,16 +87,16 @@ function getPokedexByGeneration(pokemons, generations) {
         for (let j = 0 ; j < pokemons.length ; j++) {
             var pokemon = pokemons[j];
             if (pokemon.generation_id == gene) {
-                contenuHTML += `<tr class="lign-pokedex">
-                        <th>${pokemon.pokedex_id}</th>
-                        <th><a href="/pokemon/${pokemon.pokedex_id}">${pokemon.name_fr}</a></th>
-                        <th class="th-logo"> 
+                contenuHTML += `<tr class="bg-neutral-200 h-10">
+                        <td><div class="flex justify-center">${pokemon.pokedex_id}</div></td>
+                        <td><a href="/pokemon/${pokemon.pokedex_id}" class="flex justify-center hover:text-white">${pokemon.name_fr}</a></td>
+                        <td class="flex justify-center"> 
                         `;
                 var lesLogos = pokemon.logos.split(",");
                 for (let k = 0 ; k < lesLogos.length ; k++) {
-                    contenuHTML += `<img class="img-type" src="${lesLogos[k]}"> `;
+                    contenuHTML += `<div class="flex justify-center"><img class="h-8 m-2" src="${lesLogos[k]}"></div> `;
                 }
-                contenuHTML += "</th>";
+                contenuHTML += "</td>";
             }
         }
         contenuHTML += "</table>";
@@ -120,8 +120,8 @@ function getPokedexByName(pokemons) {
         selectElement.selectedIndex = 0;
         // Contruit le code HTML qui sera inséré à la place de l'ancien pour reconstituer le tableau filtré 
         var contenuHTML = `
-                    <table class="table-pokedex">
-                    <tr class="first-lign-pokedex">
+                    <table class="w-11/12 border-collapse border-separate border-spacing-2">
+                    <tr class="bg-neutral-400 h-10">
                     <th>Numéro</th>
                     <th>Nom</th>
                     <th>Types</th>
@@ -130,16 +130,16 @@ function getPokedexByName(pokemons) {
         for (let j = 0; j < pokemons.length; j++) {
             var pokemon = pokemons[j];
             if (pokemon.name_fr.toLowerCase().startsWith(valeurRecherche.toLowerCase())) {
-                contenuHTML += `<tr class="lign-pokedex">
-                                    <th>${pokemon.pokedex_id}</th>
-                                    <th><a href="/pokemon/${pokemon.pokedex_id}">${pokemon.name_fr}</a></th>
-                                    <th class="th-logo"> 
+                contenuHTML += `<tr class="bg-neutral-200 h-10">
+                                    <td><div class="flex justify-center">${pokemon.pokedex_id}</div></td>
+                                    <td><a href="/pokemon/${pokemon.pokedex_id}" class="flex justify-center hover:text-white">${pokemon.name_fr}</a></th>
+                                    <td class="flex justify-center"> 
                                     `;
                 var lesLogos = pokemon.logos.split(",");
                 for (let k = 0; k < lesLogos.length; k++) {
-                    contenuHTML += `<img class="img-type" src="${lesLogos[k]}"> `;
+                    contenuHTML += `<div class="flex justify-center"><img class="h-8 m-2" src="${lesLogos[k]}"></div> `;
                 }
-                contenuHTML += "</th>";
+                contenuHTML += "</td>";
             }
         }
         contenuHTML += "</table>";
