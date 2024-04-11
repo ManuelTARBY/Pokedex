@@ -157,6 +157,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->caught;
     }
 
+    public function getNumberOfCaught(): ?int
+    {
+        $caughts = $this->getCaught();
+        return count($caughts);
+    }
+
     public function addCaught(Caught $caught): static
     {
         if (!$this->caught->contains($caught)) {

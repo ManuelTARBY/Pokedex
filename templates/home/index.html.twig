@@ -3,18 +3,187 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/terrygyselings/Documents/Pokedex/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/Users/terrygyselings/Documents/Pokedex/templates/home/index.html.twig</code></li>
-    </ul>
+<div class="tableaux-accueil">
+    <div class="bloc-accueil" id="bloc-top-shasse">
+        <div class="title-bloc-accueil">Top Shasses<br></div>
+        <canvas id="chartShasses"></canvas>
+    </div>
+    <div class="bloc-accueil" id="bloc-top-dresseur">
+        <div class="title-bloc-accueil">Top Dresseurs<br></div>
+        <canvas id="chartBestDresseurs"></canvas>
+    </div>
+    <div class="bloc-accueil" id="bloc-shiny-jour">
+        <div class="title-bloc-accueil">Shiny du jour<br></div>
+        <canvas id="chartShinyDay"></canvas>
+    </div>
+    <div class="bloc-accueil" id="bloc-pokemon-team">
+        <div class="title-bloc-accueil">Top Pokemon Team<br></div>
+        <canvas id="chartPokemonTeam"></canvas>
+    </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>var ctx = document.getElementById('chartPokemonTeam').getContext('2d');
+    var pokemons = [];
+    var occurrences = [];
+    {% for pokemon in pokemon_team %}
+        pokemons.push("{{pokemon.name_fr}}");
+        occurrences.push("{{pokemon.occurrence}}");
+    {% endfor %}
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: pokemons,
+            datasets: [{
+                label: 'Top Pokemon Team',
+                data: occurrences,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });</script>
+    <script>var ctx = document.getElementById('chartShinyDay').getContext('2d');
+    var days = [];
+    var nbCaught = [];
+    {% for caught in shiny_du_jour %}
+        days.push("{{caught.date_capture}}");
+        nbCaught.push("{{caught.nb_capture}}");
+    {% endfor %}
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: days,
+            datasets: [{
+                label: 'Shiny du jour',
+                data: nbCaught,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });</script>
+    <script>var ctx = document.getElementById('chartBestDresseurs').getContext('2d');
+    var dresseurs = [];
+    var nbCaught = [];
+    {% for dresseur in top_dresseur %}
+        dresseurs.push("{{dresseur.dresseur}}");
+        nbCaught.push("{{dresseur.occurrences}}");
+    {% endfor %}
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: dresseurs,
+            datasets: [{
+                label: 'Top Dresseurs',
+                data: nbCaught,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });</script>
+    <script>var ctx = document.getElementById('chartShasses').getContext('2d');
+    var name_fr = [];
+    var occurrences = [];
+    {% for pokemon in top_shasse %}
+        name_fr.push("{{pokemon.name_fr}}");
+        occurrences.push("{{pokemon.occurrences}}");
+    {% endfor %}
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: name_fr,
+            datasets: [{
+                label: 'Top Shasses',
+                data: occurrences,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });</script>
 {% endblock %}
