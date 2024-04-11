@@ -4,44 +4,44 @@
 
 {% block body %}
 
-<div class="main-container">
-    <div class="titre-page">
-        <h1 id="h1-pokedex">Pokedex</h1>
+<div class="lex justify-center items-center bg-neutral-600 rounded-lg w-11/12">
+    <div class="flex justify-center items-center h-8 mt-1 text-white">
+        <h1 class="text-2xl">Pokedex</h1>
     </div>
-    <div class="search-by-name">
-        <input type="text" name="searchname" id="search-by-name" placeholder="Recherche par nom" oninput="getPokedexByName({{ pokemons|json_encode }})">
+    <div class="flex justify-center items-center m-8">
+        <input type="text" name="searchname" id="search-by-name" class="bg-neutral-700 text-white border border-black rounded-lg px-4 py-2 h-8 text-center w-80 font-normal text-xs" placeholder="Recherche par nom" oninput="getPokedexByName({{ pokemons|json_encode }})">
     </div>
-    <div class="div-select">
-        <select name="sel-type" id="select-type" onchange="getPokedexByType({{ pokemons|json_encode }}, {{ poketypes|json_encode }}, {{ types|json_encode }})">
+    <div class="flex justify-around mx-16 my-5">
+        <select name="sel-type" id="select-type" onchange="getPokedexByType({{ pokemons|json_encode }}, {{ poketypes|json_encode }}, {{ types|json_encode }})" class="h-8 text-white bg-neutral-700 border border-black rounded-lg w-80 pl-4 text-center text-xs">
                 <option value="null">Recherche par Type</option>
             {% for type in types %}
                 <option value="{{type.name}}">{{type.name}}</option>
             {% endfor %}
         </select>
-        <select name="sel-generation" id="select-generation" onchange='getPokedexByGeneration({{ pokemons|json_encode }}, {{ generations|json_encode }})'>
+        <select name="sel-generation" id="select-generation" onchange='getPokedexByGeneration({{ pokemons|json_encode }}, {{ generations|json_encode }})' class="h-8 text-white bg-neutral-700 border border-black rounded-lg w-80 pl-4 text-center text-xs">
                 <option value="null">Recherche par Génération</option>
             {% for generation in generations %}
                 <option value="{{generation.number}}">{{generation.number}}</option>
             {% endfor %}
         </select>
     </div>
-    <div class="div-table-pokedex" id="tab-poke">
-        <table class="table-pokedex">
-            <tr class="first-lign-pokedex">
+    <div class="flex justify-center items-center" id="tab-poke">
+        <table class="w-11/12 border-collapse border-separate border-spacing-2">
+            <tr class="bg-neutral-400 h-10">
                 <th>Numéro</th>
                 <th>Nom</th>
                 <th>Types</th>
-            </tr>
+            </tr>   
             {% for ligne in pokemons %}
-            <tr class="lign-pokedex" id="datas-pokemon">
-                <th>{{ ligne.pokedex_id }}</th>
-                <th><a href="/pokemon/{{ ligne.pokedex_id }}">{{ ligne.name_fr }}</a></th>
-                <th class="th-logo">
+            <tr class="bg-neutral-200 h-10" id="datas-pokemon">
+                <td><div class="flex justify-center">{{ ligne.pokedex_id }}</div></td>
+                <td><a href="/pokemon/{{ ligne.pokedex_id }}" class="flex justify-center hover:text-white">{{ ligne.name_fr }}</a></td>
+                <td class="flex justify-center">
                 {% set leslogos = ligne.logos | split(',') %}
                 {% for logo in leslogos %}
-                    <img class="img-type" src="{{ logo }}">
+                    <div class="flex justify-center"><img class="h-8 m-2" src="{{ logo }}"></div>
                 {% endfor %}
-                </th>  
+                </td>  
             </tr>
             {% endfor %}
         </table>
