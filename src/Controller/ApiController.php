@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Entity\Pokemon;
 use App\Entity\Team;
+use App\Entity\Generation;
 use App\Entity\User;
  
 #[Route('/api', name: 'route_api')]
@@ -140,9 +141,8 @@ class ApiController extends AbstractController
     #[Route('/teams', name: 'api_teams')]
     public function getTeams(): Response
     {
-      // $user = $this->entityManager->getRepository(User::class)->findOneBy(['id' => $id]);
-      $user = $this->getUser();
       $teams = array();
+      $user = $this->getUser();
       if(isset($user)) {
 
         $lesTeams = $this->entityManager->getRepository(Team::class)->findBy(['user' => $user]);
@@ -163,5 +163,41 @@ class ApiController extends AbstractController
       }
         
       return new JsonResponse($teams);
+    }
+
+    #[Route('/shinydex', name: 'api_shinydex')]
+    public function getShinyDex(): Response
+    {
+      $user = $this->getUser();
+      if(isset($user)) {
+        // Shinydex
+        $lesShiny = $user->getCaught();
+        foreach ($lesShiny as $caught){
+          $shinydex[] = array(
+            "pokedex_id" => $caught->getPokemon()->getPokedexId(),
+            "sprite_shiny" => $caught->getPokemon()->getSpriteShiny(),
+            "date_capture" => $caught->getDateCapture(),
+          );
+        }
+
+        // Générations
+        $lesGenerations = $this->entityManager->getRepository(Generation::class)->findAll();
+        foreach ($lesGenerations as $generation) {
+          $generations[] = array(
+            "number" => $generation->getNumber(),
+          );
+        }
+      }
+      
+      $responseShiny[] = array(
+        "generations" => $generations,
+        "shinydex" => $shinydex,
+        "datas" => array(
+          "total_caught" => $user->getNumberOfCaught(),
+          "total_pokemon" => count($this->entityManager->getRepository(Pokemon::class)->findAll()),
+        ),
+      );
+
+      return new JsonResponse($responseShiny);
     }
 }
