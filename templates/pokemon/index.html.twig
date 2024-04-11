@@ -3,79 +3,54 @@
 {% block title %}Fiche Pokédex - {{ pokemon.NameFr }}{% endblock %}
 
 {% block body %}
-
-<div class="fiche-pokemon">
-    <div class="container-table-en-tete-pokemon">
-    <table class="table-pokemon">
-        <th style="width: 40%;"><img style="width: 100%; height: auto;" src="{{ pokemon.SpriteRegular }}"><th>
-        <th class="pokemon-en-tete-droit">
-            Fiche Pokédex de {{ pokemon.NameFr }}<br>
-            <div style="background-color : green; height: 0.1em;"></div>
-            <div style="color: rgb(220, 220, 220);">{{pokemon.NameEn}} #{{ pokemon.PokedexId }} - {{pokemon.NameJp}}<br></div>
+<div>
+<div class="w-10/12 mx-auto mt-24">
+    <div class="grid grid-row md:grid-cols-2 bg-neutral-600 rounded-lg">
+        <div class="w-60 mx-auto">
+            <img class="w-100 h-auto m-5" src="{{ pokemon.SpriteRegular }}">
+        </div>
+        <div class="my-auto text-white">
+            <div class="text-2xl">Fiche Pokédex de {{ pokemon.NameFr }}</div>
+            <div class="bg-green-500 h-px"></div>
+            <div class="flex"><div>#{{ pokemon.PokedexId }} {{pokemon.NameEn}}</div>&nbsp;-&nbsp;<div>{{pokemon.NameJp}}</div></div>
+            <div class="flex justify-start">
             {% for type in pokemon.PokemonHasType %}
-                <img style="width: 10%;" src="{{type.Logo}}">
+                <div class="flex justify-center"><img class="h-8 m-2" src="{{type.Logo}}"></div>
             {% endfor %}
-        </th>
-    </table>
+            </div>
+        </div>
     </div>
-    <div class="container-table-donnees-pokemon">
-        <table style="width: 50%;">
-        <tr>
-            <th style="text-align: left;">CATÉGORIE</th>
-            <th>{{pokemon.Category}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">GÉNÉRATION</th>
-            <th>{{pokemon.Generation.Number}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">PV</th>
-            <th>{{pokemon.Hp}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">ATTAQUE</th>
-            <th>{{pokemon.Atk}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">DÉFENSE</th>
-            <th>{{pokemon.Def}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">ATTAQUE SPÉ</th>
-            <th>{{pokemon.SpeAtk}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">DÉFENSE SPÉ</th>
-            <th>{{pokemon.SpeDef}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">VITESSE</th>
-            <th>{{pokemon.Vit}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">TAILLE</th>
-            <th>{{pokemon.Height}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">POIDS</th>
-            <th>{{pokemon.Weight}}</th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">PREVOLUTION(S)</th>
-            <th>
-                {% for prevol in prevolutions %}
-                    <a class="lien-fiche-pokemon" href="/pokemon/{{ prevol.pokedex_id }}">{{ prevol.name_fr }}</a>
-                    <br>
-                {% endfor %}
-                {% if not prevolutions %}
-                    -
-                {% endif %}
-            </th>
-            <th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">EVOLUTION(S)</th>
-            <th>
+    <div class="bg-neutral-600 rounded-lg mt-2 text-white">
+        <div class="flex justify-center pt-5">GÉNÉRATION</div>
+        <div class="flex justify-center">{{pokemon.Generation.Number}}</div>
+        <div class="flex justify-center mt-5">CATÉGORIE</div>
+        <div class="flex justify-center">{{pokemon.Category}}</div>
+        <div class="grid grid-cols-2 mx-auto mt-5">
+            <div class="flex justify-center">TAILLE</div>
+            <div class="flex justify-center">POIDS</div>
+            <div class="flex justify-center">{{pokemon.Height}}</div>
+            <div class="flex justify-center">{{pokemon.Weight}}</div>
+        </div>
+        <div class="mt-5 ml-60">
+            <div class="flex justify-start">PV :{{pokemon.Hp}}</div>
+            <div class="flex justify-start">ATTAQUE :{{pokemon.Atk}}</div>
+            <div class="flex justify-start">DÉFENSE :{{pokemon.Def}}</div>
+            <div class="flex justify-start">ATTAQUE SPÉ :{{pokemon.SpeAtk}}</div>
+            <div class="flex justify-start">DÉFENSE SPÉ :{{pokemon.SpeDef}}</div>
+            <div class="flex justify-start">VITESSE :{{pokemon.Vit}}</div>        
+        </div>
+        <div>
+            {% for prevol in prevolutions %}
+            {% if not prevolutions %}
+            <div style="text-align: left;">PREVOLUTION(S)</div>
+            <a class="lien-fiche-pokemon" href="/pokemon/{{ prevol.pokedex_id }}">{{ prevol.name_fr }}</a>
+            <br>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <div style="text-align: left;">EVOLUTION(S)</div>
+            <div>
                 {% if pokemon.Evolution.empty %}
                     -
                 {% else %}
@@ -84,12 +59,10 @@
                         <br>
                     {% endfor %}
                 {% endif %}
-            </th>
-            <th>
-        </tr>
-        <tr>
-            <th style="text-align: left;">TALENT(S)</th>
-            <th>
+            </div>
+        <div>
+        <div style="text-align: left;">TALENT(S)</div>
+            <div>
             {% for ability in pokemon.PokemonHasAbility %}
                 {% if ability.Hidden == 0 %}
                     <div class="ability">{{ ability.Name }}</div>
@@ -97,9 +70,9 @@
                     <div class="ability">{{ ability.Name }} <span class="talent-cache">Talent caché</span></div>
                 {% endif %}
             {% endfor %}
-            </th>
-        </tr>
-        </table>
+            </div>
+        </div>
     </div>
+</div>
 </div>
 {% endblock %}
