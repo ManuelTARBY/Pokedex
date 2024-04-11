@@ -3,18 +3,27 @@
 {% block title %}Hello TeamsController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/terrygyselings/Documents/Pokedex/src/Controller/TeamsController.php</code></li>
-        <li>Your template at <code>/Users/terrygyselings/Documents/Pokedex/templates/teams/index.html.twig</code></li>
-    </ul>
+<div class="main-container">
+    <div class="titre-page">
+        <h1 id="h1-shinydex">Teams</h1>
+    </div>
+    {% for team in teams %}
+        <div class="div-shinydex">
+        
+            <h1>{{ team.name }}</h1><br>
+                {% for pokemon in team.PokemonAsTeam %}
+                    <div class="pokemon" value="{{ pokemon.generation.id }}">
+                        <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
+                        {% set captured = capturedPokemons[pokemon.getId()] is defined %}
+                        {% if captured %}
+                            <img src="{{ pokemon.SpriteShiny }}">
+                        {% else %}
+                            <img class="filter" src="{{ pokemon.SpriteRegular }}">
+                        {% endif %}
+                    </div>
+                {% endfor %}
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

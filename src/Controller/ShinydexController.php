@@ -3,44 +3,64 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Pokemon;
+use App\Entity\Generation;
+use App\Entity\User;
 
 class ShinydexController extends AbstractController
 {
     private $entityManager;
+
     public function __construct(EntityManagerInterface $entityManager){
         $this->entityManager = $entityManager;
     }
-
+    
     #[Route('/shinydex', name: 'app_shinydex')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        $connection = $this->entityManager->getConnection();
+        $pokemons = $this->entityManager->getRepository(Pokemon::class)->findAll();
 
-        $sql = '
-            SELECT pokedex_id, sprite_shiny
-            FROM pokemon
-            ORDER BY pokedex_id
-        ';
+        $generations = $this->entityManager->getRepository(Generation::class)->findAll();
 
-        $statement = $connection->executeQuery($sql);
-        $resultPoke = $statement->fetchAssociative();
+        $storage = [];
+        $user = $this->getUser();
 
-        $sql = '
-            SELECT * 
-            FROM generation 
-            ORDER BY number
-        ';
+        $caughts = $user->getCaught();
+        
+        $totalCaughtByGen = [];
+        
+        foreach ($caughts as $caught) {
+            $pokemon = $caught->getPokemon();
+            $storage[] = $pokemon;
+            if (array_key_exists($caught->getPokemon()->getGeneration()->getId(), $totalCaughtByGen)){
+                $totalCaughtByGen [$caught->getPokemon()->getGeneration()->getId()]++;
+            }else{
+                $totalCaughtByGen [$caught->getPokemon()->getGeneration()->getId()]=1;
+            }
+        }
 
-        $statement = $connection->executeQuery($sql);
-        $generations = $statement->fetchAllAssociative();
+        $capturedPokemons = [];
+        
+        foreach ($storage as $capturedPokemon) {
+            $capturedPokemons[$capturedPokemon->getId()] = true;
+        }
+
+        $totalCaught = count($caughts);
+
+        $total = count($pokemons);
+
+        dump($totalCaughtByGen);
 
         return $this->render('shinydex/index.html.twig', [
-            'pokemons' => $resultPoke,
+            'pokemons' => $pokemons,
             'generations' => $generations,
+            'capturedPokemons' => $capturedPokemons,
+            'totalCaught' => $totalCaught,
+            'totalCaughtByGen' => json_encode($totalCaughtByGen),
+            'total' => $total,
         ]);
     }
 }

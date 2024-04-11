@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Caught{% endblock %}
+
+{% block body %}
+    <h1>Edit Caught</h1>
+
+    {{ include('caught/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_caught_index') }}">back to list</a>
+
+    {{ include('caught/_delete_form.html.twig') }}
+{% endblock %}

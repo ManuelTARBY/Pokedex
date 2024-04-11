@@ -3,18 +3,24 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="inscription-container">
+         {{ form_start(registrationForm) }}
+            <div class="elt-frm-inscri">
+                <label class="lbl-form" for="pseudo">Pseudo :</label><br>
+                {{ form_widget(registrationForm.pseudo, {'attr': {'class': 'input-form', 'minlength':"3", 'maxlength':"45"}}) }}
+            </div>
+            <div class="elt-frm-inscri">
+                <label class="lbl-form" for="email">Email :</label><br>
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'input-form', 'minlength':"3", 'maxlength':"180"}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+            <div class="elt-frm-inscri">
+                {{ form_widget(registrationForm.password) }}
+                {{ form_errors(registrationForm.password) }}
+            </div>
+            <button type="submit" class="btn-create-acc">CRÉER UN COMPTE</button>
+            {{ form_errors(registrationForm) }}
+            {{ form_end(registrationForm) }}
+        </div>
 
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.pseudo, {label: 'Pseudo'}) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
 {% endblock %}
