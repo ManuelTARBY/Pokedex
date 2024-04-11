@@ -30,14 +30,12 @@
         </div>
     </nav>
     <body>
-    <div class="flex justify-center mt-24">
         {% block body %}{% endblock %}
-    </div>
     </body>
+    <footer>
+        <div class="text-center text-sm bg-red-600 overflow-hidden w-full bottom-O mt-5"> © All right reserved to Nintendo </div>
+    </footer>
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
-    <foot class="overflow-hidden w-full bottom-0 z-40 bg-red-600 flex items-center flex-row justify-center font-bold text-uppercase h-6 mt-2">
-        <div class="flex items-center justify-center text-center text-sm"> © All right reserved to Nintendo </div>
-    </foot>
 </html>
