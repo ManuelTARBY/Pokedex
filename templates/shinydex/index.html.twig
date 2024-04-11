@@ -30,7 +30,7 @@
     <div class="flex justify-center">
         <div id="totalByGen" class="bg-neutral-700 text-white border border-black rounded-lg w-20 text-center mx-8"></div>
     </div>
-    <div class="grid grid-cols-3 md:grid-cols-9 m-8">
+    <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 m-8">
         {% for pokemon in pokemons %}
         <div class="pokemon h-36 text-white relative" value="{{ pokemon.generation.id }}">
             <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>

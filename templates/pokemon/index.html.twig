@@ -10,7 +10,7 @@
         </div>
         <div class="my-auto text-white">
             <div class="text-2xl">Fiche Pokédex de {{ pokemon.NameFr }}</div>
-            <div class="bg-green-500 h-px"></div>
+            <div class="bg-sky-400 h-px"></div>
             <div class="flex"><div>#{{ pokemon.PokedexId }} {{pokemon.NameEn}}</div>&nbsp;-&nbsp;<div>{{pokemon.NameJp}}</div></div>
             <div class="flex justify-start">
             {% for type in pokemon.PokemonHasType %}
@@ -36,11 +36,35 @@
         </div>
         <div class="mt-5">
             <div class="flex justify-center">PV : {{pokemon.Hp}}</div>
+            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.Hp}} / 255) * 100%);"></div>
+            </div>
             <div class="flex justify-center">ATTAQUE : {{pokemon.Atk}}</div>
+            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.Atk}} / 255) * 100%);"></div>
+            </div>
             <div class="flex justify-center">DÉFENSE : {{pokemon.Def}}</div>
+            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.Def}} / 255) * 100%);"></div>
+            </div>
             <div class="flex justify-center">ATTAQUE SPÉ : {{pokemon.SpeAtk}}</div>
+            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.SpeAtk}} / 255) * 100%);"></div>
+            </div>
             <div class="flex justify-center">DÉFENSE SPÉ : {{pokemon.SpeDef}}</div>
-            <div class="flex justify-center">VITESSE : {{pokemon.Vit}}</div>        
+            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.SpeDef}} / 255) * 100%);"></div>
+            </div>
+            <div class="flex justify-center">VITESSE : {{pokemon.Vit}}</div>
+            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.Vit}} / 255) * 100%);"></div>
+            </div>
         </div>
         <div>
             {% if prevolutions %}
