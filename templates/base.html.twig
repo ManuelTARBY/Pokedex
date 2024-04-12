@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -13,16 +14,37 @@
             <div class="border-r-2">
                 <a href="/"><img id="logo" src="/images/LogoPokeball.png" alt="logo" class="h-16 w-16 mt-2 ml-10 mr-10"></a>
             </div>
-            <ul class="flex">
+            <ul class="hidden lg:flex">
                 <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/pokedex" class="text-black no-underline hover:text-white">pokedex</a></li>
                 <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/shinydex" class="text-black no-underline hover:text-white">shinydex</a></li>
                 <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/teams" class="text-black no-underline hover:text-white">teams</a></li>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="" class="text-black no-underline hover:text-white">gestion</a></li>
+                {% if is_granted ("ROLE_ADMIN") %}
+                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="" class="text-black no-underline hover:text-white">gestion</a></li>
                 {% endif %}
             </ul>
         </div>
-        <div class="flex">
+        <div class="hidden lg:flex">
+        {% if is_granted('ROLE_USER') %}
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="">{{app.user.pseudo}}</a>
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/logout">déconnexion</a>
+        {% else %}
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_register')}}">inscription</a>
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}">connexion</a>
+        {% endif %}
+        </div>
+        
+        <div id="button-nav" class="flex justify-center items-center m-5 cursor-pointer hover:text-white lg:hidden">
+            <i class="fa-solid fa-bars fa-2xl"></i>
+        </div>
+    </nav>
+    <div id="navbar-menu" class="bg-red-600 overflow-hidden hidden fixed flex flex-col items-center w-full top-20 z-50 uppercase font-bold border-t-2 lg:hidden">
+        <div class="my-5"><a href="/pokedex" class="text-black no-underline hover:text-white">pokedex</a></div>
+        <div class="my-5"><a href="/shinydex" class="text-black no-underline hover:text-white">shinydex</a></div>
+        <div class="my-5"><a href="/teams" class="text-black no-underline hover:text-white">teams</a></div>
+        {% if is_granted ("ROLE_ADMIN") %}
+        <div class="my-5"><a href="" class="text-black no-underline hover:text-white">gestion</a></div>
+        {% endif %}
+        <div class="my-5">
         {% if is_granted('ROLE_USER') %}
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_teams_index')}}">{{app.user.pseudo}}</a>
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/logout">déconnexion</a>
@@ -31,7 +53,7 @@
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}">connexion</a>
         {% endif %}
         </div>
-    </nav>
+    </div>
     <body>
         {% block body %}{% endblock %}
     </body>
@@ -41,4 +63,12 @@
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
+    <script>
+    function toggleMenu() {
+        var menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('hidden');
+    }    
+
+    document.getElementById('button-nav').addEventListener('click', toggleMenu);
+    </script>
 </html>
