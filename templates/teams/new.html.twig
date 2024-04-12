@@ -3,12 +3,12 @@
 {% block title %}New Team{% endblock %}
 
 {% block body %}
-<div class="main-container">
-    <div class="titre-page">
-        <h1 id="h1-shinydex">Crée ta team</h1>
+<div class="bg-neutral-600 rounded-lg w-8/12 mx-auto mt-24">
+    <div class="flex justify-center items-center h-8 mt-1 text-white">
+        <h1 class="text-3xl pt-8">Crée ta team</h1>
     </div>
-    {{ include('teams/_form.html.twig', {'button_label': 'Créer'}) }}
-
-    <a href="{{ path('app_teams_index') }}">Annuler</a>
+    <div>
+        {{ include('teams/_form.html.twig', {'button_label': 'Créer'}) }}
+    </div>
 </div>
 {% endblock %}
