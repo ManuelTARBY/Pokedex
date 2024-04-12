@@ -14,8 +14,7 @@
             <div class="border-r-2">
                 <a href="/"><img id="logo" src="/images/LogoPokeball.png" alt="logo" class="h-16 w-16 mt-2 ml-10 mr-10"></a>
             </div>
-            <div class="hidden lg:flex">
-            <ul class="lg:flex">
+            <ul class="hidden lg:flex">
                 <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/pokedex" class="text-black no-underline hover:text-white">pokedex</a></li>
                 <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/shinydex" class="text-black no-underline hover:text-white">shinydex</a></li>
                 <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/teams" class="text-black no-underline hover:text-white">teams</a></li>
@@ -26,6 +25,27 @@
         </div>
         <div class="hidden lg:flex">
         {% if is_granted('ROLE_USER') %}
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="">{{app.user.pseudo}}</a>
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/logout">déconnexion</a>
+        {% else %}
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_register')}}">inscription</a>
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}">connexion</a>
+        {% endif %}
+        </div>
+        
+        <div id="button-nav" class="flex justify-center items-center m-5 cursor-pointer hover:text-white lg:hidden">
+            <i class="fa-solid fa-bars fa-2xl"></i>
+        </div>
+    </nav>
+    <div id="navbar-menu" class="bg-red-600 overflow-hidden hidden fixed flex flex-col items-center w-full top-20 z-50 uppercase font-bold border-t-2 lg:hidden">
+        <div class="my-5"><a href="/pokedex" class="text-black no-underline hover:text-white">pokedex</a></div>
+        <div class="my-5"><a href="/shinydex" class="text-black no-underline hover:text-white">shinydex</a></div>
+        <div class="my-5"><a href="/teams" class="text-black no-underline hover:text-white">teams</a></div>
+        {% if is_granted ("ROLE_ADMIN") %}
+        <div class="my-5"><a href="" class="text-black no-underline hover:text-white">gestion</a></div>
+        {% endif %}
+        <div class="my-5">
+        {% if is_granted('ROLE_USER') %}
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="">{{app.user.pseudo}}</a>
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/logout">déconnexion</a>
         {% else %}
@@ -33,11 +53,7 @@
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}">connexion</a>
         {% endif %}
         </div>
-        <div class="flex items-center m-5 lg:hidden">
-            <i class="fa-solid fa-bars fa-2xl"></i>
-            <i class="fa-solid fa-x fa-2xl"></i>
-        </div>
-    </nav>
+    </div>
     <body>
         {% block body %}{% endblock %}
     </body>
@@ -47,4 +63,12 @@
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
+    <script>
+    function toggleMenu() {
+        var menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('hidden');
+    }    
+
+    document.getElementById('button-nav').addEventListener('click', toggleMenu);
+    </script>
 </html>
