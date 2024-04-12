@@ -3,22 +3,26 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<div class="w-10/12 mx-auto mt-24 grid gap-5 md:grid-cols-2">
-    <div class="bg-neutral-600 w-full h-60 border-black border-3 rounded-lg px-4 py-16" id="bloc-top-shasse">
-        <div class="underline text-white fontsize-30px  mb-0.5em">Top Shasses du jour<br></div>
-        <canvas id="chartShasses"></canvas>
+<div class="mt-24 flex flex-col justify-center mx-auto w-11/12">
+    <div class="flex flex-col xl:flex-row justify-center">
+        <div class="bg-neutral-600 xl:w-1/2  border-black border-3 rounded-lg m-5 p-2" id="bloc-top-shasse">
+            <div class="text-white text-2xl underline underline-offset mt-2 ml-5">Top Shasses<br></div>
+            <canvas id="chartShasses" class:""></canvas>
+        </div>
+        <div class="bg-neutral-600 xl:w-1/2 border-black border-3 rounded-lg m-5 p-2" id="bloc-top-dresseur">
+            <div class="text-white text-2xl underline underline-offset mt-2 ml-5">Top Dresseurs<br></div>
+            <canvas id="chartBestDresseurs" class=""></canvas>
+        </div>
     </div>
-    <div class="bg-neutral-600 w-full h-60 border-black border-3 rounded-lg px-4 py-16" id="bloc-top-dresseur">
-        <div class="title-bloc-accueil">Top Dresseurs<br></div>
-        <canvas id="chartBestDresseurs"></canvas>
-    </div>
-    <div class="bg-neutral-600 w-full h-60 border-black border-3 rounded-lg px-4 py-16" id="bloc-shiny-jour">
-        <div class="title-bloc-accueil">Shiny<br></div>
-        <canvas id="chartShinyDay"></canvas>
-    </div>
-    <div class="bg-neutral-600 w-full h-60 border-black border-3 rounded-lg px-4 py-16" id="bloc-pokemon-team">
-        <div class="title-bloc-accueil">Top Pokemon Team<br></div>
-        <canvas id="chartPokemonTeam"></canvas>
+    <div class="flex flex-col xl:flex-row justify-center">
+        <div class="bg-neutral-600 xl:w-1/2  border-black border-3 rounded-lg m-5 p-2" id="bloc-shiny-jour">
+            <div class="text-white text-2xl underline underline-offset mt-2 ml-5">Shiny du jour<br></div>
+            <canvas id="chartShinyDay" class=""></canvas>
+        </div>
+        <div class="bg-neutral-600 xl:w-1/2  border-black border-3 rounded-lg m-5 p-2" id="bloc-pokemon-team">
+            <div class="text-white text-2xl underline underline-offset mt-2 ml-5">Top Pokemon Team<br></div>
+            <canvas id="chartPokemonTeam" class=""></canvas>
+        </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -63,8 +67,9 @@
             },
             indexAxis: 'y'
         }
-    });</script>
-    <script>var ctx = document.getElementById('chartShinyDay').getContext('2d');
+    });
+</script>
+<script>var ctx = document.getElementById('chartShinyDay').getContext('2d');
     var days = [];
     var nbCaught = [];
     {% for caught in shiny_du_jour %}
@@ -104,8 +109,9 @@
                 }
             }
         }
-    });</script>
-    <script>var ctx = document.getElementById('chartBestDresseurs').getContext('2d');
+    });
+</script>
+<script>var ctx = document.getElementById('chartBestDresseurs').getContext('2d');
     var dresseurs = [];
     var nbCaught = [];
     {% for dresseur in top_dresseur %}
@@ -146,8 +152,9 @@
             },
             indexAxis: 'y'
         }
-    });</script>
-    <script>var ctx = document.getElementById('chartShasses').getContext('2d');
+    });
+</script>
+<script>var ctx = document.getElementById('chartShasses').getContext('2d');
     var name_fr = [];
     var occurrences = [];
     {% for pokemon in top_shasse %}

@@ -28,50 +28,51 @@ class ShinydexController extends AbstractController
 
         
         $user = $this->getUser();
+
+        $caughts = $user->getCaught();
         
-        if (isset($user)) {
-            
-            // Récupère le nombre pokemon pour chaque génération
-            foreach ($generations as $generation) {
-                $pokemonByGene[] = count($this->entityManager->getRepository(Pokemon::class)->findBy(['generation' => $generation->getId()]));
+        $totalCaughtByGen = [];
+        
+        foreach ($caughts as $caught) {
+            $pokemon = $caught->getPokemon();
+            $storage[] = $pokemon;
+            if (array_key_exists($caught->getPokemon()->getGeneration()->getId(), $totalCaughtByGen)){
+                $totalCaughtByGen [$caught->getPokemon()->getGeneration()->getId()]++;
+            }else{
+                $totalCaughtByGen [$caught->getPokemon()->getGeneration()->getId()]=1;
             }
-            
-            $caughts = $user->getCaught();
-            
-            $totalCaughtByGen = [];
-            
-            foreach ($caughts as $caught) {
-                $pokemon = $caught->getPokemon();
-                $storage[] = $pokemon;
-                if (array_key_exists($caught->getPokemon()->getGeneration()->getId(), $totalCaughtByGen)){
-                    $totalCaughtByGen [$caught->getPokemon()->getGeneration()->getId()]++;
-                }else{
-                    $totalCaughtByGen [$caught->getPokemon()->getGeneration()->getId()]=1;
-                }
-            }
-            
-            $capturedPokemons = [];
-            
-            foreach ($storage as $capturedPokemon) {
-                $capturedPokemons[$capturedPokemon->getId()] = true;
-            }
-            
-            $totalCaught = count($caughts);
-            
-            $total = count($pokemons);
-                        
-            return $this->render('shinydex/index.html.twig', [
-                'pokemons' => $pokemons,
-                'generations' => $generations,
-                'pokemonByGeneration' => $pokemonByGene,
-                'capturedPokemons' => $capturedPokemons,
-                'totalCaught' => $totalCaught,
-                'totalCaughtByGen' => json_encode($totalCaughtByGen),
-                'total' => $total,
-            ]);
         }
-        else {
-            return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
+
+        $capturedPokemons = [];
+        
+        foreach ($storage as $capturedPokemon) {
+            $capturedPokemons[$capturedPokemon->getId()] = true;
         }
+
+        $totalCaught = count($caughts);
+
+        $total = count($pokemons);
+
+        $totalByGen = [];
+        foreach ($pokemons as $pokemon) {
+            //$totalByGen = $generation->getId() => count($this->entityManager->getRepository(Pokemon::class)->findBy(["generation" => $generation->getId()]));
+            $tot = $pokemon->getId();
+            $storage[] = $tot;
+            if (array_key_exists($pokemon->getGeneration()->getId(), $totalByGen)){
+                $totalByGen [$pokemon->getGeneration()->getId()]++;
+            }else{
+                $totalByGen [$pokemon->getGeneration()->getId()]=1;
+            }
+        }
+
+        return $this->render('shinydex/index.html.twig', [
+            'pokemons' => $pokemons,
+            'generations' => $generations,
+            'capturedPokemons' => $capturedPokemons,
+            'totalCaught' => $totalCaught,
+            'totalCaughtByGen' => json_encode($totalCaughtByGen),
+            'total' => $total,
+            'totalByGen' => json_encode($totalByGen),
+        ]);
     }
 }
