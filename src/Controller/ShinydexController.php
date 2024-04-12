@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Pokemon;
 use App\Entity\Generation;
-use App\Entity\User;
 
 class ShinydexController extends AbstractController
 {
@@ -26,6 +25,8 @@ class ShinydexController extends AbstractController
         $generations = $this->entityManager->getRepository(Generation::class)->findAll();
 
         $storage = [];
+
+        
         $user = $this->getUser();
 
         $caughts = $user->getCaught();

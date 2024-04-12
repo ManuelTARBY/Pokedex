@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
 <div class="mt-24 flex flex-col justify-center mx-auto w-11/12">
@@ -64,7 +64,8 @@
                 y: {
                     beginAtZero: true
                 }
-            }
+            },
+            indexAxis: 'y'
         }
     });
 </script>
@@ -80,7 +81,7 @@
         data: {
             labels: days,
             datasets: [{
-                label: 'Shiny du jour',
+                label: 'Shiny',
                 data: nbCaught,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -122,7 +123,7 @@
         data: {
             labels: dresseurs,
             datasets: [{
-                label: 'Top Dresseurs',
+                label: '',
                 data: nbCaught,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -148,7 +149,8 @@
                 y: {
                     beginAtZero: true
                 }
-            }
+            },
+            indexAxis: 'y'
         }
     });
 </script>
@@ -164,7 +166,7 @@
         data: {
             labels: name_fr,
             datasets: [{
-                label: 'Top Shasses',
+                label: 'Top Shasses du jour',
                 data: occurrences,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -190,7 +192,8 @@
                 y: {
                     beginAtZero: true
                 }
-            }
+            },
+            indexAxis: 'y'
         }
     });</script>
 {% endblock %}
