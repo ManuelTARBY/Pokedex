@@ -52,10 +52,10 @@ class HomeController extends AbstractController
         $lesCaughts = array();
         $dateOfTheDay = date('Y-m-d');
         $dateDuJour = new \DateTime($dateOfTheDay);
-        $dateDuJour = $dateDuJour->modify('+1 days');
+        $dateDuJour = $dateDuJour->modify('-5 days');
         
         for ($i = 5 ; $i >= 1 ; $i--){
-            $dateDuJourMoins5Jours = $dateDuJour->modify('-1 days');
+            $dateDuJourMoins5Jours = $dateDuJour->modify('+1 days');
             $caughts = count($this->entityManager->getRepository(Caught::class)->findBy(['date_capture' => $dateDuJourMoins5Jours]));
             $lesCaughts[] = array(
                 "date_capture" => $dateDuJour->format('Y-m-d'),
@@ -65,26 +65,23 @@ class HomeController extends AbstractController
 
 
         // Requête pour les pokemons les plus présents dans les teams
-        $lesTeams = $this->entityManager->getRepository(Team::class)->findAll();
-        $lesPokeTeams = array();
-        foreach ($lesTeams as $team){
-            $laTeam = $team->getPokemonAsTeam();
-            foreach($laTeam as $pokemon) {
-                $lesPokeTeams[] = $pokemon->getNameFr();
-            }
+        $sql = 'SELECT COUNT(team_pokemon.pokemon_id) AS occurrences, pokemon.name_fr
+        FROM team_pokemon
+        JOIN pokemon ON pokemon.id = team_pokemon.pokemon_id
+        GROUP BY pokemon.name_fr
+        ORDER BY occurrences DESC
+        LIMIT 3';
+
+        $statement = $connection->executeQuery($sql);
+        $resultTopPokemonInTeam = $statement->fetchAllAssociative();
+
+        foreach ($resultTopPokemonInTeam as $unPoke) {
+        $pokemonsShinyTeam[] = array(
+            'name_fr' => $unPoke['name_fr'],
+            'occurrence' => $unPoke['occurrences'],
+        );
         }
-
-        $details = array_count_values($lesPokeTeams);
-        arsort($details);
-
-        $pokemonsShinyTeam = array();
-        foreach (array_slice($details, 0, 3) as $key => $value) {
-            $pokemonsShinyTeam[] = array(
-                "name_fr" => $key,
-                "occurrence" => $value,
-            );
-        }
-
+        
         return $this->render('home/index.html.twig', [
             'top_shasse' => $resultTopShasse,
             'top_dresseur' => $resultTopDresseur,
