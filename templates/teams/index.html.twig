@@ -22,13 +22,8 @@
             <h1 class="text-white text-center pl-2 text-xl">{{ team.name }} : </h1><br>
                 {% for pokemon in team.PokemonAsTeam %}
                     <div class="pokemon h-36 mx-3 text-white relative">
-                        <div class="pokemon_id"> #{{ pokemon.getPokedexId }} {{ pokemon.NameFr }} </div>
-                        {% set captured = capturedPokemons[pokemon.getId()] is defined %}
-                        {% if captured %}
-                            <img src="{{ pokemon.SpriteShiny }}" class="h-12 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        {% else %}
-                            <img src="{{ pokemon.SpriteRegular }}" class="filter grayscale h-12 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        {% endif %} 
+                        <div> #{{ pokemon.pokedexId }} {{ pokemon.NameFr }} </div>
+                        <a href="/pokemon/{{ pokemon.pokedexId }}"><img src="{{ pokemon.SpriteRegular }}" class="h-12 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></a>
                     </div>
                 {% endfor %}
             <div class="mx-4">

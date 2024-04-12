@@ -20,7 +20,7 @@ class UserController extends AbstractController
         $user = $this->getUser();
         if ($user != null){ 
             return $this->render('user/index.html.twig', [
-                'user' => $userRepository->findOneBy(['id'=>$user->getId()]),
+                'user' => $user,
             ]);
         }else{
             return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
