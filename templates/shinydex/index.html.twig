@@ -4,16 +4,16 @@
 
 {% block body %}
 <div class="bg-neutral-600 rounded-lg w-11/12 mx-auto mt-24">
-    <div class="flex justify-center items-center h-8 mt-1 text-white">
-        <h1 class="text-3xl pt-8">Shinydex</h1>
+    <div class="flex justify-center items-center h-8 py-8 text-white">
+        <h1 class="text-3xl">Shinydex</h1>
     </div>
-    <div class="flex justify-end">
-        <div class="bg-neutral-700 text-white border border-black rounded-lg w-20 text-center mx-8">
+    <div class="flex justify-center md:justify-end md:mr-8">
+        <div class="bg-neutral-700 text-white border border-black rounded-lg w-20 text-center">
             {{totalCaught}}/{{total}}
         </div>
     </div>
-    <div class="flex justify-between mx-8 my-5">
-        <div class="flex items-center">    
+    <div class="flex flex-col md:flex-row items-center md:justify-between md:mx-8 my-5">
+        <div class="flex items-center mb-5 md:mb-0">    
             <a href="/caught/new"><button type="button" class="rounded-full bg-sky-400 p-2 text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
@@ -27,18 +27,22 @@
                 {% endfor %}
         </select>
     </div>
-    <div class="flex justify-center">
-        <div id="totalByGen" class="bg-neutral-700 text-white border border-black rounded-lg w-20 text-center mx-8"></div>
+    <div class=" bg-neutral-700 text-white border border-black flex justify-center rounded-lg w-20 mx-auto">
+        <div id="totalCaughtByGen"></div>/<div id="totalByGen"></div>
     </div>
+    <div class="my-2 mx-auto h-4 relative w-10/12 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full bg-sky-400 absolute" id="dynamicWidth"></div>
+            </div>
     <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 m-8">
         {% for pokemon in pokemons %}
         <div class="pokemon h-36 text-white relative" value="{{ pokemon.generation.id }}">
             <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
             {% set captured = capturedPokemons[pokemon.getId()] is defined %}
             {% if captured %}
-            <img src="{{ pokemon.SpriteShiny }}" class="h-12 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <img src="{{ pokemon.SpriteShiny }}" class="h-16 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             {% else %}
-            <img src="{{ pokemon.SpriteRegular }}" class="filter grayscale h-12 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <img src="{{ pokemon.SpriteRegular }}" class="filter grayscale h-16 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             {% endif %}
         </div>
         {% endfor %}
@@ -52,16 +56,32 @@
 function changeGeneration () {
     var selectedGeneration = document.getElementById('select-generation').value;
     var pokemons = document.querySelectorAll('.pokemon');
-    var totalByGen = document.getElementById('totalByGen');
     var total = '{{totalCaughtByGen|raw}}';
+    var totals = '{{totalByGen|raw}}';
     total = JSON.parse(total);
+    totals = JSON.parse(totals);
+
+    var pokemonWidth = total[selectedGeneration];
+    var totalPokemon = totals[selectedGeneration];
+    var widthPercentage = (pokemonWidth / totalPokemon) * 100;
+    var dynamicWidthElement = document.getElementById('dynamicWidth');
     
+    dynamicWidthElement.style.width = `calc(${widthPercentage}%)`;
+
     if (total[selectedGeneration] == undefined){
-        totalByGen.innerHTML = 0;
+        totalCaughtByGen.innerHTML = 0;
     }else{
-        totalByGen.innerHTML = total[selectedGeneration];
+        totalCaughtByGen.innerHTML = total[selectedGeneration];
     }
     
+    if (totals[selectedGeneration] == undefined){
+        totalByGen.innerHTML = 0;
+    }else{
+        totalByGen.innerHTML = totals[selectedGeneration];
+    }
+
+    
+
     pokemons.forEach(function(pokemon) {
         var generationId = pokemon.getAttribute('value');
         if (selectedGeneration === 'null' || selectedGeneration === generationId) {
