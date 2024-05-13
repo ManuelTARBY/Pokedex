@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Pokemon;
 use App\Entity\Generation;
-use App\Entity\User;
 
 class ShinydexController extends AbstractController
 {
@@ -26,6 +25,8 @@ class ShinydexController extends AbstractController
         $generations = $this->entityManager->getRepository(Generation::class)->findAll();
 
         $storage = [];
+
+        
         $user = $this->getUser();
 
         $caughts = $user->getCaught();
@@ -52,7 +53,17 @@ class ShinydexController extends AbstractController
 
         $total = count($pokemons);
 
-        dump($totalCaughtByGen);
+        $totalByGen = [];
+        foreach ($pokemons as $pokemon) {
+            //$totalByGen = $generation->getId() => count($this->entityManager->getRepository(Pokemon::class)->findBy(["generation" => $generation->getId()]));
+            $tot = $pokemon->getId();
+            $storage[] = $tot;
+            if (array_key_exists($pokemon->getGeneration()->getId(), $totalByGen)){
+                $totalByGen [$pokemon->getGeneration()->getId()]++;
+            }else{
+                $totalByGen [$pokemon->getGeneration()->getId()]=1;
+            }
+        }
 
         return $this->render('shinydex/index.html.twig', [
             'pokemons' => $pokemons,
@@ -61,6 +72,7 @@ class ShinydexController extends AbstractController
             'totalCaught' => $totalCaught,
             'totalCaughtByGen' => json_encode($totalCaughtByGen),
             'total' => $total,
+            'totalByGen' => json_encode($totalByGen),
         ]);
     }
 }

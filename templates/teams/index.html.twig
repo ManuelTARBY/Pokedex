@@ -1,29 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TeamsController!{% endblock %}
+{% block title %}Team index{% endblock %}
 
 {% block body %}
-
-<div class="main-container">
-    <div class="titre-page">
-        <h1 id="h1-shinydex">Teams</h1>
+<div class="bg-neutral-600 rounded-lg w-11/12 mx-auto mt-24">
+    <div class="flex justify-center items-center h-8 mt-1 text-white">
+        <h1 class="text-3xl pt-8">Teams</h1>
+    </div>
+    <div class="flex justify-between mx-8 my-5">
+        <div class="flex items-center">    
+            <a href="{{ path('app_teams_new') }}"><button type="button" class="rounded-full bg-sky-400 p-2 text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                </svg>
+            </button></a>   
+            <span class="text-white mx-5">Créer une nouvelle team</span>
+        </div>
     </div>
     {% for team in teams %}
-        <div class="div-shinydex">
-        
-            <h1>{{ team.name }}</h1><br>
+        <div class="flex justify-center flex-col-3 md:flex-col-8 m-8">
+            <h1 class="text-white text-center pl-2 text-xl">{{ team.name }} : </h1><br>
                 {% for pokemon in team.PokemonAsTeam %}
-                    <div class="pokemon" value="{{ pokemon.generation.id }}">
-                        <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
-                        {% set captured = capturedPokemons[pokemon.getId()] is defined %}
-                        {% if captured %}
-                            <img src="{{ pokemon.SpriteShiny }}">
-                        {% else %}
-                            <img class="filter" src="{{ pokemon.SpriteRegular }}">
-                        {% endif %}
+                    <div class="pokemon h-36 mx-3 text-white relative">
+                        <div> #{{ pokemon.pokedexId }} {{ pokemon.NameFr }} </div>
+                        <a href="/pokemon/{{ pokemon.pokedexId }}"><img src="{{ pokemon.SpriteRegular }}" class="h-12 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></a>
                     </div>
                 {% endfor %}
+            <div class="mx-4">
+            <form method="get" action="{{ path('app_teams_edit', {'id': team.id}) }}">
+                <button class="bg-sky-400 rounded-lg h-8 mt-4 mb-2 py-1 px-1 hover:bg-sky-600 text-white text-12 text-center font-bold uppercase">Editer</button>
+            </form>
+            {{ include('teams/_delete_form.html.twig') }}
+            </div>
         </div>
+    {% else %}
+        <tr>
+            <td colspan="3" class="text-white pl-2 text-26">Vous n'avez créé aucune équipe.. Lancez-vous !</td>
+        </tr>
     {% endfor %}
 </div>
 {% endblock %}

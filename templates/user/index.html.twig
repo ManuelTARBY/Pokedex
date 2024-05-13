@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="bg-neutral-600 rounded-lg w-11/12 mx-auto mt-24">
+        <div class="flex justify-center items-center h-8 mt-1 text-white">
+            <h1 class="text-3xl pt-8">Votre Profil</h1>
+        </div>
+        <div class="flex justify-between mx-8 my-5 text-white pl-2 text-xl">
+            <div>Email : {{ user.email }}</div>
+            <div>Pseudo : {{ user.pseudo }}</div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div>Rôles : Administrateur</div>
+            {% else %}
+                <div>Rôle : Utilisateur</div>   
+            {% endif %}
+        </div>
+            {# {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td>{{ user.password }}</td>
+                    <td>{{ user.pseudo }}</td>
+                    <td>
+                        <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %} #}
+        {# <a href="{{ path('app_user_new') }}">Create new</a> #}
+    </div>
+{% endblock %}

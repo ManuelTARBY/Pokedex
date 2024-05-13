@@ -4,29 +4,29 @@
 
 {% block body %}
 
-<div class="lex justify-center items-center bg-neutral-600 rounded-lg w-11/12">
+<div class="bg-neutral-600 rounded-lg w-11/12 mx-auto mt-24">
     <div class="flex justify-center items-center h-8 mt-1 text-white">
-        <h1 class="text-2xl">Pokedex</h1>
+        <h1 class="text-3xl pt-8">Pokedex</h1>
     </div>
     <div class="flex justify-center items-center m-8">
         <input type="text" name="searchname" id="search-by-name" class="bg-neutral-700 text-white border border-black rounded-lg px-4 py-2 h-8 text-center w-80 font-normal text-xs" placeholder="Recherche par nom" oninput="getPokedexByName({{ pokemons|json_encode }})">
     </div>
-    <div class="flex justify-around mx-16 my-5">
-        <select name="sel-type" id="select-type" onchange="getPokedexByType({{ pokemons|json_encode }}, {{ poketypes|json_encode }}, {{ types|json_encode }})" class="h-8 text-white bg-neutral-700 border border-black rounded-lg w-80 pl-4 text-center text-xs">
+    <div class="flex flex-col md:flex-row items-center md:justify-around md:mx-16 my-5">
+        <select name="sel-type" id="select-type" onchange="getPokedexByType({{ pokemons|json_encode }}, {{ poketypes|json_encode }}, {{ types|json_encode }})" class="h-8 text-white bg-neutral-700 border border-black rounded-lg mb-5 md:mb-0 md:w-80 pl-4 text-center text-xs">
                 <option value="null">Recherche par Type</option>
             {% for type in types %}
                 <option value="{{type.name}}">{{type.name}}</option>
             {% endfor %}
         </select>
-        <select name="sel-generation" id="select-generation" onchange='getPokedexByGeneration({{ pokemons|json_encode }}, {{ generations|json_encode }})' class="h-8 text-white bg-neutral-700 border border-black rounded-lg w-80 pl-4 text-center text-xs">
+        <select name="sel-generation" id="select-generation" onchange='getPokedexByGeneration({{ pokemons|json_encode }}, {{ generations|json_encode }})' class="h-8 text-white bg-neutral-700 border border-black rounded-lg md:w-80 pl-4 text-center text-xs">
                 <option value="null">Recherche par Génération</option>
             {% for generation in generations %}
                 <option value="{{generation.number}}">{{generation.number}}</option>
             {% endfor %}
         </select>
     </div>
-    <div class="flex justify-center items-center" id="tab-poke">
-        <table class="w-11/12 border-collapse border-separate border-spacing-2">
+    <div class="flex justify-center items-center my-5" id="tab-poke">
+        <table class="w-11/12 border-separate border-spacing-2">
             <tr class="bg-neutral-400 h-10">
                 <th>Numéro</th>
                 <th>Nom</th>

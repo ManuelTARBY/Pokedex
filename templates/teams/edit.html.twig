@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Team{% endblock %}
+
+{% block body %}
+<div class="bg-neutral-600 rounded-lg w-8/12 mx-auto mt-24">
+    <div class="flex justify-center items-center h-8 mt-1 text-white">
+        <h1 class="text-3xl pt-8">Edite ta team</h1>
+    </div>
+    <div>
+        {{ include('teams/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+</div>
+{% endblock %}

@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<div class="inscription-container">
+<div class="flex justify-center rounded-lg bg-neutral-600 mt-24 mx-auto w-3/12 pt-2 pb-1">
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -15,13 +15,13 @@
             </div>
         {% endif %}
 
-        <div class="elt-frm-inscri">
-            <label class="lbl-form" for="email">Email :</label><br>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input-form" autocomplete="email" required autofocus>
+        <div class="mt-2 w-full">
+            <label class="text-white pl-2 text-26" for="email">Email :</label><br>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="bg-neutral-800 h-8 w-full border-black rounded-lg text-white text-22 mt-1 px-2" autocomplete="email" required autofocus>
         </div>
-        <div class="elt-frm-inscri">
-            <label class="lbl-form" for="inputPassword">Mot de passe :</label>
-            <input type="password" name="password" id="inputPassword" class="input-form" autocomplete="current-password" required>
+        <div class="mt-2 w-full">
+            <label class="text-white pl-2 text-26" for="inputPassword">Mot de passe :</label>
+            <input type="password" name="password" id="inputPassword" class="bg-neutral-800 h-8 w-full border-black rounded-lg text-white text-22 mt-1 px-2" autocomplete="current-password" required>
         </div>
         <input type="hidden" name="_csrf_token"
             value="{{ csrf_token('authenticate') }}"
@@ -33,9 +33,12 @@
             </label>
         </div>
 
-        <button class="btn-create-acc" type="submit">
+        <button class="bg-sky-400 w-5/12 hover:bg-sky-600 rounded-lg h-8 mt-4 mb-2 text-white text-22 text-center font-bold uppercase" type="submit">
             Se connecter
-        </button>
+        </button><br>
+        <a class=" text-white hover:text-sky-600 text-center font-bold" href="/register">
+            Pas de compte ? inscrivez-vous ici 
+        </a>
     </form>
 </div>
 {% endblock %}
