@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Error;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,24 +29,28 @@ class UserController extends AbstractController
     }
 
     #[Route('/gestion', name: 'app_user_gestion', methods: ['GET', 'POST'])]
-    public function gestion(Request $request, EntityManagerInterface $entityManager, UserRepository $userrepository): Response
+    public function gestion(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
     {
-        $user = new User();
-        $users = $userrepository->findAll();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        if ($this->getUser() != null and in_array("ROLE_ADMIN", ($this->getUser()->getRoles()))){
+            $user = new User();
+            $users = $userRepository->findAll();
+            $form = $this->createForm(UserType::class, $user);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($user);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            }
+
+            return $this->render('user/gestion.html.twig', [
+                'user' => $user,
+                'users' => $users,
+                'form' => $form,
+            ]);
+        }else{
+            return $this->render('user/not_allowed.html.twig');
         }
-
-        return $this->render('user/gestion.html.twig', [
-            'user' => $user,
-            'users' => $users,
-            'form' => $form,
-        ]);
     }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]

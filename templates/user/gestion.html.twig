@@ -3,25 +3,38 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <div class="bg-neutral-600 rounded-lg w-11/12 mx-auto mt-24">
-        <div class="flex justify-center items-center h-8 mt-1 text-white">
-            <h1 class="text-3xl pt-8">Votre Profil</h1>
+    <div class="bg-neutral-600 flex flex-col justify-center rounded-lg w-11/12 mx-auto mt-24">
+        <div class="flex justify-center items-center h-8 mt-1 mb-2 text-white">
+            <h1 class="text-3xl pt-8">Gestion des utilisateurs</h1>
         </div>
-        <div class="flex justify-between mx-8 my-5 text-white pl-2 text-xl">
-             {% for user in users %}
-                <div>{{ user.id }}</div>
-                <div>{{ user.email }}</div>
-                <div>{{ user.roles ? user.roles|json_encode : '' }}</div>
-                <div>{{ user.pseudo }}</div>
-                <div>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a><br>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </div>
+        <table class="mx-8 my-10 border text-white pl-2 text-xl">
+            <thead>
+                <tr>
+                    <th scope="col" class="border">User ID</th>
+                    <th scope="col" class="border">Pseudo</th>
+                    <th scope="col" class="border">Email</th>
+                    <th scope="col" class="border">Roles</th>
+                    <th scope="col" class="border">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr class="mx-8 mb-6">
+                    <td class="border text-center py-2">{{ user.id }}</td>
+                    <td class="border text-center">{{ user.pseudo }}</td>
+                    <td class="border text-center">{{ user.email }}</td>
+                    <td class="border text-center">{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td class="border text-center">
+                        <a href="{{ path('app_user_show', {'id': user.id}) }}" class="bg-sky-400 rounded-lg h-8 mt-4 mb-4 mx-2 py-1 px-1 hover:bg-sky-600 text-white text-sm text-center font-bold uppercase">edit</a>
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="bg-red-600 rounded-lg h-8 mt-4 mb-4 mx-2 py-1 px-1 hover:bg-red-800 text-white text-sm text-center font-bold uppercase">del</a>
+                    </td>
+                </tr>
             {% else %}
                 <tr>
                     <td colspan="6">no records found</td>
                 </tr>
             {% endfor %}
-        </div>
+            </tbody>
+        </table>
     </div>
 {% endblock %}
