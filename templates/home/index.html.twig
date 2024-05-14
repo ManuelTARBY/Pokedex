@@ -26,7 +26,8 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>var ctx = document.getElementById('chartPokemonTeam').getContext('2d');
+<script>
+    var ctx = document.getElementById('chartPokemonTeam').getContext('2d');
     var pokemons = [];
     var occurrences = [];
     {% for pokemon in pokemon_team %}
@@ -38,23 +39,38 @@
         data: {
             labels: pokemons,
             datasets: [{
-                label: 'Top Pokemon Team',
+                label: 'Top Pokemon présent dans Team',
                 data: occurrences,
                 backgroundColor: '#38bdf8',
                 borderWidth: 1,
-            }],
-            fontColor : '#fffff'
+            }]
         },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe y en blanc
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe x en blanc
+                    }
                 }
             },
-            indexAxis: 'y',
-        },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff' // Couleur des étiquettes de la légende en blanc
+                    }
+                }
+            },
+            indexAxis: 'y'
+        }
     });
 </script>
+
 <script>var ctx = document.getElementById('chartShinyDay').getContext('2d');
     var days = [];
     var nbCaught = [];
@@ -67,7 +83,7 @@
         data: {
             labels: days,
             datasets: [{
-                label: 'Shiny du jour',
+                label: 'Nombre de Shiny par jour',
                 data: nbCaught,
                 backgroundColor: '#38bdf8',
                 borderWidth: 1
@@ -76,7 +92,22 @@
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe y en blanc
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe x en blanc
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff' // Couleur des étiquettes de la légende en blanc
+                    }
                 }
             }
         }
@@ -94,7 +125,7 @@
         data: {
             labels: dresseurs,
             datasets: [{
-                label: 'Top Dresseurs du jour',
+                label: 'Top Dresseurs',
                 data: nbCaught,
                 backgroundColor: '#38bdf8',
                 borderWidth: 1
@@ -103,7 +134,22 @@
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe y en blanc
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe x en blanc
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff' // Couleur des étiquettes de la légende en blanc
+                    }
                 }
             },
             indexAxis: 'y'
@@ -131,7 +177,22 @@
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe y en blanc
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe x en blanc
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff' // Couleur des étiquettes de la légende en blanc
+                    }
                 }
             },
             indexAxis: 'y'
