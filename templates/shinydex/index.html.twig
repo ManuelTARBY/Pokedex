@@ -41,9 +41,9 @@
             {% set captured = capturedPokemons[pokemon.getId()] is defined %}
             <a href="/pokemon/{{pokemon.PokedexId}}">
             {% if captured %}
-            <img src="{{ pokemon.SpriteShiny }}" class="h-16 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <img src="{{ pokemon.SpriteShiny }}" class="h-20 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             {% else %}
-            <img src="{{ pokemon.SpriteRegular }}" class="filter grayscale h-16 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <img src="{{ pokemon.SpriteRegular }}" class="filter grayscale h-20 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             {% endif %}
             </a>
         </div>
