@@ -3,21 +3,22 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <div class="bg-neutral-600 rounded-lg w-11/12 mx-auto mt-24">
+    <div class="bg-neutral-600 rounded-lg w-11/12 md:w-5/12 mt-24 mx-auto">
         <div class="flex justify-center items-center h-8 mt-1 text-white">
             <h1 class="text-3xl pt-8">Votre Profil</h1>
         </div>
-        <div class="flex justify-between mx-8 my-5 text-white pl-2 text-xl">
-            <div>Email : {{ user.email }}</div>
-            <div>Pseudo : {{ user.pseudo }}</div>
+        <div class="mx-8 my-5 text-white pl-2 text-xl">
+            <div class="flex justify-center">Email : {{ user.email }}</div>
+            <div class="flex justify-center">Pseudo : {{ user.pseudo }}</div>
             {% if is_granted('ROLE_ADMIN') %}
-                <div>Rôles : Administrateur</div>
+                <div class="flex justify-center">Rôles : Administrateur</div>
             {% else %}
-                <div>Rôle : Utilisateur</div>   
+                <div class="flex justify-center">Rôle : Utilisateur</div>   
             {% endif %}
         </div>
-        <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-          
+        <div class="flex justify-center">
+            <a class="bg-sky-400 rounded-lg m-5 p-2 hover:bg-sky-600 text-white text-12 text-center font-bold uppercase" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+        </div>
             {# {% for user in users %}
                 <tr>
                     <td>{{ user.id }}</td>

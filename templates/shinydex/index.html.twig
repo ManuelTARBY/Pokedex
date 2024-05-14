@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ShinydexController!{% endblock %}
+{% block title %}Shinydex{% endblock %}
 
 {% block body %}
 <div class="bg-neutral-600 rounded-lg w-11/12 mx-auto mt-24">
@@ -36,7 +36,7 @@
             </div>
     <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 m-8">
         {% for pokemon in pokemons %}
-        <div class="h-36 text-white relative" value="{{ pokemon.generation.id }}">
+        <div class="pokemon h-36 text-white relative" value="{{ pokemon.generation.id }}">
             <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
             {% set captured = capturedPokemons[pokemon.getId()] is defined %}
             {% if captured %}
@@ -55,7 +55,7 @@
 <script type="text/javascript">
 function changeGeneration () {
     var selectedGeneration = document.getElementById('select-generation').value;
-    var pokemons = document.querySelectorAll('.pokemon');
+    var pokemons = document.querySelectorAll('.pokemon'); 
     var total = '{{totalCaughtByGen|raw}}';
     var totals = '{{totalByGen|raw}}';
     total = JSON.parse(total);
@@ -80,16 +80,13 @@ function changeGeneration () {
         totalByGen.innerHTML = totals[selectedGeneration];
     }
 
-    
-
     pokemons.forEach(function(pokemon) {
         var generationId = pokemon.getAttribute('value');
         if (selectedGeneration === 'null' || selectedGeneration === generationId) {
             pokemon.style.display = 'block';
         } else {
             pokemon.style.display = 'none';
-        }  
-        
+        }
     });
 };
 
