@@ -20,8 +20,12 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('pseudo')
+            ->add('email', EmailType::class, [
+                'attr' => ['class'=>'bg-neutral-800 h-8 w-full border-black rounded-lg color-white text-22 mt-1 px-2'],
+            ])
+            ->add('pseudo', TextType::class, [
+                'attr' => ['class'=>'bg-neutral-800 h-8 w-full border-black rounded-lg color-white text-22 mt-1 px-2'],
+            ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
