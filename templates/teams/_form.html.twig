@@ -4,7 +4,7 @@
             Nom de l'équipe : 
             {{ form_widget(form.name, { 'attr': {'class': 'bg-neutral-800 h-8 w-4/12 border-black rounded-lg text-white mt-1 px-2', 'min-length': '1', 'max-length': '45'}}) }}
         </div>
-        <div class="flex">
+        <div class="grid grid-cols-1 lg:grid-cols-6">
             <div class="mx-2">{{ form_widget(form.Pokemon_1, { 'attr': {'class': 'bg-neutral-800 h-8 w-full border-black rounded-lg text-white mt-1 px-2'}}) }}</div>
             <div class="mx-2">{{ form_widget(form.Pokemon_2, { 'attr': {'class': 'bg-neutral-800 h-8 w-full border-black rounded-lg text-white mt-1 px-2'}}) }}</div>
             <div class="mx-2">{{ form_widget(form.Pokemon_3, { 'attr': {'class': 'bg-neutral-800 h-8 w-full border-black rounded-lg text-white mt-1 px-2'}}) }}</div>
@@ -12,9 +12,9 @@
             <div class="mx-2">{{ form_widget(form.Pokemon_5, { 'attr': {'class': 'bg-neutral-800 h-8 w-full border-black rounded-lg text-white mt-1 px-2'}}) }}</div>
             <div class="mx-2">{{ form_widget(form.Pokemon_6, { 'attr': {'class': 'bg-neutral-800 h-8 w-full border-black rounded-lg text-white mt-1 px-2'}}) }}</div>
         </div>
-        <div>
-            <button class="bg-sky-400 hover:bg-sky-600 rounded-lg h-8 mt-4 mb-2 py-1 px-1 text-white text-12 text-center font-bold uppercase">{{ button_label|default('Save') }}</button>
-            <button class="bg-sky-400 hover:bg-sky-600 rounded-lg h-8 mt-4 mb-2 py-1 px-1 text-white text-12 text-center font-bold uppercase"><a href="/teams">Annuler</a></button>
+        <div class="flex justify-center">
+            <button class="bg-sky-400 hover:bg-sky-600 rounded-lg h-8 mt-4 mb-2 py-1 px-2 text-white text-12 text-center font-bold uppercase mx-2">{{ button_label|default('Save') }}</button>
+            <button class="bg-sky-400 hover:bg-sky-600 rounded-lg h-8 mt-4 mb-2 py-1 px-2 text-white text-12 text-center font-bold uppercase mx-2"><a href="/teams">Annuler</a></button>
         </div>
     {{ form_end(form) }}
 </div>
