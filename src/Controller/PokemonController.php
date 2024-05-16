@@ -31,8 +31,6 @@ class PokemonController extends AbstractController
 
         $pokemon = $this->entityManager->getRepository(Pokemon::class)->findOneBy(['pokedex_id' => $pokemon_id]);
 
-        dump($pokemon);
-
         return $this->render('pokemon/index.html.twig', [
             'pokemon' => $pokemon,
             'prevolutions' => $resultPrevo,
