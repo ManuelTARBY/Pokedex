@@ -22,8 +22,8 @@
             <h1 class="text-white text-center pl-2 text-xl">{{ team.name }}</h1><br>
             <div class="grid grid-cols-3 lg:grid-cols-6">
                 {% for pokemon in team.PokemonAsTeam %}
-                    <div class="flex h-36 relative">
-                        <div class="flex text-white justify-center space-x-2">
+                    <div class="flex h-36 justify-center relative">
+                        <div class="flex text-white space-x-2">
                             <div class="hidden lg:block">#{{ pokemon.pokedexId }}</div><div>{{ pokemon.NameFr }}</div>
                         </div>
                         <a href="/pokemon/{{ pokemon.pokedexId }}"><img src="{{ pokemon.SpriteRegular }}" class="h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></a>

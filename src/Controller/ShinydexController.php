@@ -25,7 +25,6 @@ class ShinydexController extends AbstractController
         $generations = $this->entityManager->getRepository(Generation::class)->findAll();
 
         $storage = [];
-
         
         $user = $this->getUser();
 
