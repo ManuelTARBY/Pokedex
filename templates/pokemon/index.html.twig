@@ -3,23 +3,21 @@
 {% block title %}Fiche Pokédex - {{ pokemon.NameFr }}{% endblock %}
 
 {% block body %}
-<div class="w-11/12 lg:w-8/12 mx-auto mt-24">
-    <div class="grid grid-row lg:grid-cols-2 bg-neutral-600 rounded-lg">
-        <div class="w-60 mx-auto">
-            <img class="w-100 h-auto" src="{{ pokemon.SpriteRegular }}">
-        </div>
-        <div class="my-auto text-white">
-            <div class="flex justify-center lg:justify-start text-2xl">{{ pokemon.NameFr }}</div>
-            <div class="bg-sky-400 h-px w-10/12 mx-auto lg:w-full"></div>
-            <div class="flex justify-center lg:justify-start"><div>#{{ pokemon.PokedexId }} {{pokemon.NameEn}}</div>&nbsp;-&nbsp;<div>{{pokemon.NameJp}}</div></div>
-            <div class="flex justify-center lg:justify-start">
+<div class="lg:flex lg:justify-around w-11/12 mx-auto mt-24">
+    <div class="bg-neutral-600 rounded-lg mb-2 lg:mb-0">
+        <img class="w-80 mx-auto" src="{{ pokemon.SpriteRegular }}">
+        <div class="text-white mt-4">
+            <div class="flex justify-center text-2xl">{{ pokemon.NameFr }}</div>
+            <div class="bg-sky-400 h-px w-10/12 mx-auto"></div>
+            <div class="flex justify-center"><div>#{{ pokemon.PokedexId }} {{pokemon.NameEn}}</div>&nbsp;-&nbsp;<div>{{pokemon.NameJp}}</div></div>
+            <div class="flex justify-center pb-2">
             {% for type in pokemon.PokemonHasType %}
-                <div class="flex justify-center"><img class="h-8 m-2" src="{{type.Logo}}"></div>
+                <div class="flex justify-center"><img class="m-2" src="{{type.Logo}}"></div>
             {% endfor %}
             </div>
         </div>
     </div>
-    <div class="bg-neutral-600 rounded-lg mt-2 text-white pb-5">
+    <div class="bg-neutral-600 rounded-lg text-white pb-5 mx-auto lg:w-2/3">
         <div class="flex justify-center pt-5">GÉNÉRATION</div>
         <div class="flex justify-center">{{pokemon.Generation.Number}}</div>
         <div class="flex justify-center mt-5">CATÉGORIE</div>
