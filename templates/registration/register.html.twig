@@ -14,9 +14,9 @@
             {{ form_widget(registrationForm.email, {'attr': {'class': 'bg-neutral-800 h-8 w-full border-black rounded-lg text-white text-22 mt-1 px-2', 'minlength':"3", 'maxlength':"180"}}) }}
             {{ form_errors(registrationForm.email) }}
         </div>
-        <div class="mt-2 w-full">
-            {{ form_widget(registrationForm.password, {'attr': {'class': 'text-white'}}) }} 
-            {{ form_errors(registrationForm.password, {'attr': {'class': 'text-white'}}) }}
+        <div class="text-white mt-2 w-full">
+            {{ form_widget(registrationForm.password) }}
+            {{ form_errors(registrationForm.password) }}
         </div>
         <button type="submit" class="bg-sky-400 hover:bg-sky-600 w-5/12 rounded-lg h-8 mt-4 mb-2 text-white text-22 text-center font-bold uppercase">CRÉER UN COMPTE</button>
         <br>
