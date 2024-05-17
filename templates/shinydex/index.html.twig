@@ -31,15 +31,18 @@
                 <div class="w-full h-full bg-gray-200 absolute"></div>
                 <div class="h-full bg-sky-400 absolute" id="dynamicWidth"></div>
             </div>
-    <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 m-8">
+    <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 m-1">
         {% for pokemon in pokemons %}
-        <div class="pokemon h-36 text-white relative" value="{{ pokemon.generation.id }}">
+        {% set captured = capturedPokemons[pokemon.getId()] is defined %}{% if captured %}
+            <div class="pokemon h-36 text-white relative  bg-gradient-to-t from-sky-400 m-1 rounded-xl" value="{{ pokemon.generation.id }}">
             <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
-            {% set captured = capturedPokemons[pokemon.getId()] is defined %}
+            
             <a href="/pokemon/{{pokemon.PokedexId}}">
-            {% if captured %}
             <img src="{{ pokemon.SpriteShiny }}" class="h-20 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:h-32 duration-300">
             {% else %}
+            <div class="pokemon h-36 text-white relative" value="{{ pokemon.generation.id }}">
+            <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
+            <a href="/pokemon/{{pokemon.PokedexId}}">
             <img src="{{ pokemon.SpriteRegular }}" class="filter grayscale h-20 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:h-32 duration-300">
             {% endif %}
             </a>
