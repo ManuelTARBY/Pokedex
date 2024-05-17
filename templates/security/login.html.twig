@@ -5,6 +5,9 @@
 {% block body %}
 <div class="flex justify-center rounded-lg bg-neutral-600 mt-24 mx-auto w-11/12 lg:w-6/12 pt-2 pb-1">
     <form method="post">
+        <div class="addw-full">
+            <h1 class="flex justify-center text-white text-2xl font-bold ">CONNEXION</h1>
+        </div>
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
@@ -16,13 +19,13 @@
         {% endif %}
 
         <div class="mt-2 w-full">
-            <label class="text-white pl-2 text-26" for="email">Email :</label><br>
+            <label class="text-white pl-3 text-26" for="email">Email :</label><br>
             <div class="flex justify-center">
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="bg-neutral-800 h-8 w-11/12 border-black rounded-lg text-white text-22 mt-1 px-2" autocomplete="email" required autofocus>
             </div>
         </div>
         <div class="mt-2 w-full">
-            <label class="text-white pl-2 text-26" for="inputPassword">Mot de passe :</label>
+            <label class="text-white pl-3 text-26" for="inputPassword">Mot de passe :</label>
             <div class="flex justify-center">
             <input type="password" name="password" id="inputPassword" class="bg-neutral-800 h-8 w-11/12 border-black rounded-lg text-white text-22 mt-1 px-2" autocomplete="current-password" required>
             </div>
