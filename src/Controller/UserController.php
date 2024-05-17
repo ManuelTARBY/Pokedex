@@ -66,25 +66,16 @@ class UserController extends AbstractController
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user): Response
-    {
-        return $this->render('user/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager, $id): Response
     {
-        if ($this->getUser()->getId() == $id){
+        if ($this->getUser()->getId() == $id or in_array("ROLE_ADMIN", ($this->getUser()->getRoles()))){
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
 
@@ -110,7 +101,6 @@ class UserController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
         }
-
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_user_gestion', [], Response::HTTP_SEE_OTHER);
     }
 }

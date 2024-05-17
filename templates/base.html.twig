@@ -54,11 +54,11 @@
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}">connexion</a>
         {% endif %}
     </div>
-    <body>
+    <body class="">
         {% block body %}{% endblock %}
     </body>
-    <footer>
-        <div class="text-center text-sm bg-red-600 overflow-hidden bottom-O w-full mt-5"> © Tous droits réservés à Nintendo </div>
+    <footer class="{#{{ ("pokedex" in currentPath) ? '' : 'absolute bottom-0 w-full' }}#}">
+        <div class="text-center text-sm bg-red-600 overflow-hidden w-full mt-5"> © Tous droits réservés à Nintendo </div>
     </footer>
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
