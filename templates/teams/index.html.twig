@@ -26,7 +26,7 @@
                         <div class="flex text-white space-x-2">
                             <div class="hidden lg:block">#{{ pokemon.pokedexId }}</div><div>{{ pokemon.NameFr }}</div>
                         </div>
-                        <a href="/pokemon/{{ pokemon.pokedexId }}"><img src="{{ pokemon.SpriteRegular }}" class="h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></a>
+                        <a href="/pokemon/{{ pokemon.pokedexId }}"><img src="{{ pokemon.SpriteRegular }}" class="h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:h-32 duration-300"></a>
                     </div>
                 {% endfor %}
             </div>
