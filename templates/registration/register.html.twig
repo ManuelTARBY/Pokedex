@@ -3,26 +3,39 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <div class="flex justify-center rounded-lg bg-neutral-600 mt-24 mx-auto w-4/12 pt-2 pb-1">
+    <div class="flex justify-center bg-neutral-600 rounded-lg w-11/12 lg:w-6/12 mt-24 mx-auto">
         {{ form_start(registrationForm) }}
         <div class="mt-2 w-full">
-            <label class="text-white pl-2 text-26" for="pseudo">Pseudo :</label><br>
-            {{ form_widget(registrationForm.pseudo, {'attr': {'class': 'bg-neutral-800 h-8 w-full border-black rounded-lg text-white text-22 mt-1 px-2', 'minlength':"3", 'maxlength':"45"}}) }}
+            <label class="text-white pl-2 text-26" for="pseudo">Pseudo :</label>
+            <div class="flex justify-center">
+            {{ form_widget(registrationForm.pseudo, {'attr': {'class': 'bg-neutral-800 h-8 w-11/12 border-black rounded-lg text-white text-22 mt-1 px-2', 'minlength':"3", 'maxlength':"45"}}) }}
+            </div>
         </div>
         <div class="mt-2 w-full">
             <label class="text-white pl-2 text-26" for="email">Email :</label><br>
-            {{ form_widget(registrationForm.email, {'attr': {'class': 'bg-neutral-800 h-8 w-full border-black rounded-lg text-white text-22 mt-1 px-2', 'minlength':"3", 'maxlength':"180"}}) }}
+            <div class="flex justify-center">
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'bg-neutral-800 h-8 w-11/12 border-black rounded-lg text-white text-22 mt-1 px-2', 'minlength':"3", 'maxlength':"180"}}) }}
+            </div>
+            <div class="flex justify-center">
             {{ form_errors(registrationForm.email) }}
+            </div>
         </div>
         <div class="text-white mt-2 w-full">
+            <div class="flex justify-center">
             {{ form_widget(registrationForm.password) }}
+            </div>
+            <div class="flex justify-center">
             {{ form_errors(registrationForm.password) }}
+            </div>
         </div>
-        <button type="submit" class="bg-sky-400 hover:bg-sky-600 w-5/12 rounded-lg h-8 mt-4 mb-2 text-white text-22 text-center font-bold uppercase">CRÉER UN COMPTE</button>
-        <br>
+        <div class="flex justify-center">
+        <button type="submit" class="btn text-xl text-white bg-sky-400 hover:bg-sky-600 rounded-lg w-60 m-5 text-center">CRÉER UN COMPTE</button>
+        </div>
+        <div class="flex justify-center pb-4">
         <a class=" text-white hover:text-sky-600 text-center font-bold" href="/login">
             Déjà un compte ? connectez-vous ici 
         </a>
+        </div>
         {{ form_errors(registrationForm) }}
         {{ form_end(registrationForm) }}
     </div>

@@ -26,10 +26,10 @@
         </div>
         <div class="hidden lg:flex">
         {% if is_granted('ROLE_USER') %}
-            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/user">{{app.user.pseudo}}</a>
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/user"><i class="fa-solid fa-user fa-xs"></i>  {{app.user.pseudo}}</a>
             <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/logout">déconnexion</a>
         {% else %}
-            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_register')}}">inscription</a>
+            <a class="text-white bg-sky-400 my-5 mx-4 p-2 rounded-lg hover:text-white hover:bg-sky-600" href="{{path('app_register')}}">inscription</a>
             <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}">connexion</a>
         {% endif %}
         </div>
@@ -45,15 +45,13 @@
         {% if is_granted ("ROLE_ADMIN") %}
         <div class="my-5"><a href="" class="text-black no-underline hover:text-white">gestion</a></div>
         {% endif %}
-        <div class="my-5">
         {% if is_granted('ROLE_USER') %}
-            <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_teams_index')}}">{{app.user.pseudo}}</a>
+            <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_teams_index')}}"><i class="fa-solid fa-user fa-xs"></i>  {{app.user.pseudo}}</a>
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/logout">déconnexion</a>
         {% else %}
-            <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_register')}}">inscription</a>
+            <a class="text-white bg-sky-400 m-5 p-2 rounded-lg hover:text-white hover:bg-sky-600" href="{{path('app_register')}}">inscription</a>
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}">connexion</a>
         {% endif %}
-        </div>
     </div>
     <body>
         {% block body %}{% endblock %}

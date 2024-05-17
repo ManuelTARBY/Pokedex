@@ -3,8 +3,8 @@
 {% block title %}Fiche Pokédex - {{ pokemon.NameFr }}{% endblock %}
 
 {% block body %}
-<div class="lg:flex lg:justify-around w-11/12 mx-auto mt-24">
-    <div class="bg-neutral-600 rounded-lg mb-2 lg:mb-0">
+<div class="lg:flex lg:justify-around mt-24">
+    <div class="bg-neutral-600 rounded-lg mb-2 lg:mb-0 mx-5">
         <img class="w-80 mx-auto" src="{{ pokemon.SpriteRegular }}">
         <div class="text-white mt-4">
             <div class="flex justify-center text-2xl">{{ pokemon.NameFr }}</div>
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="bg-neutral-600 rounded-lg text-white pb-5 mx-auto lg:w-2/3">
+    <div class="bg-neutral-600 rounded-lg text-white pb-5 mx-5 lg:w-2/3">
         <div class="flex justify-center pt-5">GÉNÉRATION</div>
         <div class="flex justify-center">{{pokemon.Generation.Number}}</div>
         <div class="flex justify-center mt-5">CATÉGORIE</div>

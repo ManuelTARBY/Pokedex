@@ -27,7 +27,7 @@ function getPokedexByType(pokemons, poketypes, types) {
         }
         // Contruit le code HTML qui sera inséré à la place de l'ancien pour reconstituer le tableau filtré 
         var contenuHTML = `
-        <table class="w-11/12 border-separate border-spacing-1">
+        <table class="w-11/12 border-separate border-spacing-1 pb-5">
         <tr class="bg-neutral-400 h-10">
         <th>Numéro</th>
         <th>Nom</th>
@@ -77,7 +77,7 @@ function getPokedexByGeneration(pokemons, generations) {
         }
         // Contruit le code HTML qui sera inséré à la place de l'ancien pour reconstituer le tableau filtré 
         var contenuHTML = `
-        <table class="w-11/12 border-separate border-spacing-1">
+        <table class="w-11/12 border-separate border-spacing-1 pb-5">
         <tr class="bg-neutral-400 h-10">
         <th>Numéro</th>
         <th>Nom</th>
@@ -120,7 +120,7 @@ function getPokedexByName(pokemons) {
         selectElement.selectedIndex = 0;
         // Contruit le code HTML qui sera inséré à la place de l'ancien pour reconstituer le tableau filtré 
         var contenuHTML = `
-                    <table class="w-11/12 border-separate border-spacing-1">
+                    <table class="w-11/12 border-separate border-spacing-1 pb-5">
                     <tr class="bg-neutral-400 h-10">
                     <th>Numéro</th>
                     <th>Nom</th>
