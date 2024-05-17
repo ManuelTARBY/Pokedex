@@ -25,8 +25,10 @@
                     <td class="border text-center">{{ user.email }}</td>
                     <td class="border text-center">{{ user.roles ? user.roles|json_encode : '' }}</td>
                     <td class="border text-center">
-                        <a href="{{ path('app_user_show', {'id': user.id}) }}" class="bg-sky-400 rounded-lg h-8 mt-4 mb-4 mx-2 py-1 px-1 hover:bg-sky-600 text-white text-sm text-center font-bold uppercase">edit</a>
-                        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="bg-red-600 rounded-lg h-8 mt-4 mb-4 mx-2 py-1 px-1 hover:bg-red-800 text-white text-sm text-center font-bold uppercase">del</a>
+                        <div class="m-5">
+                            <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-xl text-white bg-sky-400 hover:bg-sky-600 rounded-lg text-center">Editer le compte</a>  
+                        </div>
+                        {{ include('user/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}

@@ -5,9 +5,8 @@
 {% block body %}
     <div class="bg-neutral-600 rounded-lg w-11/12 md:w-5/12 mt-24 mx-auto pt-2 pb-1">
         {{ include('user/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
-        <div class="text-xl text-white bg-gray-400 hover:bg-gray-600 rounded-lg mx-5 text-center">
+        <div class="text-xl text-white bg-gray-200 hover:bg-gray-400 rounded-lg mx-5 mb-4 text-center">
             <a href="{{ path('app_user_index') }}">Annuler</a>
         </div>
-        {{ include('user/_delete_form.html.twig') }}
     </div>
 {% endblock %}
