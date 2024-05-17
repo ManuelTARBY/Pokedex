@@ -19,9 +19,11 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
+                'label' => 'Email :',
                 'attr' => ['class'=>'bg-neutral-800 h-8 w-11/12 border-black rounded-lg color-white text-22 mt-1 px-2'],
             ])
             ->add('pseudo', TextType::class, [
+                'label' => 'Pseudo :',
                 'attr' => ['class'=>'bg-neutral-800 h-8 w-11/12 border-black rounded-lg color-white text-22 mt-1 px-2'],
             ])
             ->add('password', RepeatedType::class, [
