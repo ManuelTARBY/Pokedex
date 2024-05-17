@@ -6,15 +6,18 @@
     <div class="flex justify-center bg-neutral-600 rounded-lg w-11/12 lg:w-6/12 mt-24 mx-auto">
         {{ form_start(registrationForm) }}
         <div class="mt-2 w-full">
-            <label class="text-white pl-2 text-26" for="pseudo">Pseudo :</label>
+            <h1 class="flex justify-center text-white text-2xl font-bold ">INSCRIPTION</h1>
+        </div>
+        <div class="mt-2 w-full">
+            <label class="text-white text-26 ml-4" for="pseudo">Pseudo :</label>
             <div class="flex justify-center">
             {{ form_widget(registrationForm.pseudo, {'attr': {'class': 'bg-neutral-800 h-8 w-11/12 border-black rounded-lg text-white text-22 mt-1 px-2', 'minlength':"3", 'maxlength':"45"}}) }}
             </div>
         </div>
         <div class="mt-2 w-full">
-            <label class="text-white pl-2 text-26" for="email">Email :</label><br>
+            <label class="text-white text-26 ml-4" for="email">Email :</label><br>
             <div class="flex justify-center">
-            {{ form_widget(registrationForm.email, {'attr': {'class': 'bg-neutral-800 h-8 w-11/12 border-black rounded-lg text-white text-22 mt-1 px-2', 'minlength':"3", 'maxlength':"180"}}) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'bg-neutral-800 h-8 w-11/12 border-black rounded-lg text-white text-22 mt-1', 'minlength':"3", 'maxlength':"180"}}) }}
             </div>
             <div class="flex justify-center">
             {{ form_errors(registrationForm.email) }}

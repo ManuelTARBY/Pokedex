@@ -13,24 +13,25 @@
     <nav class="bg-red-600 overflow-hidden fixed w-full top-0 z-50 flex uppercase font-bold justify-between h-20">
         <div class="flex">
             <div class="border-r-2">
-                <a href="/"><img id="logo" src="/images/LogoPokeball.png" alt="logo" class="h-16 w-16 mt-2 ml-10 mr-10"></a>
+                <a href="/"><img id="logo" src="https://i.pinimg.com/originals/3f/53/20/3f5320bda51f29d0e6ef7a61d030c234.png" alt="logo" class="h-16 w-16 mt-2 ml-10 mr-10 animate-none hover:animate-spin "></a>
             </div>
             <ul class="hidden lg:flex">
-                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/pokedex" class="text-black no-underline hover:text-white">pokedex</a></li>
-                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/shinydex" class="text-black no-underline hover:text-white">shinydex</a></li>
-                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/teams" class="text-black no-underline hover:text-white">teams</a></li>
+                {% set currentPath = app.request.uri %}
+                <li class="my-8 px-10 list-none flex items-center border-r border-white "><a href="/pokedex" class="{{ ("pokedex" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">pokedex</a></li>
+                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/shinydex" class="{{ ("shinydex" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">shinydex</a></li>
+                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/teams" class="{{ ("teams" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">teams</a></li>
                 {% if is_granted ("ROLE_ADMIN") %}
-                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/user/gestion" class="text-black no-underline hover:text-white">gestion</a></li>
+                    <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/user/gestion" class="{{ ("gestion" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">gestion</a></li>
                 {% endif %}
             </ul>
         </div>
         <div class="hidden lg:flex">
         {% if is_granted('ROLE_USER') %}
-            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/user"><i class="fa-solid fa-user fa-xs"></i>  {{app.user.pseudo}}</a>
-            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/logout">déconnexion</a>
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/user"><i class="fa-solid fa-user fa-xs"></i> {{app.user.pseudo}}</a>
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket rotate-180 transform translate-y-px"></i> déconnexion</a>
         {% else %}
-            <a class="text-white bg-sky-400 my-5 mx-4 p-2 rounded-lg hover:text-white hover:bg-sky-600" href="{{path('app_register')}}">inscription</a>
-            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}">connexion</a>
+            <a class="text-white bg-sky-400 my-5 mx-4 p-2 rounded-lg hover:text-white hover:bg-sky-600" href="{{path('app_register')}}"><i class="fa-regular fa-clipboard"></i> inscription</a>
+            <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}"><i class="fa-solid fa-user fa-xs"></i> connexion</a>
         {% endif %}
         </div>
         
@@ -53,11 +54,11 @@
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}">connexion</a>
         {% endif %}
     </div>
-    <body>
+    <body class="">
         {% block body %}{% endblock %}
     </body>
-    <footer>
-        <div class="text-center text-sm bg-red-600 overflow-hidden bottom-O w-full mt-5"> © All right reserved to Nintendo </div>
+    <footer class="{#{{ ("pokedex" in currentPath) ? '' : 'absolute bottom-0 w-full' }}#}">
+        <div class="text-center text-sm bg-red-600 overflow-hidden w-full mt-5"> © Tous droits réservés à Nintendo </div>
     </footer>
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
