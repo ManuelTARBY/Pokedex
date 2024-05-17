@@ -21,7 +21,7 @@ class PokemonController extends AbstractController
     {
         $connection = $this->entityManager->getConnection();
 
-        $sql = 'SELECT pokemon.name_fr, pokemon.pokedex_id FROM pokemon 
+        $sql = 'SELECT pokemon.name_fr, pokemon.pokedex_id, pokemon.sprite_regular FROM pokemon 
         JOIN pokemon_pokemon ON pokemon.id = pokemon_pokemon.pokemon_source
         WHERE pokemon_pokemon.pokemon_target = (SELECT pokemon.id
         FROM pokemon WHERE pokemon.pokedex_id = ' . $pokemon_id . ')';
