@@ -30,10 +30,22 @@ class PokemonController extends AbstractController
         $resultPrevo = $statement->fetchAllAssociative();
 
         $pokemon = $this->entityManager->getRepository(Pokemon::class)->findOneBy(['pokedex_id' => $pokemon_id]);
+        
+        $Id = $pokemon->getId();
+
+        $sql = "
+        SELECT t.name FROM type t JOIN type_pokemon tp ON t.id = tp.type_id WHERE tp.pokemon_id = '$Id'
+        ";
+
+        $statement = $connection->executeQuery($sql);
+        $poketypes = $statement->fetchOne();
+
+        dump($poketypes);
 
         return $this->render('pokemon/index.html.twig', [
             'pokemon' => $pokemon,
             'prevolutions' => $resultPrevo,
+            'pokeTypes' => $poketypes,
         ]);
     }
 }

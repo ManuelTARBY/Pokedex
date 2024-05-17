@@ -7,6 +7,60 @@
     padding: 0;
 }
 
+.Acier {
+    background-color: #60a1b8;
+}
+.Combat {
+    background-color: #ff8000;
+}
+.Dragon {
+    background-color: #5061e1;
+}
+.Eau {
+    background-color: #2980ef;
+}
+.Électrik {
+    background-color: #fac000;
+}
+.Fée {
+    background-color: #ef71ef;
+}
+.Feu {
+    background-color: #e62829;
+}
+.Glace {
+    background-color: #3fd8ff;
+}
+.Insecte {
+    background-color: #91a119;
+}
+.Normal {
+    background-color: #9fa19f;
+}
+.Plante {
+    background-color: #3fa129;
+}
+.Poison {
+    background-color: #9141cb;
+}
+.Psy {
+    background-color: #ef4179;
+}
+.Roche {
+    background-color: #afa981;
+}
+.Sol {
+    background-color: #915121;
+}
+.Spectre {
+    background-color: #704170;
+}
+.Ténèbres {
+    background-color: #50413f;
+}
+.Vol {
+    background-color: #81b9ef;
+}
 /* body {
     background-color: white;
 } */
