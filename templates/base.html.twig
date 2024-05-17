@@ -13,7 +13,8 @@
     <nav class="bg-red-600 overflow-hidden fixed w-full top-0 z-50 flex uppercase font-bold justify-between h-20">
         <div class="flex">
             <div class="border-r-2">
-                <a href="/"><img id="logo" src="https://i.pinimg.com/originals/3f/53/20/3f5320bda51f29d0e6ef7a61d030c234.png" alt="logo" class="h-16 w-16 mt-2 ml-10 mr-10 animate-none hover:animate-spin "></a>
+            {#https://i.pinimg.com/originals/3f/53/20/3f5320bda51f29d0e6ef7a61d030c234.png#}
+                <a href="/"><img id="logo" src="/images/PokeBlue.png" alt="logo" class="h-16 w-16 mt-2 ml-10 mr-10 animate-none hover:animate-spin "></a>
             </div>
             <ul class="hidden lg:flex">
                 {% set currentPath = app.request.uri %}
@@ -30,7 +31,7 @@
             <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/user"><i class="fa-solid fa-user fa-xs"></i> {{app.user.pseudo}}</a>
             <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket rotate-180 transform translate-y-px"></i> déconnexion</a>
         {% else %}
-            <a class="text-white bg-sky-400 my-5 mx-4 p-2 rounded-lg hover:text-white hover:bg-sky-600" href="{{path('app_register')}}"><i class="fa-regular fa-clipboard"></i> inscription</a>
+            <a class="text-white bg-sky-400 my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-sky-600" href="{{path('app_register')}}"><i class="fa-regular fa-clipboard"></i> inscription</a>
             <a class="bg-white my-5 mx-4 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_login')}}"><i class="fa-solid fa-user fa-xs"></i> connexion</a>
         {% endif %}
         </div>
