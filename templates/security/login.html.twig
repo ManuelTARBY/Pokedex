@@ -31,13 +31,13 @@
             value="{{ csrf_token('authenticate') }}"
         >
 
-        <div>
+        <div class="pl-3">
             <input type="checkbox" name="_remember_me">
             <label class="text-white" for="_remember_me">Se souvenir de moi</label>
         </div>
 
         <button class="btn text-xl text-white bg-sky-400 hover:bg-sky-600 rounded-lg w-60 m-5 text-center" type="submit">Se connecter</button><br>
-        <a class=" text-white hover:text-sky-600 text-center font-bold" href="/register">
+        <a class="pl-3 text-white hover:text-sky-600 text-center font-bold" href="/register">
             Pas de compte ? Inscrivez-vous ici 
         </a>
     </form>
