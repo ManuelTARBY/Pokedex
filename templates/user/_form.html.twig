@@ -3,8 +3,8 @@
     <div class="text-xl text-white rounded-lg text-center mx-5 pt-2 pb-1">
         {{ form_widget(form) }}
     </div>
-    <div class="text-xl text-white bg-sky-400 hover:bg-sky-600 rounded-lg m-5 text-center">
-        <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="flex justify-center">
+        <button class="text-xl text-white bg-sky-400 hover:bg-sky-600 rounded-lg w-full m-5 text-center">{{ button_label|default('Save') }}</button>
     </div>
 </div>
 {{ form_end(form) }}
