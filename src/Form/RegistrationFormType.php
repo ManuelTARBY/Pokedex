@@ -38,7 +38,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
                 'invalid_message' => 'The password fields must match.',
-                'options' => ['attr' => ['class'=>'bg-neutral-800 h-8 w-full border-black rounded-lg color-white text-22 mt-1 px-2']],
+                'options' => ['attr' => ['class'=>'bg-neutral-800 h-8 w-11/12 border-black rounded-lg color-white text-22 mt-1 px-2']],
                 'required' => true,
                 'first_options'  => ['label' => 'Mot de passe :', 'label_attr' => ['class'=>"text-white pl-2 text-26"]],
                 'second_options' => ['label' => 'Confirmer mot de passe :', 'label_attr' => ['class'=>"text-white pl-2 text-26"]],
