@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Console\Output\OutputInterface;
 
 #[Route('/caught')]
 class CaughtController extends AbstractController
@@ -30,11 +31,16 @@ class CaughtController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $dateDuJour = new \DateTime();
-            $caught->setDateCapture($dateDuJour);
-            $caught->setUser($this->getUser());
-            $entityManager->persist($caught);
-            $entityManager->flush();
+                $lePokemon = $form->getData()->getPokemon();
+                $result = $entityManager->getRepository(Caught::class)->findOneBy(['pokemon' => $lePokemon, 'user' => $this->getUser()]);
+                if (!$result) {
+
+                    $dateDuJour = new \DateTime();
+                    $caught->setDateCapture($dateDuJour);
+                    $caught->setUser($this->getUser());
+                    $entityManager->persist($caught);
+                    $entityManager->flush();
+                }
 
             return $this->redirectToRoute('app_shinydex', [], Response::HTTP_SEE_OTHER);
         }

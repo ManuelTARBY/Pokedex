@@ -28,16 +28,16 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez saisir un mot de passe',
                     ]),
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'Les champs mot de passe doivent contenir des mots de passe identiques.',
                 'options' => ['attr' => ['class'=>'bg-neutral-800 h-8 w-11/12 border-black rounded-lg color-white text-22 mt-1 px-2']],
                 'required' => true,
                 'first_options'  => ['label' => 'Mot de passe :', 'label_attr' => ['class'=>"text-white pl-2 text-26"]],
