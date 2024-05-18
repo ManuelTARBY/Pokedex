@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Error;
+use App\Entity\Team;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,8 +32,9 @@ class UserController extends AbstractController
     public function gestion(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
     {
         if ($this->getUser() != null and in_array("ROLE_ADMIN", ($this->getUser()->getRoles()))){
-            $user = new User();
             $users = $userRepository->findAll();
+            $teams = $entityManager->getRepository(Team::class)->findAll();
+            $user = new User();
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
 
@@ -47,6 +48,7 @@ class UserController extends AbstractController
                 'user' => $user,
                 'users' => $users,
                 'form' => $form,
+                'teams' => $teams
             ]);
         }else{
             return $this->render('user/not_allowed.html.twig');
