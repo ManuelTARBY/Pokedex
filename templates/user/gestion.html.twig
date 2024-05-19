@@ -7,10 +7,10 @@
         <div>
             <button id="btn-select" type="button" onclick="switchGestion()" class="bg-sky-400 rounded-lg h-8 m-2 px-2 py-1 hover:bg-sky-600 text-white text-12 text-center font-bold uppercase">Aller vers la gestion des Teams</button>
         </div>
-            <div class="flex justify-center items-center h-8 mt-1 mb-2 text-white">
-                <h1 id="titre" class="text-3xl pt-8">Gestion des utilisateurs</h1>
+            <div class="flex justify-center items-center h-16 mt-1 mb-2 text-white">
+                <h1 id="titre" class="text-3xl">Gestion des utilisateurs</h1>
             </div>
-            <table id="table-users" class="mx-8 my-10 border text-white pl-2 text-xl">
+            <table id="table-users" class="mx-8 mt-4 mb-10 border text-white pl-2 text-xl">
                 <thead>
                     <tr>
                         <th scope="col" class="border">Identifiant</th>
@@ -27,9 +27,10 @@
                         <td class="border text-center">{{ user.pseudo }}</td>
                         <td class="border text-center">{{ user.email }}</td>
                         <td class="border text-center">{{ user.roles ? user.roles|json_encode : '' }}</td>
-                        <td class="border text-center">
-                            <div class="m-5">
-                                <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-xl text-white bg-sky-400 hover:bg-sky-600 rounded-lg text-center">Editer le compte</a>  
+                        <td class="border text-center pt-3 pb-3">
+                            <div class="">
+                                <button onclick="redirectTo('{{ path('app_user_edit', {'id': user.id}) }}')" class="bg-sky-400 hover:bg-sky-600 w-10/12 rounded-lg h-8 m-2 py-1 px-2 text-white text-12 text-center items-center font-bold">Editer le compte</button>
+                                {# <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="text-xl text-white bg-sky-400 hover:bg-sky-600 rounded-lg text-center">Editer le compte</a>   #}
                             </div>
                             {{ include('user/_delete_form.html.twig') }}
                         </td>
@@ -42,7 +43,7 @@
                 </tbody>
             </table>
             
-            <table id="table-teams" class="mx-8 my-10 border text-white pl-2 text-xl hidden">
+            <table id="table-teams" class="mx-8 mt-4 mb-10 border text-white pl-2 text-xl hidden">
                 <thead>
                     <tr>
                         <th scope="col" class="border">Identifiant</th>
@@ -56,8 +57,8 @@
                         <td class="border text-center py-2">{{ team.id }}</td>
                         <td class="border text-center">{{ team.name }}</td>
                         <td class="border text-center">
-                            <div class="m-5">
-                                <a href="{{ path('app_teams_edit', {'id': team.id}) }}" class="text-xl text-white bg-sky-400 hover:bg-sky-600 rounded-lg text-center">Editer la team</a>  
+                            <div class="">
+                                <button onclick="redirectTo('{{ path('app_teams_edit', {'id': team.id})}}')" class="bg-sky-400 hover:bg-sky-600 w-5/12 rounded-lg h-8 m-2 py-1 px-2 text-white text-12 text-center font-bold">Editer la team</button>  
                             </div>
                             {{ include('teams/_delete_form.html.twig') }}
                         </td>
@@ -92,6 +93,11 @@
                 blocTeams.classList.remove('hidden');
                 titre.innerHTML = "Gestion des teams";
             }
+        }
+    </script>
+    <script>
+        function redirectTo(url) {
+            window.location.href = url;
         }
     </script>
 {% endblock %}
