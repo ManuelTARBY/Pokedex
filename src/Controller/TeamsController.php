@@ -40,7 +40,6 @@ class TeamsController extends AbstractController
                 $team->addPokemonAsTeam(($form->get('Pokemon_'.$i)->getData()));
                 $entityManager->persist($team);
             }
-            dump($team);
             $entityManager->flush();
             return $this->redirectToRoute('app_teams_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -60,30 +59,34 @@ class TeamsController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_teams_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Team $team, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Team $team, $id, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(TeamType::class, $team);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            for ($i=1; $i<7; $i++){
-                if ($team->getPokemonAsTeam()[$i-1]){
-                    $team->removePokemonAsTeam($team->getPokemonAsTeam()[$i-1]);
+        if ($this->getUser()->getId() == $id or in_array("ROLE_ADMIN", ($this->getUser()->getRoles()))){
+            $form = $this->createForm(TeamType::class, $team);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                for ($i=1; $i<7; $i++){
+                    if ($team->getPokemonAsTeam()[$i-1]){
+                        $team->removePokemonAsTeam($team->getPokemonAsTeam()[$i-1]);
+                        $entityManager->persist($team);
+                    }                 
+                }
+                $entityManager->flush();
+                for ($i=1; $i<7; $i++){
+                    $team->addPokemonAsTeam(($form->get('Pokemon_'.$i)->getData()));
                     $entityManager->persist($team);
-                }                 
+                }
+                $entityManager->flush();
+                return $this->redirectToRoute('app_teams_index', [], Response::HTTP_SEE_OTHER);
             }
-            $entityManager->flush();
-            for ($i=1; $i<7; $i++){
-                $team->addPokemonAsTeam(($form->get('Pokemon_'.$i)->getData()));
-                $entityManager->persist($team);
-            }
-            $entityManager->flush();
-            return $this->redirectToRoute('app_teams_index', [], Response::HTTP_SEE_OTHER);
-        }
 
-        return $this->render('teams/edit.html.twig', [
-            'team' => $team,
-            'form' => $form,
-        ]);
+            return $this->render('teams/edit.html.twig', [
+                'team' => $team,
+                'form' => $form,
+            ]);
+        }else{
+            return $this->render('user/not_allowed.html.twig');
+        }
     }
 
     #[Route('/{id}', name: 'app_teams_delete', methods: ['POST'])]

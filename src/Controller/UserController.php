@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Caught;
+use App\Entity\Team;
 use App\Entity\Error;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -95,9 +97,21 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, User $user, $id, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->get('_token'))) {
+            $userTeams = $entityManager->getRepository(Team::class)->findBy(['user'=>$id]);
+            $t = count($userTeams);
+            $userCaught = $entityManager->getRepository(Caught::class)->findBy(['user'=>$id]);
+            $c = count($userCaught);
+
+            for ($i=0; $i<$t; $i++){
+                $entityManager->remove($userTeams[$i]);
+            }
+            for ($i=0; $i<$c; $i++){
+                $entityManager->remove($userCaught[$i]);
+            }
+            
             $entityManager->remove($user);
             $entityManager->flush();
         }
