@@ -21,7 +21,7 @@ use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Cette adresse mail est déjà utilisée')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     #[Assert\Email(
-        message: 'Please enter a valid email address.'
+        message: "Merci d'entrer une adresse mail valide."
     )]
     private ?string $email = null;
 
@@ -48,6 +48,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 45)]
+    #[Assert\Length(
+        max: 45,
+        maxMessage: "Le pseudo ne peut pas dépasser {{ limit }} caractères."
+    )]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z0-9]+$/",
+        message: "Le pseudo ne peut contenir que des lettres et des chiffres."
+    )]
     private ?string $pseudo = null;
 
     #[ORM\OneToMany(targetEntity: Caught::class, mappedBy: 'user', orphanRemoval: true)]

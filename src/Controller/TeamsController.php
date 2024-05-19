@@ -50,12 +50,21 @@ class TeamsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_teams_show', methods: ['GET'])]
-    public function show(Team $team): Response
+    #[Route('/{id}', name: 'app_teams_show', methods: ['GET', 'POST'])]
+    public function show(Team $team, Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('teams/show.html.twig', [
-            'team' => $team,
-        ]);
+        if ($request->isMethod('GET')) {
+            return $this->render('teams/show.html.twig', [
+                'team' => $team,
+            ]);
+        }
+        else{
+            if ($this->isCsrfTokenValid('delete'.$team->getId(), $request->getPayload()->get('_token'))) {
+                $entityManager->remove($team);
+                $entityManager->flush();
+            }
+            return $this->redirectToRoute('app_teams_index', [], Response::HTTP_SEE_OTHER);
+        }
     }
 
     #[Route('/{id}/edit', name: 'app_teams_edit', methods: ['GET', 'POST'])]
