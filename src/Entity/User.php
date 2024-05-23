@@ -54,6 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     #[Assert\Regex(
         pattern: "/^[a-zA-Z0-9]+$/",
+        match:   true,
         message: "Le pseudo ne peut contenir que des lettres et des chiffres."
     )]
     private ?string $pseudo = null;
