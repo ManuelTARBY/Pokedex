@@ -78,18 +78,23 @@ class UserController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager, $id): Response
-    {
-        if ($this->getUser()->getId() == $id or in_array("ROLE_ADMIN", ($this->getUser()->getRoles()))){
+    {   
+        $actualUserId = $this->getUser()->getId();
+        if ($actualUserId == $id or in_array("ROLE_ADMIN", ($this->getUser()->getRoles()))){
             $form = $this->createForm(UserType::class, $user);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager->flush();
-
-                return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+                if ($actualUserId != $id and in_array("ROLE_ADMIN", ($this->getUser()->getRoles()))){
+                    return $this->redirectToRoute('app_user_gestion', [], Response::HTTP_SEE_OTHER);
+                }else{
+                    return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+                }
             }
             return $this->render('user/edit.html.twig', [
                 'user' => $user,
+                'actualUserId' => $actualUserId,
                 'form' => $form,
             ]);
         }else{

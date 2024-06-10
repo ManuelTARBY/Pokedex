@@ -47,7 +47,7 @@
         <div class="my-5"><a href="/shinydex" class="text-black no-underline hover:text-white">shinydex</a></div>
         <div class="my-5"><a href="/teams" class="text-black no-underline hover:text-white">teams</a></div>
         {% if is_granted ("ROLE_ADMIN") %}
-        <div class="my-5"><a href="" class="text-black no-underline hover:text-white">gestion</a></div>
+        <div class="my-5"><a href="/user/gestion" class="text-black no-underline hover:text-white">gestion</a></div>
         {% endif %}
         {% if is_granted('ROLE_USER') %}
             <a class="bg-white m-5 p-2 border border-black rounded-lg hover:text-white hover:bg-black" href="{{path('app_teams_index')}}"><i class="fa-solid fa-user fa-xs"></i>  {{app.user.pseudo}}</a>
