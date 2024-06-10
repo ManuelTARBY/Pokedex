@@ -47,9 +47,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 45)]
+    #[ORM\Column(length: 30)]
     #[Assert\Length(
-        max: 45,
+        max: 30,
         maxMessage: "Le pseudo ne peut pas dépasser {{ limit }} caractères."
     )]
     #[Assert\Regex(
