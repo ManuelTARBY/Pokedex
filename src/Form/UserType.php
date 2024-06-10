@@ -20,11 +20,11 @@ class UserType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'Email :',
-                'attr' => ['class'=>'bg-neutral-800 h-8 w-full border-black rounded-lg color-white text-22 mt-1 px-2'],
+                'attr' => ['class'=>'bg-neutral-800 h-8 w-full border-black rounded-lg color-white text-22 mt-1 px-2', 'maxlenght' => 60],
             ])
             ->add('pseudo', TextType::class, [
                 'label' => 'Pseudo :',
-                'attr' => ['class'=>'bg-neutral-800 h-8 w-full border-black rounded-lg color-white text-22 mt-1 px-2'],
+                'attr' => ['class'=>'bg-neutral-800 h-8 w-full border-black rounded-lg color-white text-22 mt-1 px-2', 'maxlenght' => 30],
             ])
         ;
     }

@@ -17,11 +17,13 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('pseudo', TextType::class,[
+            ->add('pseudo', TextType::class, [
                 'label' => 'Pseudo',
-                'attr' => ['maxlenght' => 45]
+                'attr' => ['maxlenght' => 30]
             ])
-            ->add('email', TextType::class)
+            ->add('email', TextType::class, [
+                'attr' => ['maxlenght' => 60]
+            ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
