@@ -13,10 +13,18 @@ class ShinydexController extends AbstractController
 {
     private $entityManager;
 
+    /**
+     * Constructeur du controlleur de Shinydex
+     *
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager){
         $this->entityManager = $entityManager;
     }
     
+    /**
+     * Récupère les informations à envoyer à la vue de la page Shinydex
+     */
     #[Route('/shinydex', name: 'app_shinydex')]
     public function index(EntityManagerInterface $entityManager): Response
     {

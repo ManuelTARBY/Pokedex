@@ -14,6 +14,12 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/teams')]
 class TeamsController extends AbstractController
 {
+    /**
+     * Récupère les informations sur les teams et les envoie à la vue de la page des teams
+     *
+     * @param TeamRepository $teamRepository
+     * @return Response
+     */
     #[Route('/', name: 'app_teams_index', methods: ['GET'])]
     public function index(TeamRepository $teamRepository): Response
     {
@@ -28,6 +34,13 @@ class TeamsController extends AbstractController
         }
     }
 
+    /**
+     * Envoie vers le formulaire de création d'une nouvelle équipe
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/new', name: 'app_teams_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -50,23 +63,29 @@ class TeamsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_teams_show', methods: ['GET', 'POST'])]
-    public function show(Team $team, Request $request, EntityManagerInterface $entityManager): Response
-    {
-        if ($request->isMethod('GET')) {
-            return $this->render('teams/show.html.twig', [
-                'team' => $team,
-            ]);
-        }
-        else{
-            if ($this->isCsrfTokenValid('delete'.$team->getId(), $request->getPayload()->get('_token'))) {
-                $entityManager->remove($team);
-                $entityManager->flush();
-            }
-            return $this->redirectToRoute('app_teams_index', [], Response::HTTP_SEE_OTHER);
-        }
-    }
+    // /**
+    //  * 
+    //  */
+    // #[Route('/{id}', name: 'app_teams_show', methods: ['GET', 'POST'])]
+    // public function show(Team $team, Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     if ($request->isMethod('GET')) {
+    //         return $this->render('teams/show.html.twig', [
+    //             'team' => $team,
+    //         ]);
+    //     }
+    //     else{
+    //         if ($this->isCsrfTokenValid('delete'.$team->getId(), $request->getPayload()->get('_token'))) {
+    //             $entityManager->remove($team);
+    //             $entityManager->flush();
+    //         }
+    //         return $this->redirectToRoute('app_teams_index', [], Response::HTTP_SEE_OTHER);
+    //     }
+    // }
 
+       /**
+     * Envoie vers la vue du formulaire d'édition de Team
+     */
     #[Route('/{id}/edit', name: 'app_teams_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Team $team, $id, EntityManagerInterface $entityManager): Response
     {
@@ -98,6 +117,9 @@ class TeamsController extends AbstractController
         }
     }
 
+    /**
+     * Envoie vers la vue du formulaire de suppression de Team
+     */
     #[Route('/{id}', name: 'app_teams_delete', methods: ['POST'])]
     public function delete(Request $request, Team $team, EntityManagerInterface $entityManager): Response
     {

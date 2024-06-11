@@ -27,6 +27,7 @@ class ApiController extends AbstractController
     $this->entityManager = $entityManager;
   }
 
+ 
   #[Route('/pokedex', name: 'api_pokedex')]
   public function getPokedex(): Response
   {

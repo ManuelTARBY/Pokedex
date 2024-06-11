@@ -8,11 +8,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class SubscribeController extends AbstractController
 {
-    #[Route('/subscribe', name: 'app_subscribe')]
-    public function index(): Response
-    {
-        return $this->render('subscribe/index.html.twig', [
-            'controller_name' => 'SubscribeController',
-        ]);
-    }
+    // #[Route('/subscribe', name: 'app_subscribe')]
+    // public function index(): Response
+    // {
+    //     return $this->render('subscribe/index.html.twig', [
+    //         'controller_name' => 'SubscribeController',
+    //     ]);
+    // }
 }

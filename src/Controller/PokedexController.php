@@ -13,10 +13,20 @@ class PokedexController extends AbstractController
     
     private EntityManagerInterface $entityManager;
 
+    /**
+     * Constructeur du controlleur de Pokedex
+     *
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager){
         $this->entityManager = $entityManager;
     }
     
+    /**
+     * Recupère les informations à envoyer à la vue de la page Pokedex
+     *
+     * @return Response
+     */
     #[Route('/pokedex', name: 'app_pokedex')]
     public function index(): Response
     {

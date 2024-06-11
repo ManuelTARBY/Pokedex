@@ -12,10 +12,18 @@ class PokemonController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
 
+    /**
+     * Constructeur du controlleur Pokemon
+     *
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager) {
         $this->entityManager = $entityManager;
     }
     
+    /**
+     * Récupère les informations à envoyer à la vue de la page Pokemon
+     */
     #[Route('/pokemon/{pokemon_id}', name: 'app_pokemon', methods: ['GET'])]
     public function index($pokemon_id): Response
     {

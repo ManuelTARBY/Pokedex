@@ -14,10 +14,20 @@ class HomeController extends AbstractController
     
     private EntityManagerInterface $entityManager;
 
+    /**
+     * Constructeur du controlleur Home
+     *
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager){
         $this->entityManager = $entityManager;
     }
     
+    /**
+     * Récupère les informations à envoyer à la vue de la page Home
+     *
+     * @return Response
+     */
     #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(): Response
     {
