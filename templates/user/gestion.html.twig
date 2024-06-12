@@ -54,10 +54,10 @@
                 <tbody>
                 {% for team in teams %}
                     <tr class="mx-8 mb-6">
-                        <td class="border text-center py-2">{{ team.id }}</td>
+                        <td class="border text-center">{{ team.id }}</td>
                         <td class="border text-center">{{ team.name }}</td>
                         <td class="border text-center">{{ team.getUser().getPseudo() }}</td>
-                        <td class="border text-center">
+                        <td class="border text-center pt-3 pb-3">
                             <div class="">
                                 <button onclick="redirectTo('{{ path('app_teams_edit', {'id': team.id})}}')" class="bg-sky-400 hover:bg-sky-600 w-10/12 rounded-lg h-8 m-2 px-2 text-white text-12 text-center font-bold">Editer la team</button>  
                             </div>
