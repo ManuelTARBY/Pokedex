@@ -29,9 +29,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(length: 60)]
     #[Assert\Email(
         message: "Merci d'entrer une adresse mail valide."
+    )]
+    #[Assert\Length(
+        max: 60,
+        maxMessage: "L'adresse mail ne peut pas dépasser {{ limit }} caractères."
     )]
     private ?string $email = null;
 
