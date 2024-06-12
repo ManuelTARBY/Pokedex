@@ -1,7 +1,7 @@
 <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous certain de vouloir supprimer ce compte ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
     <div class="">
-        <button class="w-10/12 bg-red-600 hover:bg-red-800 rounded-lg h-8 m-2 py-1 px-2 text-white text-12 text-center font-bold">Supprimer le compte</button>
+        <button class="w-10/12 bg-red-600 hover:bg-red-800 rounded-lg h-8 m-2 px-2 text-white text-12 text-center font-bold">Supprimer le compte</button>
     </div>
 </form>
     
