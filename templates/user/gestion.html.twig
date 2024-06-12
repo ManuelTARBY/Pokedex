@@ -1,27 +1,104 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Gestion{% endblock %}
 
 {% block body %}
-    <div class="bg-neutral-600 rounded-lg w-11/12 mx-auto mt-24">
-        <div class="flex justify-center items-center h-8 mt-1 text-white">
-            <h1 class="text-3xl pt-8">Votre Profil</h1>
+    <div class="bg-neutral-600 flex flex-col justify-center rounded-lg w-11/12 mx-auto mt-24">
+        <div>
+            <button id="btn-select" type="button" onclick="switchGestion()" class="bg-sky-400 rounded-lg h-8 m-2 px-2 py-1 hover:bg-sky-600 text-white text-12 text-center font-bold uppercase">Aller vers la gestion des Teams</button>
         </div>
-        <div class="flex justify-between mx-8 my-5 text-white pl-2 text-xl">
-             {% for user in users %}
-                <div>{{ user.id }}</div>
-                <div>{{ user.email }}</div>
-                <div>{{ user.roles ? user.roles|json_encode : '' }}</div>
-                <div>{{ user.pseudo }}</div>
-                <div>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a><br>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </div>
-            {% else %}
-                <tr>
-                    <td colspan="6">no records found</td>
-                </tr>
-            {% endfor %}
-        </div>
+            <div class="flex justify-center items-center h-16 mt-1 mb-2 text-white">
+                <h1 id="titre" class="text-3xl">Gestion des utilisateurs</h1>
+            </div>
+            <table id="table-users" class="mx-8 mt-4 mb-10 border text-white pl-2 text-xl">
+                <thead>
+                    <tr>
+                        <th scope="col" class="border">Identifiant</th>
+                        <th scope="col" class="border">Pseudo</th>
+                        <th scope="col" class="border">Email</th>
+                        <th scope="col" class="border">Roles</th>
+                        <th scope="col" class="border">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr class="mx-8 mb-6">
+                        <td class="border text-center py-2">{{ user.id }}</td>
+                        <td class="border text-center">{{ user.pseudo }}</td>
+                        <td class="border text-center">{{ user.email }}</td>
+                        <td class="border text-center">{{ user.roles ? ('ROLE_ADMIN' in user.roles ? 'Admin' : 'User') : '' }}</td>
+                        <td class="border text-center pt-3 pb-3">
+                            <div class="">
+                                <button onclick="redirectTo('{{ path('app_user_edit', {'id': user.id}) }}')" class="bg-sky-400 hover:bg-sky-600 w-10/12 rounded-lg h-8 m-2 px-2 text-white text-12 text-center items-center font-bold">Editer le compte</button>
+                            </div>
+                            {{ include('user/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">Aucun contenu trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            
+            <table id="table-teams" class="mx-8 mt-4 mb-10 border text-white pl-2 text-xl hidden">
+                <thead>
+                    <tr>
+                        <th scope="col" class="border">Identifiant</th>
+                        <th scope="col" class="border">Nom Team</th>
+                        <th scope="col" class="border">Pseudo</th>
+                        <th scope="col" class="border">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for team in teams %}
+                    <tr class="mx-8 mb-6">
+                        <td class="border text-center py-2">{{ team.id }}</td>
+                        <td class="border text-center">{{ team.name }}</td>
+                        <td class="border text-center">{{ team.getUser().getPseudo() }}</td>
+                        <td class="border text-center">
+                            <div class="">
+                                <button onclick="redirectTo('{{ path('app_teams_edit', {'id': team.id})}}')" class="bg-sky-400 hover:bg-sky-600 w-10/12 rounded-lg h-8 m-2 px-2 text-white text-12 text-center font-bold">Editer la team</button>  
+                            </div>
+                            {{ include('teams/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">Aucun contenu trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        function switchGestion(){
+            const button = document.getElementById('btn-select');
+            const buttonText = button.textContent;
+            const blocUsers = document.getElementById('table-users');
+            const blocTeams = document.getElementById('table-teams');
+            const titre = document.getElementById('titre');
+            if (buttonText === "Aller vers la gestion des Utilisateurs") {
+                button.innerText = "Aller vers la gestion des Teams";
+                blocTeams.classList.add('hidden');
+                blocUsers.classList.remove('hidden');
+                titre.innerHTML = "Gestion des utilisateurs";
+            } else {
+                button.innerText = "Aller vers la gestion des Utilisateurs";
+                blocUsers.classList.add('hidden');
+                blocTeams.classList.remove('hidden');
+                titre.innerHTML = "Gestion des teams";
+            }
+        }
+    </script>
+    <script>
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+    </script>
 {% endblock %}

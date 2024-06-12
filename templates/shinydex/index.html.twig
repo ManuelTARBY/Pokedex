@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ShinydexController!{% endblock %}
+{% block title %}Shinydex{% endblock %}
 
 {% block body %}
 <div class="bg-neutral-600 rounded-lg w-11/12 mx-auto mt-24">
@@ -14,16 +14,13 @@
     </div>
     <div class="flex flex-col md:flex-row items-center md:justify-between md:mx-8 my-5">
         <div class="flex items-center mb-5 md:mb-0">    
-            <a href="/caught/new"><button type="button" class="rounded-full bg-sky-400 p-2 text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                </svg>
-            </button></a>   
-            <span class="text-white mx-5">Ajouter un nouveau Shiny</span>
+            <a type="button" href="/caught/new" class="group rounded-full bg-sky-400 p-2 text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <label class="text-white ml-1 mr-5"><i class="fa-solid fa-plus mr-5 group-hover:rotate-180 transition-transform duration-300"></i>Ajouter un nouveau Shiny</label>
+            </a>
         </div>
-        <select name="sel-generation" id="select-generation" class="h-8 text-white bg-neutral-700 border border-black rounded-lg w-80 pl-4 text-center text-xs">
+        <select name="sel-generation" onchange='changeGeneration()' id="select-generation" class="h-8 text-white bg-neutral-700 border border-black rounded-lg w-80 pl-4 text-center text-xs">
                 {% for generation in generations %}
-                    <option value="{{generation.id}}">{{generation.number}}</option>
+                    <option value="{{generation.id}}">Génération {{generation.number}}</option>
                 {% endfor %}
         </select>
     </div>
@@ -34,16 +31,19 @@
                 <div class="w-full h-full bg-gray-200 absolute"></div>
                 <div class="h-full bg-sky-400 absolute" id="dynamicWidth"></div>
             </div>
-    <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 m-8">
+    <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 m-1">
         {% for pokemon in pokemons %}
-        <div class="pokemon h-36 text-white relative" value="{{ pokemon.generation.id }}">
+        {% set captured = capturedPokemons[pokemon.getId()] is defined %}{% if captured %}
+            <div class="pokemon h-36 text-white relative bg-gradient-to-t from-sky-400 m-1 rounded-xl" value="{{ pokemon.generation.id }}">
             <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
-            {% set captured = capturedPokemons[pokemon.getId()] is defined %}
+            
             <a href="/pokemon/{{pokemon.PokedexId}}">
-            {% if captured %}
-            <img src="{{ pokemon.SpriteShiny }}" class="h-16 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <img src="{{ pokemon.SpriteShiny }}" class="h-20 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:h-32 duration-300">
             {% else %}
-            <img src="{{ pokemon.SpriteRegular }}" class="filter grayscale h-16 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div class="pokemon h-36 text-white relative" value="{{ pokemon.generation.id }}">
+            <div class="pokemon_id"> # {{ pokemon.PokedexId }} </div>
+            <a href="/pokemon/{{pokemon.PokedexId}}">
+            <img src="{{ pokemon.SpriteRegular }}" class="filter grayscale h-20 md:h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:h-32 duration-300">
             {% endif %}
             </a>
         </div>
@@ -57,7 +57,7 @@
 <script type="text/javascript">
 function changeGeneration () {
     var selectedGeneration = document.getElementById('select-generation').value;
-    var pokemons = document.querySelectorAll('.pokemon');
+    var pokemons = document.querySelectorAll('.pokemon'); 
     var total = '{{totalCaughtByGen|raw}}';
     var totals = '{{totalByGen|raw}}';
     total = JSON.parse(total);
@@ -88,8 +88,7 @@ function changeGeneration () {
             pokemon.style.display = 'block';
         } else {
             pokemon.style.display = 'none';
-        }  
-        
+        }
     });
 };
 

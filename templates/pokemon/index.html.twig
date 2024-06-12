@@ -3,96 +3,145 @@
 {% block title %}Fiche Pokédex - {{ pokemon.NameFr }}{% endblock %}
 
 {% block body %}
-<div class="w-11/12 lg:w-8/12 mx-auto mt-24">
-    <div class="grid grid-row lg:grid-cols-2 bg-neutral-600 rounded-lg">
-        <div class="w-60 mx-auto">
-            <img class="w-100 h-auto" src="{{ pokemon.SpriteRegular }}">
-        </div>
-        <div class="my-auto text-white">
-            <div class="flex justify-center lg:justify-start text-2xl">Fiche Pokédex de {{ pokemon.NameFr }}</div>
-            <div class="bg-sky-400 h-px w-10/12 mx-auto lg:w-full"></div>
-            <div class="flex justify-center lg:justify-start"><div>#{{ pokemon.PokedexId }} {{pokemon.NameEn}}</div>&nbsp;-&nbsp;<div>{{pokemon.NameJp}}</div></div>
-            <div class="flex justify-center lg:justify-start">
+<div class="mt-24">
+    <div class="bg-neutral-600 rounded-lg mb-2 lg:mb-0 mx-auto w-11/12 text-white">
+    <div class="flex justify-center items-center text-white rounded-t-lg {{ pokeTypes }} border-b-2">
+        <h1 class="text-4xl py-8">Fiche Pokédex de {{ pokemon.NameFr }}</h1>
+    </div>
+    <div class="lg:flex">
+    <div class="border-b-2 lg:w-1/3 lg:border-r-2 lg:border-b-0 group">
+        <img class="mx-auto group-hover:hidden" src="{{ pokemon.SpriteRegular }}">
+        <img class="mx-auto hidden group-hover:flex" src="{{ pokemon.SpriteShiny }}">
+        <div class="text-white m-4">
+            <div class="flex justify-center text-2xl">#{{ pokemon.PokedexId }}</div>
+            <div class="{{ pokeTypes }} h-px w-10/12 mx-auto my-2"></div>
+            <div class="flex justify-center m-2"><img id="flag" src="/images/united-kingdom-uk-svgrepo-com.svg" alt="uk" class="h-6 mr-2">{{pokemon.NameEn}}</div>
+            <div class="flex justify-center m-2"><img id="flag" src="/images/japan-svgrepo-com.svg" alt="jp" class="h-6 mr-2">{{pokemon.NameJp}}</div>
+            <div class="{{ pokeTypes }} h-px w-10/12 mx-auto my-2"></div>
+            <div class="">
             {% for type in pokemon.PokemonHasType %}
-                <div class="flex justify-center"><img class="h-8 m-2" src="{{type.Logo}}"></div>
+                <div class="flex justify-center items-center"><img class="m-2 h-10" src="{{type.Logo}}">{{type.name}}</div>
             {% endfor %}
             </div>
+             
         </div>
     </div>
-    <div class="bg-neutral-600 rounded-lg mt-2 text-white pb-5">
-        <div class="flex justify-center pt-5">GÉNÉRATION</div>
-        <div class="flex justify-center">{{pokemon.Generation.Number}}</div>
-        <div class="flex justify-center mt-5">CATÉGORIE</div>
-        <div class="flex justify-center">{{pokemon.Category}}</div>
-        <div class="grid grid-row md:grid-cols-2 mx-24 mt-5">
-            <div>
-                <div class="flex justify-center">TAILLE</div>
-                <div class="flex justify-center">{{pokemon.Height}}</div>
-            </div>    
-            <div> 
-                <div class="flex justify-center">POIDS</div>   
-                <div class="flex justify-center">{{pokemon.Weight}}</div>
+    <div class="lg:w-2/3">
+        <div class="md:flex border-b-2">
+            <div class="border-b-2 md:w-1/2 md:border-r-2 md:border-b-0">
+                <div class="flex justify-center m-2 text-2xl">Informations</div>
+                <div class="{{ pokeTypes }} h-px w-10/12 mx-auto my-2"></div>
+                <div class="flex justify-around m-2">
+                    <div class="m-2 w-1/2 justify-items-center">
+                        <div class="flex justify-center text-lg">Génération</div>
+                        <div class="flex justify-center">{{pokemon.Generation.Number}}</div>
+                    </div>
+                    <div class="m-2 w-1/2">
+                        <div class="flex justify-center text-lg">Catégorie</div>
+                        <div class="flex justify-center">{{pokemon.Category}}</div>
+                    </div>
+                </div>
+                <div class="{{ pokeTypes }} h-px w-10/12 mx-auto my-2"></div>
+                <div class="flex justify-around m-2">
+                    <div class="m-2 w-1/2 justify-items-center">
+                        <div class="flex justify-center text-lg">Taille</div>
+                        <div class="flex justify-center">{{pokemon.Height}}</div>
+                    </div>
+                    <div class="m-2 w-1/2">
+                        <div class="flex justify-center text-lg">Poids</div>
+                        <div class="flex justify-center">{{pokemon.Weight}}</div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="mt-5">
-            <div class="flex justify-center">PV : {{pokemon.Hp}}</div>
-            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
-                <div class="w-full h-full bg-gray-200 absolute"></div>
-                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.Hp}} / 255) * 100%);"></div>
+            <div class="md:w-1/2">
+                <div class="flex justify-center m-2 text-2xl">Talent(s)</div>
+                <div class="{{ pokeTypes }} h-px w-10/12 mx-auto my-2"></div>
+                <div>
+                    {% for ability in pokemon.PokemonHasAbility %}
+                    {% if ability.Hidden == 0 %}
+                    <div class="flex justify-center m-2">{{ ability.Name }}</div>
+                    {% else %}
+                    <div class="flex justify-center m-2">{{ ability.Name }}&nbsp;<div class="{{ pokeTypes }} rounded-lg px-1">Talent caché</div></div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
-            <div class="flex justify-center">ATTAQUE : {{pokemon.Atk}}</div>
-            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
-                <div class="w-full h-full bg-gray-200 absolute"></div>
-                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.Atk}} / 255) * 100%);"></div>
-            </div>
-            <div class="flex justify-center">DÉFENSE : {{pokemon.Def}}</div>
-            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
-                <div class="w-full h-full bg-gray-200 absolute"></div>
-                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.Def}} / 255) * 100%);"></div>
-            </div>
-            <div class="flex justify-center">ATTAQUE SPÉ : {{pokemon.SpeAtk}}</div>
-            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
-                <div class="w-full h-full bg-gray-200 absolute"></div>
-                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.SpeAtk}} / 255) * 100%);"></div>
-            </div>
-            <div class="flex justify-center">DÉFENSE SPÉ : {{pokemon.SpeDef}}</div>
-            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
-                <div class="w-full h-full bg-gray-200 absolute"></div>
-                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.SpeDef}} / 255) * 100%);"></div>
-            </div>
-            <div class="flex justify-center">VITESSE : {{pokemon.Vit}}</div>
-            <div class="my-2 mx-auto h-4 relative w-60 rounded-full overflow-hidden">
-                <div class="w-full h-full bg-gray-200 absolute"></div>
-                <div class="h-full bg-sky-400 absolute" style="width: calc(({{pokemon.Vit}} / 255) * 100%);"></div>
-            </div>
-        </div>
-        <div>
-            {% if prevolutions %}
-            <div  class="flex justify-center mt-5">PREVOLUTION(S)</div>
-            {% for prevol in prevolutions %}
-            <a  class="flex justify-center text-sky-400 hover:text-neutral-400" href="/pokemon/{{ prevol.pokedex_id }}">{{ prevol.name_fr }}</a>
-            {% endfor %}
-            {% endif %}
-        </div>
-        <div>
-            {% if pokemon.Evolution.empty %}
-            {% else %}
-            <div class="flex justify-center mt-5">EVOLUTION(S)</div>
-            {% for evol in pokemon.Evolution %}
-            <a class="flex justify-center text-sky-400 hover:text-neutral-400" href="/pokemon/{{ evol.PokedexId }}">{{ evol.NameFr }}</a>
-            {% endfor %}
-            {% endif %}
-        </div>
-        <div class="flex justify-center mt-5">TALENT(S)</div>
-        <div>
-            {% for ability in pokemon.PokemonHasAbility %}
-            {% if ability.Hidden == 0 %}
-                <div class="flex justify-center">{{ ability.Name }}</div>
-            {% else %}
-                <div class="flex justify-center">{{ ability.Name }}&nbsp;<div class="bg-sky-400 rounded-lg px-1">Talent caché</div></div>
-            {% endif %}
-            {% endfor %}
         </div>        
+        <div class="border-b-2">
+            <div class="flex justify-center m-2 text-2xl">Statistique de base</div>
+                <div class="{{ pokeTypes }} h-px w-10/12 mx-auto my-2"></div>
+                <div class="m-4">
+                <div class="flex justify-center">PV : {{pokemon.Hp}}</div>
+                <div class="my-2 mx-auto h-4 relative w-9/12 rounded-full overflow-hidden">
+                    <div class="w-full h-full bg-gray-200 absolute"></div>
+                    <div class="h-full {{ pokeTypes }} absolute" style="width: calc(({{pokemon.Hp}} / 255) * 100%);"></div>
+                </div>
+            <div class="flex justify-center">Attaque : {{pokemon.Atk}}</div>
+            <div class="my-2 mx-auto h-4 relative w-9/12 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full {{ pokeTypes }} absolute" style="width: calc(({{pokemon.Atk}} / 255) * 100%);"></div>
+            </div>
+            <div class="flex justify-center">Défense : {{pokemon.Def}}</div>
+            <div class="my-2 mx-auto h-4 relative w-9/12 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full {{ pokeTypes }} absolute" style="width: calc(({{pokemon.Def}} / 255) * 100%);"></div>
+            </div>
+            <div class="flex justify-center my-2">Attaque Spé : {{pokemon.SpeAtk}}</div>
+            <div class="my-2 mx-auto h-4 relative w-9/12 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full {{ pokeTypes }} absolute" style="width: calc(({{pokemon.SpeAtk}} / 255) * 100%);"></div>
+            </div>
+            <div class="flex justify-center">Défense Spé : {{pokemon.SpeDef}}</div>
+            <div class="my-2 mx-auto h-4 relative w-9/12 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full {{ pokeTypes }} absolute" style="width: calc(({{pokemon.SpeDef}} / 255) * 100%);"></div>
+            </div>
+            <div class="flex justify-center">Vitesse : {{pokemon.Vit}}</div>
+            <div class="my-2 mx-auto h-4 relative w-9/12 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
+                <div class="h-full {{ pokeTypes }} absolute" style="width: calc(({{pokemon.Vit}} / 255) * 100%);"></div>
+            </div>
+            </div>
+        </div>
+        <div class="flex justify-center m-2 text-2xl">Lignée évolutive</div>
+        <div class="{{ pokeTypes }} h-px w-10/12 mx-auto my-2"></div>
+        <div class="flex justify-around">
+            {% if prevolutions %}
+            <div class="w-full justify-items-center relative">
+                <div class="flex flex-col items-center relative text-lg">Prévolution(s)</div>
+                <div class="flex justify-around">
+                {% for prevol in prevolutions %}
+                
+                <a class="text-sky-400 hover:text-neutral-400 flex flex-col items-center relative" href="/pokemon/{{ prevol.pokedex_id }}">
+                    <img src="{{ prevol.sprite_regular }}" class="h-20 hover:h-24 duration-300 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div class="mt-28 m-2">{{ prevol.name_fr }}</div>
+                </a>
+                
+                {% else %}
+                <div class="hidden"></div>
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            {% if pokemon.Evolution.empty %}
+                <div class="hidden"></div>
+            {% else %}
+            <div class="w-full justify-items-center relative">
+            <div class="flex flex-col items-center relative text-lg">Évolution(s)</div>
+            <div class="flex justify-around">
+                {% for evol in pokemon.Evolution %}
+                <a class="text-sky-400 hover:text-neutral-400 flex flex-col items-center relative" href="/pokemon/{{ evol.PokedexId }}">
+                    <img src="{{ evol.SpriteRegular }}" class="h-20 hover:h-24 duration-300 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div class="mt-28 m-2">{{ evol.NameFr }}</div>
+                </a>                    
+                {% endfor %}
+            </div>
+            </div>
+            {% endif %}
+            </div>
+        </div>
+        </div>
+    </div>
     </div>
 </div>
 {% endblock %}

@@ -16,6 +16,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
+    /**
+     * Envoie vers la vue de création de compte
+     *
+     * @param Request $request
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param Security $security
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
     {
@@ -31,7 +40,7 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-
+            
             $entityManager->persist($user);
             $entityManager->flush();
 

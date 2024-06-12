@@ -1,4 +1,10 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="">
+    <div class="text-xl text-white rounded-lg text-center mx-5 pt-2 pb-1">
+        {{ form_widget(form) }}
+    </div>
+    <div class="flex justify-center">
+        <button class="text-xl text-white bg-sky-400 hover:bg-sky-600 rounded-lg w-full mt-5 mb-4 mx-5 text-center">{{ button_label|default('Save') }}</button>
+    </div>
+</div>
 {{ form_end(form) }}

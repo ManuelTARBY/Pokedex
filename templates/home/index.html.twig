@@ -5,28 +5,29 @@
 {% block body %}
 <div class="mt-24 flex flex-col justify-center mx-auto w-11/12">
     <div class="flex flex-col xl:flex-row justify-center">
-        <div class="bg-neutral-600 xl:w-1/2  border-black border-3 rounded-lg m-5 p-2" id="bloc-top-shasse">
-            <div class="text-white text-2xl underline underline-offset mt-2 ml-5">Top Shasses<br></div>
+        <div class="bg-neutral-600 xl:w-1/2  border-black border-3 rounded-lg my-2 xl:m-5 p-2" id="bloc-top-shasse">
+            <div class="text-white text-2xl mt-2 ml-5">Top Shasses<br></div>
             <canvas id="chartShasses" class:""></canvas>
         </div>
-        <div class="bg-neutral-600 xl:w-1/2 border-black border-3 rounded-lg m-5 p-2" id="bloc-top-dresseur">
-            <div class="text-white text-2xl underline underline-offset mt-2 ml-5">Top Dresseurs<br></div>
+        <div class="bg-neutral-600 xl:w-1/2 border-black border-3 rounded-lg my-2 xl:m-5 p-2" id="bloc-top-dresseur">
+            <div class="text-white text-2xl mt-2 ml-5">Top Dresseurs<br></div>
             <canvas id="chartBestDresseurs" class=""></canvas>
         </div>
     </div>
     <div class="flex flex-col xl:flex-row justify-center">
-        <div class="bg-neutral-600 xl:w-1/2  border-black border-3 rounded-lg m-5 p-2" id="bloc-shiny-jour">
-            <div class="text-white text-2xl underline underline-offset mt-2 ml-5">Shiny du jour<br></div>
+        <div class="bg-neutral-600 xl:w-1/2  border-black border-3 rounded-lg my-2 xl:m-5 p-2" id="bloc-shiny-jour">
+            <div class="text-white text-2xl mt-2 ml-5">Shiny du jour<br></div>
             <canvas id="chartShinyDay" class=""></canvas>
         </div>
-        <div class="bg-neutral-600 xl:w-1/2  border-black border-3 rounded-lg m-5 p-2" id="bloc-pokemon-team">
-            <div class="text-white text-2xl underline underline-offset mt-2 ml-5">Top Pokemon Team<br></div>
+        <div class="bg-neutral-600 xl:w-1/2  border-black border-3 rounded-lg my-2 xl:m-5 p-2" id="bloc-pokemon-team">
+            <div class="text-white text-2xl mt-2 ml-5">Top Pokemon Team<br></div>
             <canvas id="chartPokemonTeam" class=""></canvas>
         </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>var ctx = document.getElementById('chartPokemonTeam').getContext('2d');
+<script>
+    var ctx = document.getElementById('chartPokemonTeam').getContext('2d');
     var pokemons = [];
     var occurrences = [];
     {% for pokemon in pokemon_team %}
@@ -38,37 +39,38 @@
         data: {
             labels: pokemons,
             datasets: [{
-                label: 'Top Pokemon Team',
+                label: 'Top Pokemon présent dans Team',
                 data: occurrences,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
+                backgroundColor: '#38bdf8',
+                borderWidth: 1,
             }]
         },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe y en blanc
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe x en blanc
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff' // Couleur des étiquettes de la légende en blanc
+                    }
                 }
             },
             indexAxis: 'y'
         }
     });
 </script>
+
 <script>var ctx = document.getElementById('chartShinyDay').getContext('2d');
     var days = [];
     var nbCaught = [];
@@ -81,31 +83,31 @@
         data: {
             labels: days,
             datasets: [{
-                label: 'Shiny',
+                label: 'Nombre de Shiny par jour',
                 data: nbCaught,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                backgroundColor: '#38bdf8',
                 borderWidth: 1
             }]
         },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe y en blanc
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe x en blanc
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff' // Couleur des étiquettes de la légende en blanc
+                    }
                 }
             }
         }
@@ -123,31 +125,31 @@
         data: {
             labels: dresseurs,
             datasets: [{
-                label: '',
+                label: 'Top Dresseurs',
                 data: nbCaught,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                backgroundColor: '#38bdf8',
                 borderWidth: 1
             }]
         },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe y en blanc
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe x en blanc
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff' // Couleur des étiquettes de la légende en blanc
+                    }
                 }
             },
             indexAxis: 'y'
@@ -168,29 +170,29 @@
             datasets: [{
                 label: 'Top Shasses du jour',
                 data: occurrences,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                backgroundColor: '#38bdf8',
                 borderWidth: 1
             }]
         },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe y en blanc
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff' // Couleur des étiquettes de l'axe x en blanc
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff' // Couleur des étiquettes de la légende en blanc
+                    }
                 }
             },
             indexAxis: 'y'

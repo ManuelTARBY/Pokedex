@@ -27,7 +27,7 @@ function getPokedexByType(pokemons, poketypes, types) {
         }
         // Contruit le code HTML qui sera inséré à la place de l'ancien pour reconstituer le tableau filtré 
         var contenuHTML = `
-        <table class="w-11/12 border-collapse border-separate border-spacing-2">
+        <table class="w-11/12 border-separate border-spacing-1 pb-5">
         <tr class="bg-neutral-400 h-10">
         <th>Numéro</th>
         <th>Nom</th>
@@ -39,7 +39,7 @@ function getPokedexByType(pokemons, poketypes, types) {
             if (listePokemon.includes(pokemon.id)) {
                 contenuHTML += `<tr class="bg-neutral-200 h-10">
                         <td><div class="flex justify-center">${pokemon.pokedex_id}</div></td>
-                        <td><a href="/pokemon/${pokemon.pokedex_id}" class="flex justify-center hover:text-white">${pokemon.name_fr}</a></td>
+                        <td><a href="/pokemon/${pokemon.pokedex_id}" class="flex justify-center hover:text-neutral-500">${pokemon.name_fr}</a></td>
                         <td class="flex justify-center"> 
                         `;
                 var lesLogos = pokemon.logos.split(",");
@@ -77,7 +77,7 @@ function getPokedexByGeneration(pokemons, generations) {
         }
         // Contruit le code HTML qui sera inséré à la place de l'ancien pour reconstituer le tableau filtré 
         var contenuHTML = `
-        <table class="w-11/12 border-collapse border-separate border-spacing-2">
+        <table class="w-11/12 border-separate border-spacing-1 pb-5">
         <tr class="bg-neutral-400 h-10">
         <th>Numéro</th>
         <th>Nom</th>
@@ -89,7 +89,7 @@ function getPokedexByGeneration(pokemons, generations) {
             if (pokemon.generation_id == gene) {
                 contenuHTML += `<tr class="bg-neutral-200 h-10">
                         <td><div class="flex justify-center">${pokemon.pokedex_id}</div></td>
-                        <td><a href="/pokemon/${pokemon.pokedex_id}" class="flex justify-center hover:text-white">${pokemon.name_fr}</a></td>
+                        <td><a href="/pokemon/${pokemon.pokedex_id}" class="flex justify-center hover:text-neutral-500">${pokemon.name_fr}</a></td>
                         <td class="flex justify-center"> 
                         `;
                 var lesLogos = pokemon.logos.split(",");
@@ -120,7 +120,7 @@ function getPokedexByName(pokemons) {
         selectElement.selectedIndex = 0;
         // Contruit le code HTML qui sera inséré à la place de l'ancien pour reconstituer le tableau filtré 
         var contenuHTML = `
-                    <table class="w-11/12 border-collapse border-separate border-spacing-2">
+                    <table class="w-11/12 border-separate border-spacing-1 pb-5">
                     <tr class="bg-neutral-400 h-10">
                     <th>Numéro</th>
                     <th>Nom</th>
@@ -132,7 +132,7 @@ function getPokedexByName(pokemons) {
             if (pokemon.name_fr.toLowerCase().startsWith(valeurRecherche.toLowerCase())) {
                 contenuHTML += `<tr class="bg-neutral-200 h-10">
                                     <td><div class="flex justify-center">${pokemon.pokedex_id}</div></td>
-                                    <td><a href="/pokemon/${pokemon.pokedex_id}" class="flex justify-center hover:text-white">${pokemon.name_fr}</a></th>
+                                    <td><a href="/pokemon/${pokemon.pokedex_id}" class="flex justify-center hover:text-neutral-500">${pokemon.name_fr}</a></th>
                                     <td class="flex justify-center"> 
                                     `;
                 var lesLogos = pokemon.logos.split(",");
