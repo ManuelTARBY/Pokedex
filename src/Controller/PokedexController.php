@@ -34,7 +34,7 @@ class PokedexController extends AbstractController
         $connection = $this->entityManager->getConnection();
 
         $sql = '
-            SELECT pokemon.id, pokemon.pokedex_id, pokemon.name_fr, pokemon.generation_id, GROUP_CONCAT(type.logo) AS logos
+            SELECT pokemon.id, pokemon.pokedex_id, pokemon.name_fr, pokemon.generation_id, GROUP_CONCAT(type.logo) AS logos, GROUP_CONCAT(type.name) AS name_logos
             FROM type_pokemon
             JOIN pokemon ON pokemon.id = type_pokemon.pokemon_id
             JOIN type ON type.id = type_pokemon.type_id

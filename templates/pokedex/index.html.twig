@@ -30,14 +30,20 @@
                 <th>Nom</th>
                 <th>Types</th>
             </tr>   
-            {% for ligne in pokemons %}
+            {% for pokemon in pokemons %}
             <tr class="bg-neutral-200 h-10" id="datas-pokemon">
-                <td><div class="flex justify-center">{{ ligne.pokedex_id }}</div></td>
-                <td><a href="/pokemon/{{ ligne.pokedex_id }}" class="flex justify-center hover:text-neutral-500">{{ ligne.name_fr }}</a></td>
+                <td><div class="flex justify-center">{{ pokemon.pokedex_id }}</div></td>
+                <td><a href="/pokemon/{{ pokemon.pokedex_id }}" class="flex justify-center hover:text-neutral-500">{{ pokemon.name_fr }}</a></td>
                 <td class="flex justify-center">
-                {% set leslogos = ligne.logos | split(',') %}
-                {% for logo in leslogos %}
-                    <div class="flex justify-center"><img class="h-8 m-2" src="{{ logo }}"></div>
+                {% set leslogos = pokemon.logos | split(',') %}
+                {% set lesnomslogos = pokemon.name_logos | split(',') %}
+                {% for i in 0..leslogos|length - 1 %}
+                    <div class="flex justify-center relative group">
+                        <img alt="{{lesnomslogos[i]}}" class="h-8 m-2" src="{{ leslogos[i] }}">
+                        <div class="absolute bottom-full left-1/4 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            {{lesnomslogos[i]}}
+                        </div>
+                    </div>
                 {% endfor %}
                 </td>  
             </tr>
