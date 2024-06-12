@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/user')]
 class UserController extends AbstractController
-{
+{   
     /**
      * Envoie vers la vue du profil utilisateur
      *
