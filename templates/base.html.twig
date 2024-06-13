@@ -20,11 +20,11 @@
             </div>
             <ul class="hidden lg:flex">
                 {% set currentPath = app.request.uri %}
-                <li class="my-8 px-10 list-none flex items-center border-r border-white "><a href="/pokedex" class="{{ ("pokedex" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">pokedex</a></li>
-                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/shinydex" class="{{ ("shinydex" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">shinydex</a></li>
-                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/teams" class="{{ ("teams" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">teams</a></li>
+                <li class="my-8 px-10 list-none flex items-center border-r border-white "><a href="/pokedex" class="{{ ("/pokedex" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">pokedex</a></li>
+                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/shinydex" class="{{ ("/shinydex" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">shinydex</a></li>
+                <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/teams" class="{{ ("/teams" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">teams</a></li>
                 {% if is_granted ("ROLE_ADMIN") %}
-                    <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/user/gestion" class="{{ ("gestion" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">gestion</a></li>
+                    <li class="my-8 px-10 list-none flex items-center border-r border-white"><a href="/user/gestion" class="{{ ("/gestion" in currentPath) ? 'text-white no-underline hover:text-black' : 'text-black no-underline hover:text-white' }}">gestion</a></li>
                 {% endif %}
             </ul>
         </div>
